@@ -6,14 +6,12 @@ import LoginForm from "./components/auth/LoginForm";
 import SignupForm from "./components/auth/SignupForm";
 import CurrentUserProvider from "./contexts/currentUser";
 import DisplayContainer from "./components/DisplayContainer";
-import NavMenu from "./components/nav/NavMenu";
-
 
 function App() {
   return (
     <CurrentUserProvider>
       <div className="App">
-        <NavMenu />
+        
         <Router>
           <Routes>
             <Route path='/' element={<Navigate to='/auth/login' />} />
@@ -23,13 +21,19 @@ function App() {
               element={ <DisplayContainer isTask={true} isEvent= {false} viewType={'priority'}/>} />
             <Route path='/tasks/duedate' 
               element={ <DisplayContainer isTask={true} isEvent={false} viewType={'duedate'}/>} />
+            <Route path='/tasks/new' 
+              element={ <DisplayContainer isTask={true} isEvent={false} viewType={'new'}/>} />
             <Route path='/events/list/:week' 
               element={ <DisplayContainer isTask={false} isEvent={true} viewType={'list'}/>} />
             <Route path='/events/overview/:week' 
               element={ <DisplayContainer isTask={false} isEvent={true} viewType={'overview'}/>} />
             <Route path='/events/day/:day' 
               element={ <DisplayContainer isTask={false} isEvent={true} viewType={'day'}/>} />
+              <Route path='/events/new' 
+              element={ <DisplayContainer isTask={false} isEvent={true} viewType={'new'}/>} />
             <Route path='/groups' 
+              element={ <DisplayContainer isTask={false} isEvent={false} viewType={'groups'}/>} />
+            < Route path='/groups/new' 
               element={ <DisplayContainer isTask={false} isEvent={false} viewType={'groups'}/>} />
             <Route path='/settings' 
               element={ <DisplayContainer isTask={false} isEvent={false} viewType={'settings'}/>} />

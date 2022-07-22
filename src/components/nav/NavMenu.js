@@ -1,34 +1,54 @@
 import React, { useContext, useEffect } from "react";
-import { Navbar, Button, Nav } from "react-bootstrap";
+import { Navbar, Button, Nav, NavDropdown } from "react-bootstrap";
 import { CurrentUser } from "../../contexts/currentUser";
 import UserDataService from "../../services/userDataService";
+import ViewBtns from "./ViewBtns";
 
-const NavMenu = () => {
+const NavMenu = (props) => {
     // Store current user session after successful login
     const {currentUser, setCurrentUser} = useContext(CurrentUser);
+
+    // Props
+    const { isTask, isEvent, viewType } = props;
 
     useEffect(() => {
         UserDataService.CheckSessionUser().then(res => setCurrentUser(res.data));
     }, [setCurrentUser])
     
-    
     // When logout button is clicked, clear the session
     const handleLogoutClick = () => {
         UserDataService.Logout();
     };
+
+    let dropdownTitle = '';
+
+    if (isTask === true) {
+        dropdownTitle = 'Tasks';
+    } else if (isEvent === true) {
+        dropdownTitle = 'Events';
+    } else if (viewType === 'groups') {
+        dropdownTitle = "Groups";
+    } else if (viewType === 'settings') {
+        dropdownTitle = 'Settings';
+    }
     
     return (
         <Navbar expand='lg'>
             <Navbar.Brand href='/'>Event Manager</Navbar.Brand>
-            <Nav fill variant="pills">
-                <Nav.Link href='/tasks/priority'>By Priority</Nav.Link>
-                <Nav.Link href='/tasks/duedate'>By Due Date</Nav.Link>
-                <Nav.Link href='/events/list/0'>By List</Nav.Link>
-                <Nav.Link href='/events/overview/0'>By Overview</Nav.Link>
-                <Nav.Link href='/events/day/0'>By Day</Nav.Link>
-                <Nav.Link href='/groups'>Groups</Nav.Link>
-                <Nav.Link href='/settings'>Settings</Nav.Link>
-            </Nav>
+            <Navbar.Toggle aria-controls="basic-navebar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav fill variant="pills" className="me-auto">
+                    <Navbar.Text>Views: </Navbar.Text>
+                    <NavDropdown title={dropdownTitle} id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/events/list/0">Events</NavDropdown.Item>
+                        <NavDropdown.Item href="/tasks/priority">Tasks</NavDropdown.Item>
+                        <NavDropdown.Item href="/groups">Groups</NavDropdown.Item>
+                        <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
+                    </NavDropdown>
+                    <ViewBtns isTask={isTask} isEvent={isEvent} viewType={viewType} />
+                </Nav>
+            </Navbar.Collapse>
+
             {currentUser !== null ? 
                 <Button 
                     variant="primary" 

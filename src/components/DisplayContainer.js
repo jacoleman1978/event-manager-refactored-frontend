@@ -9,6 +9,7 @@ import EventsByOverview from "./byOverview/EventsByOverview";
 import EventsByDay from "./byListAndByDay/EventsByDay";
 import Groups from "./groups/Groups";
 import Settings from "./settings/Settings";
+import NavMenu from "./nav/NavMenu";
 
 const DisplayContainer = (props) => {
     const navigate = useNavigate();
@@ -58,6 +59,7 @@ const DisplayContainer = (props) => {
 
     return (
         <>
+            <NavMenu isTask={isTask} isEvent={isEvent} viewType={viewType}/>
             {selectView(isTask, isEvent, viewType)}
         </>
     )
