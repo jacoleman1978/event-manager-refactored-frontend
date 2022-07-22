@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import UserDataService from '../services/userDataService';
+import UserDataService from '../../services/userDataService';
 
 // Called from App.js
 const SignupForm = () => {

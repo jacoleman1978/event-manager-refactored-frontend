@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import UserDataService from '../services/userDataService';
-import { CurrentUser } from '../contexts/currentUser';
+import UserDataService from '../../services/userDataService';
+import { CurrentUser } from '../../contexts/currentUser';
 
 // Called from App.js
 const LoginForm = () => {
@@ -39,7 +39,7 @@ const LoginForm = () => {
             if (res.data.userName.length > 0) {
                 // Store user info in Context after successful login and redirect to default page
                 setCurrentUser(res.data.session);
-                //TODO navigate(``);
+                navigate(`/tasks/priority`);
             } else {
                 setErrorFlag(true);
             }
