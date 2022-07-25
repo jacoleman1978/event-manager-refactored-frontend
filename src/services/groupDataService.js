@@ -18,7 +18,7 @@ class GroupDataService {
 
     static AcceptGroupInvite(data, groupId) {
         axios.defaults.withCredentials = true;
-        return axios.put(`http://localhost:3100/geoup/${groupId/acceptinvite}`, data)
+        return axios.put(`http://localhost:3100/group/${groupId}/acceptinvite`, data)
     }
 
     static ChangeEditPrivilege(data, groupId) {
@@ -36,9 +36,19 @@ class GroupDataService {
         return axios.delete(`http://localhost:3100/group/${groupId}`, data)
     }
 
-    static GetOwnedGroups(data) {
+    static GetOwnedGroups() {
         axios.defaults.withCredentials = true;
-        return axios.get('http://localhost:3100/group/owner', data)
+        return axios.get('http://localhost:3100/group/owner')
+    }
+
+    static GetGroupMemberships() {
+        axios.defaults.withCredentials = true;
+        return axios.get('http://localhost:3100/group/memberships')
+    }
+
+    static GetGroupInvitations() {
+        axios.defaults.withCredentials = true;
+        return axios.get('http://localhost:3100/group/invitations')
     }
 }
 

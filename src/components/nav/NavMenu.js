@@ -38,7 +38,7 @@ const NavMenu = (props) => {
             <Navbar.Toggle aria-controls="basic-navebar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav fill variant="pills" className="me-auto">
-                    <Navbar.Text>Views: </Navbar.Text>
+                    <Navbar.Text>View: </Navbar.Text>
                     <NavDropdown title={dropdownTitle} id="basic-nav-dropdown">
                         <NavDropdown.Item href="/events/list/0">Events</NavDropdown.Item>
                         <NavDropdown.Item href="/tasks/priority">Tasks</NavDropdown.Item>
