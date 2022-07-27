@@ -20,6 +20,7 @@ const OwnedGroup = (props) => {
     let [formattedResults, setFormattedResults] = useState([]);
     let [changedPermissionList, setPermission] = useState([]);
     let [removeMemberList, setRemoveMemberList] = useState([]);
+    let [groupInvitations, setGroupInvitations] = useState(group.inviteeIds);
 
     let users = [group.ownerId];
 
@@ -31,6 +32,7 @@ const OwnedGroup = (props) => {
         if (resultsFlag === true) {
             setFormattedResults(handleSearchDisplay(searchResults));
         }
+
     }, [editFlag, resultsFlag, newInviteFlag])
 
     const handleSubmit = (e) => {
@@ -79,9 +81,11 @@ const OwnedGroup = (props) => {
             invitedUserId: invitedUserId
         }
 
-        let success = GroupDataService.InviteGroupMember(data);
+        GroupDataService.InviteGroupMember(data);
 
-        setNewInviteFlag(success.invited);
+        GroupDataService.GetGroupById(group._id).then(res => setGroupInvitations(res.data.groupDoc.inviteeIds))
+
+        setNewInviteFlag(true);
     }
 
     const handleSearch = (e) => {
@@ -148,6 +152,7 @@ const OwnedGroup = (props) => {
 
     const groupStyle = {
         display: "flex",
+        flexWrap: "wrap",
         justifyContent: "center",
         gap: "1rem"
     }
@@ -163,7 +168,6 @@ const OwnedGroup = (props) => {
         border: "1px solid black",
         padding: "0.5rem",
         borderRadius: "0.5rem",
-        width: "48%"
     }
 
     const memberStyle = {
@@ -268,12 +272,19 @@ const OwnedGroup = (props) => {
         )
     })
 
-    const invitees = group.inviteeIds.map((inviteeId) => {
+    const invitees = groupInvitations.map((inviteeId) => {
         users.push(inviteeId._id);
 
         return (
             <li key={`${inviteeId.userName}`} style={memberStyle}>
                 {`${inviteeId.firstName} ${inviteeId.lastName}`}
+                <Form.Check 
+                    type="checkbox"
+                    id={`${inviteeId._id}-Remove`}
+                    label={`Remove Invitation`}
+                    disabled={!editFlag}
+                    onChange={(e) => handleRemoveMemberCheck(e, inviteeId._id)}
+                />
             </li>
         )
     })

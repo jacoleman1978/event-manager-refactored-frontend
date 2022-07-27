@@ -36,6 +36,11 @@ class GroupDataService {
         return axios.delete(`http://localhost:3100/group/${groupId}`, data)
     }
 
+    static GetGroupById(groupId) {
+        axios.defaults.withCredentials = true;
+        return axios.get(`http://localhost:3100/group/${groupId}`)
+    }
+
     static GetOwnedGroups() {
         axios.defaults.withCredentials = true;
         return axios.get('http://localhost:3100/group/owner')

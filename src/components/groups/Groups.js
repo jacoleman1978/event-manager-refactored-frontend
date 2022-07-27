@@ -35,20 +35,28 @@ const Groups = () => {
         )
     });
 
-    let invitationList = groupInvitations.map((group, i) => {
-        return (
-            <GroupInvitations group={group} key={`invite-${i}`}/>
-        )
-    });
+    const groupSectionStyle = {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center"
+    }
 
     return (
         <div>
             <h1>Owned Groups</h1>
-            {ownedGroups}
+            <div style={groupSectionStyle}>
+                {ownedGroups}
+            </div>
             <h2>Group Membership</h2>
-            {membershipList}
+            <div style={groupSectionStyle}>
+                {membershipList}
+            </div>
+            
             <h2>Group Invitations</h2>
-            {invitationList}
+            <div style={groupSectionStyle}>
+                <GroupInvitations groupInvitations={groupInvitations} />
+            </div>
+
         </div>
         
     )

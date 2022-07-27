@@ -1,6 +1,4 @@
 import React from "react";
-import { Card } from "react-bootstrap";
-
 
 const GroupMembership = (props) => {
     // Get props
@@ -32,28 +30,63 @@ const GroupMembership = (props) => {
         )
     })
 
+    const groupContainer = {
+        border: "1px solid black",
+        margin: "0.5rem",
+        backgroundColor: "antiquewhite",
+        padding: "0.5rem",
+        borderRadius: "0.5rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "start",
+    }
+
+    const groupLabel = {
+        marginBottom: "0rem",
+        textDecoration: "underline",
+        fontSize: "larger",
+        fontWeight: "bold"
+    }
+
+    const ownerRowStyle = {
+        display: "flex",
+        gap: "0.5rem"
+    }
+
+    const labelStyle = {
+        display: "flex",
+        justifyContent: "left",
+        fontWeight: "bold",
+        marginBottom: "0rem"
+    }
+
+    const memberStyle = {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "start",
+        justifyContent: "flex-start"
+    }
+
     return (
-        <div>
-            <Card>
-                <Card.Body>
-                    <Card.Title><strong>{group.name}</strong></Card.Title>
-                    <hr />
-                    <Card.Text>Owner:</Card.Text>
-                        {owner}
-                    <Card.Text>Editor Members:</Card.Text>
-                    <ul>
-                        {editorMembers.length > 0 ? editorMembers : "None"} 
-                    </ul>
-                    <Card.Text>Viewer Members:</Card.Text>
-                    <ul>
-                        {viewerMembers.length > 0 ? viewerMembers : "None"}
-                    </ul>
-                    <Card.Text>People Invited to Join:</Card.Text>
-                    <ul>
-                        {invitees.length > 0 ? invitees : "None"}
-                    </ul>
-                </Card.Body>
-            </Card>
+        <div style={groupContainer}>
+            <p style={groupLabel}>{group.name}</p>
+            <hr />
+            <div style={ownerRowStyle}>
+                <strong>Owner:</strong>
+                    {owner}  
+            </div>
+            <div style={labelStyle}>Editor Members:</div>
+            <ul style={memberStyle}>
+                {editorMembers.length > 0 ? editorMembers : "None"} 
+            </ul>
+            <div style={labelStyle}>Viewer Members:</div>
+            <ul style={memberStyle}>
+                {viewerMembers.length > 0 ? viewerMembers : ""}
+            </ul>
+            <div style={labelStyle}>People Invited to Join:</div>
+            <ul style={memberStyle}>
+                {invitees.length > 0 ? invitees : "None"}
+            </ul>
         </div>
     )
 }

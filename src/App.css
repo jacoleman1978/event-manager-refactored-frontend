@@ -13,3 +13,7 @@ form {
   flex-direction: column;
   gap: 0.5rem;
 }
+
+hr {
+  margin: 0;
+}
