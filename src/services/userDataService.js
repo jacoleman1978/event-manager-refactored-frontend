@@ -17,12 +17,19 @@ class UserDataService {
     }
 
     static CheckSessionUser() {
-        return axios.get('http://localhost:3100/auth/session', {withCredentials: true})
+        axios.defaults.withCredentials = true
+        return axios.get('http://localhost:3100/auth/session')
     }
 
     static Logout() {
-        return axios.get('http://localhost:3100/auth/logout', {withCredentials: true})
+        axios.defaults.withCredentials = true
+        return axios.get('http://localhost:3100/auth/logout')
     }   
+
+    static SearchUser(data) {
+        axios.defaults.withCredentials = true
+        return axios.post('http://localhost:3100/auth/search', data)
+    }
 }
 
 export default UserDataService;

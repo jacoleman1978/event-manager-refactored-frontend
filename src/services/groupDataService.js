@@ -6,29 +6,29 @@ class GroupDataService {
         return axios.post('http://localhost:3100/group/new', data)
     }
 
-    static InviteGroupMember(data, groupId) {
+    static InviteGroupMember(data) {
         axios.defaults.withCredentials = true;
-        return axios.put(`http://localhost:3100/group/${groupId}/invite`, data)
+        return axios.put(`http://localhost:3100/group/invite`, data)
     }
 
-    static RemoveGroupMember(data, groupId) {
+    static RemoveGroupMember(data) {
         axios.defaults.withCredentials = true;
-        return axios.put(`http://localhost:3100/group/${groupId}/removemember`, data)
+        return axios.put(`http://localhost:3100/group/removemember`, data)
     }
 
-    static AcceptGroupInvite(data, groupId) {
+    static AcceptGroupInvite(data) {
         axios.defaults.withCredentials = true;
-        return axios.put(`http://localhost:3100/group/${groupId}/acceptinvite`, data)
+        return axios.put(`http://localhost:3100/group/acceptinvite`, data)
     }
 
-    static ChangeEditPrivilege(data, groupId) {
+    static ChangeEditPrivilege(data) {
         axios.defaults.withCredentials = true;
-        return axios.put(`http://localhost:3100/group/${groupId}/membertype`, data)
+        return axios.put(`http://localhost:3100/group/membertype`, data)
     }
 
-    static ChangeGroupName(data, groupId) {
+    static ChangeGroupName(data) {
         axios.defaults.withCredentials = true;
-        return axios.put(`http://localhost:3100/group/${groupId}/name`, data)
+        return axios.put(`http://localhost:3100/group/name`, data)
     }
 
     static DeleteGroup(data, groupId) {
