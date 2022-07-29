@@ -1,6 +1,11 @@
 import axios from "axios";
 
 class EventDataService {
+    static GetTasks() {
+        axios.defaults.withCredentials = true;
+        return axios.get('http://localhost:3100/event/tasks')
+    }
+
     static AddEvent(data) {
         axios.defaults.withCredentials = true;
         return axios.post('http://localhost:3100/event/new', data)
