@@ -18,7 +18,7 @@ const TaskRow = (props) => {
 
         return (
             <div key={task._id + task.task.priority} style={rowStyle} >
-                {task.notes}
+                {task.title}
             </div>
         )
     }
@@ -44,13 +44,16 @@ const TaskRow = (props) => {
             <div style={detailedRowDisplay}>
                 <Card key={task._id + task.task.priority} style={rowStyle} >
                     <Card.Body>
-                        <Card.Title><strong>{task.notes}</strong></Card.Title>
+                        <Card.Title><strong>{task.title}</strong></Card.Title>
                         <hr />
                         <Card.Text>
                             <strong>Priority</strong>: {task.task.priority}
                         </Card.Text>
                         <Card.Text>
                             <strong>Due Date</strong>: {task.allDay.endDate}
+                        </Card.Text>
+                        <Card.Text>
+                            <strong>Notes</strong>: {task.notes}
                         </Card.Text>
                     </Card.Body>
                 </Card>

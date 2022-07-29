@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TaskGroup from "./TaskGroup";
+import NewSimpleTask from "./NewSimpleTask";
 import EventDataService from "../../services/eventDataService";
 
 const TasksByPriority = (props) => {
@@ -65,6 +66,7 @@ const TasksByPriority = (props) => {
     return (
         <div>
             {groupTasksList}
+            <NewSimpleTask />
         </div>
     )
 }

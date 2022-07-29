@@ -26,7 +26,7 @@ const TaskGroup = (props) => {
             )
         });
     } else {
-        const task = {_id: "", notes: "No tasks found", task: {priority: "", dueData: ""}}
+        const task = {_id: "", title: "No tasks found", task: {priority: ""}, allDay: {endDate: ""}, notes: ""}
         tasksList = [
             <li key={0}>
                 <TaskRow task={task} needButtons={false}/>
