@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 
-const PriorityRow = (props) => {
+const TaskRow = (props) => {
     // Props
     const {task} = props;
 
@@ -67,4 +67,4 @@ const PriorityRow = (props) => {
     )
 }
 
-export default PriorityRow;
+export default TaskRow;

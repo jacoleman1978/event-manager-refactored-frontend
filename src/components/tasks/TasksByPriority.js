@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import PriorityGroup from "./PriorityGroup";
+import TaskGroup from "./TaskGroup";
 import EventDataService from "../../services/eventDataService";
 
-const TasksByPriority = () => {
+const TasksByPriority = (props) => {
     // Use State for data pulled from database
     let [taskData, setTaskData] = useState([]);
 
@@ -10,8 +10,6 @@ const TasksByPriority = () => {
         EventDataService.GetTasks().then(res => {
             setTaskData(res.data.tasks)})
     }, [])
-        
-
 
     // Need to fill groupTaskList whether sorting by priority or dueDate
     let groupTasksList =[];
@@ -23,6 +21,7 @@ const TasksByPriority = () => {
     // Function to sort tasks by priority and push them to an array of the same type
     const sortByPriority = (task) => {
         let priority = task.task.priority;
+
         if (priority === "Critical") {
             criticalTasks.push(task);
         } else if (priority === "High") {
@@ -60,7 +59,7 @@ const TasksByPriority = () => {
         data = sortedTasks[index];
         let headerStyle = {backgroundColor: headerColors[index], borderRadius: "0.5rem"}
         return (
-            <PriorityGroup key={index} header={priority} data={data} headerStyle={headerStyle} sort={"priorities"}/>
+            <TaskGroup key={index} header={priority} data={data} headerStyle={headerStyle} sort={"priorities"}/>
         )
     });
     return (

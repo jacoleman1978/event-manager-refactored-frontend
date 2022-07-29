@@ -1,7 +1,7 @@
 import React from "react";
-import PriorityRow from "./PriorityRow";
+import TaskRow from "./TaskRow";
 
-const PriorityGroup = (props) => {
+const TaskGroup = (props) => {
     // Props
     const {header, data, headerStyle} = props;
 
@@ -20,7 +20,7 @@ const PriorityGroup = (props) => {
             return (
                 <li key={task._id} >
                     <div style={rowStyle}>
-                        <PriorityRow task={task} needButtons={true} />
+                        <TaskRow task={task} needButtons={true} />
                     </div>
                 </li>
             )
@@ -29,7 +29,7 @@ const PriorityGroup = (props) => {
         const task = {_id: "", notes: "No tasks found", task: {priority: "", dueData: ""}}
         tasksList = [
             <li key={0}>
-                <PriorityRow task={task} needButtons={false}/>
+                <TaskRow task={task} needButtons={false}/>
             </li>
         ];
     }
@@ -52,4 +52,4 @@ const PriorityGroup = (props) => {
     )
 }
 
-export default PriorityGroup;
+export default TaskGroup;
