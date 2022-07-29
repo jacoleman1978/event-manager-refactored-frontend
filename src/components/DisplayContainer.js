@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { CurrentUser } from "../contexts/currentUser";
 import UserDataService from "../services/userDataService";
 import TasksByPriority from "./tasks/TasksByPriority";
@@ -15,7 +15,7 @@ const DisplayContainer = (props) => {
     const navigate = useNavigate();
 
     // Get currentUser from context
-    const { currentUser, setCurrentUser } = useContext(CurrentUser);
+    const { currentUser } = useContext(CurrentUser);
 
     // Props
     const { isTask, isEvent, viewType } = props;
@@ -59,7 +59,11 @@ const DisplayContainer = (props) => {
 
     return (
         <>
-            <NavMenu isTask={isTask} isEvent={isEvent} viewType={viewType}/>
+            <NavMenu 
+                isTask={isTask} 
+                isEvent={isEvent} 
+                viewType={viewType} 
+            />
             {selectView(isTask, isEvent, viewType)}
         </>
     )

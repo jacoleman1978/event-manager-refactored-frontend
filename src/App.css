@@ -17,3 +17,77 @@ form {
 hr {
   margin: 0;
 }
+
+.group-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  background-color: antiquewhite;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: solid black 1px;
+  border-radius: 0.5rem;
+  width: 30rem;
+}
+
+.flex-center-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.title {
+  text-decoration: underline;
+  font-size: larger;
+  font-weight: bold;
+  margin-bottom: 0rem;
+}
+
+.border {
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.list-items {
+  display: flex;
+  justify-content: left;
+  gap: 0.5rem;
+}
+
+.flex-left-center {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0rem;
+}
+
+.flex-col-center-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  gap: 0.5rem;
+  margin-bottom: 0rem;
+}
+
+.flex-left-bold {
+  display: flex;
+  justify-content: left;
+  font-weight: bold;
+  margin-bottom: 0rem;
+}
+
+.input-width {
+  width: 18rem;
+}
+
+.flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

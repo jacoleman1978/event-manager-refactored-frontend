@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
 
@@ -6,8 +6,18 @@ const GroupInvitations = (props) => {
     // Get props
     const {groupInvitations} = props;
 
+    let [inviteFlag, setInviteFlag] = useState(false);
+
+    useEffect(() => {
+        if (inviteFlag === true) {
+
+        }
+    }, [inviteFlag])
+
     const handleAcceptInvite = (groupId) => {
+        setInviteFlag(true);
         GroupDataService.AcceptGroupInvite(groupId);
+        setInviteFlag(false)
     }
 
     const listStyle = {
@@ -24,7 +34,7 @@ const GroupInvitations = (props) => {
         let owner = `${group.ownerId.firstName} ${group.ownerId.lastName}`;
 
         return (
-            <div style={listStyle}>
+            <div style={listStyle} key={group.name}>
                 <Button 
                     size="sm"
                     variant="primary" 
@@ -32,7 +42,7 @@ const GroupInvitations = (props) => {
                     onClick={() => handleAcceptInvite({groupId: group._id})}
                     style={buttonStyle}
                 >
-                    Accept Invitation
+                    Accept
                 </Button>
                 <strong>{group.name}</strong>
                 {` owned by ${owner}`}
@@ -40,20 +50,8 @@ const GroupInvitations = (props) => {
         )
     });
 
-    const groupContainer = {
-        border: "1px solid black",
-        margin: "0.5rem",
-        backgroundColor: "antiquewhite",
-        borderRadius: "0.5rem",
-        padding: "0.5rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "start",
-        width: "37rem"
-    }
-
     return (
-        <div style={groupContainer}>
+        <div className="group-container">
             {invitationList.length > 0 ? invitationList : "None"}
         </div>
     )

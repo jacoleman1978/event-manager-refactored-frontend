@@ -45,7 +45,11 @@ const NavMenu = (props) => {
                         <NavDropdown.Item href="/groups">Groups</NavDropdown.Item>
                         <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                     </NavDropdown>
-                    <ViewBtns isTask={isTask} isEvent={isEvent} viewType={viewType} />
+                    <ViewBtns 
+                        isTask={isTask} 
+                        isEvent={isEvent} 
+                        viewType={viewType} 
+                    />
                 </Nav>
             </Navbar.Collapse>
 

@@ -28,12 +28,6 @@ const ViewBtns = (props) => {
                     <Nav.Link href='/events/new'>New Event</Nav.Link>
                 </>
             )
-        } else if (viewType === 'groups') {
-            return (
-                <>
-                    <Nav.Link href='/groups/new'>New Group</Nav.Link>
-                </>
-            )
         } else if (viewType === 'settings') {
             return (
                 <>

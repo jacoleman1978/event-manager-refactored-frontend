@@ -69,24 +69,26 @@ const GroupMembership = (props) => {
 
     return (
         <div style={groupContainer}>
-            <p style={groupLabel}>{group.name}</p>
-            <hr />
-            <div style={ownerRowStyle}>
-                <strong>Owner:</strong>
-                    {owner}  
+            <div>
+                <p style={groupLabel}>{group.name}</p>
+                <hr />
+                <div style={ownerRowStyle}>
+                    <strong>Owner:</strong>
+                        {owner}  
+                </div>
+                <div style={labelStyle}>Editor Members:</div>
+                <ul style={memberStyle}>
+                    {editorMembers.length > 0 ? editorMembers : "None"} 
+                </ul>
+                <div style={labelStyle}>Viewer Members:</div>
+                <ul style={memberStyle}>
+                    {viewerMembers.length > 0 ? viewerMembers : "None"}
+                </ul>
+                <div style={labelStyle}>People Invited to Join:</div>
+                <ul style={memberStyle}>
+                    {invitees.length > 0 ? invitees : "None"}
+                </ul>
             </div>
-            <div style={labelStyle}>Editor Members:</div>
-            <ul style={memberStyle}>
-                {editorMembers.length > 0 ? editorMembers : "None"} 
-            </ul>
-            <div style={labelStyle}>Viewer Members:</div>
-            <ul style={memberStyle}>
-                {viewerMembers.length > 0 ? viewerMembers : ""}
-            </ul>
-            <div style={labelStyle}>People Invited to Join:</div>
-            <ul style={memberStyle}>
-                {invitees.length > 0 ? invitees : "None"}
-            </ul>
         </div>
     )
 }

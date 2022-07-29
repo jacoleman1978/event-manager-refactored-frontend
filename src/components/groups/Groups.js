@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Form } from "react-bootstrap";
 import { CurrentUser } from '../../contexts/currentUser';
 import GroupDataService from "../../services/groupDataService";
 import OwnedGroup from "./OwnedGroup";
 import GroupMembership from "./GroupMemberShip";
 import GroupInvitations from "./GroupInvitations";
+import NewGroupForm from "./NewGroupForm";
 
-const Groups = () => {
+const Groups = (props) => {
     const { currentUser } = useContext(CurrentUser);
 
     // Use State for data pulled from database
     let [ownedGroup, setOwnedGroup] = useState([]);
     let [groupMemberships, setGroupMemberships] = useState([]);
     let [groupInvitations, setGroupInvitations] = useState([]);
+    let [editFlag, setEditFlag] = useState(false);
     
     useEffect(() => {
         if (currentUser !== null) {
@@ -25,7 +28,7 @@ const Groups = () => {
 
     let ownedGroups = ownedGroup.map((group, i) => {
         return (
-            <OwnedGroup group={group} key={`owned-${i}`}/>
+            <OwnedGroup group={group} editFlag={editFlag}  key={`owned-${i}`}/>
         )
     });
 
@@ -43,18 +46,35 @@ const Groups = () => {
 
     return (
         <div>
-            <h1>Owned Groups</h1>
+            <p className="title">Group Invitations</p>
+            <div style={groupSectionStyle}>
+                <GroupInvitations groupInvitations={groupInvitations} />
+            </div>
+
+            <div className="flex-centered">
+                <NewGroupForm />
+            </div>
+            
+            <div className="flex-centered">
+                <p className="title">Owned Groups</p>
+                <div className="flex-center-wrap">
+                    <Form.Check 
+                        type="switch"
+                        id="edit-group"
+                        label="Edit Groups"
+                        checked={editFlag}
+                        onChange={() => setEditFlag(!editFlag)}
+                    />
+                </div>
+            </div>
+
             <div style={groupSectionStyle}>
                 {ownedGroups}
             </div>
-            <h2>Group Membership</h2>
+            
+            <p className="title">Group Membership</p>
             <div style={groupSectionStyle}>
                 {membershipList}
-            </div>
-            
-            <h2>Group Invitations</h2>
-            <div style={groupSectionStyle}>
-                <GroupInvitations groupInvitations={groupInvitations} />
             </div>
 
         </div>
