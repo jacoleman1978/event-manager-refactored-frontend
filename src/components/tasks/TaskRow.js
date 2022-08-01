@@ -40,6 +40,9 @@ const TaskRow = (props) => {
             backgroundColor: "antiquewhite"
         }
 
+        let deconstructedDate = task.allDay.endDate.split("-");
+        let dueDate = `${deconstructedDate[1]}/${deconstructedDate[2].split("T")[0]}/${deconstructedDate[0]}`
+
         return (
             <div style={detailedRowDisplay}>
                 <Card key={task._id + task.task.priority} style={rowStyle} >
@@ -50,7 +53,7 @@ const TaskRow = (props) => {
                             <strong>Priority</strong>: {task.task.priority}
                         </Card.Text>
                         <Card.Text>
-                            <strong>Due Date</strong>: {task.allDay.endDate}
+                            <strong>Due Date</strong>: {dueDate}
                         </Card.Text>
                         <Card.Text>
                             <strong>Notes</strong>: {task.notes}

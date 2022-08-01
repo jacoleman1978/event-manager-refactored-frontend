@@ -10,6 +10,7 @@ import EventsByDay from "./byListAndByDay/EventsByDay";
 import Groups from "./groups/Groups";
 import Settings from "./settings/Settings";
 import NavMenu from "./nav/NavMenu";
+import NewTask from "./tasks/NewTask";
 
 const DisplayContainer = (props) => {
     const navigate = useNavigate();
@@ -38,6 +39,8 @@ const DisplayContainer = (props) => {
                 return <TasksByPriority />
             } else if (viewType === 'duedate') {
                 return <TasksByDueDate />
+            } else if (viewType === 'new') {
+                return <NewTask />
             }
 
         } else if (isEvent === true) {

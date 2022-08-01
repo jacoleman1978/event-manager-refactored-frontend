@@ -1,9 +1,9 @@
 import axios from "axios";
 
 class SettingsDataService {
-    static GetSettings(data, settingsId) {
+    static GetSettings(settingsId) {
         axios.defaults.withCredentials = true;
-        return axios.get(`http://localhost:3100/settings/${settingsId}`, data)
+        return axios.get(`http://localhost:3100/settings/${settingsId}`)
     }
 
     static UpdateSettings(data, settingsId) {

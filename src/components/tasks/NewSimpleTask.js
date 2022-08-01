@@ -6,7 +6,8 @@ const NewSimpleTask = () => {
     // Use state to keep track of info entered into the form
     let [formTitle, setTitle] = useState("");
     let [formPriority, setPriority] = useState("Low");
-    let [formDueDate, setDueDate] = useState("")
+    let [formDueDate, setDueDate] = useState("");
+    let [formNotes, setNotes] = useState("");
 
     // Uses the DataService to port the data to database when form submitted
     const handleSubmit = (e) => {
@@ -23,7 +24,8 @@ const NewSimpleTask = () => {
             },
             recurring: {
                 isIt: false
-            }
+            },
+            notes: formNotes
         };
         
         EventDataService.AddEvent(data);
@@ -60,8 +62,8 @@ const NewSimpleTask = () => {
                     <Form.Control
                         required
                         type="text"
-                        aria-describedby="Enter task"
-                        placeholder="Enter task"
+                        aria-describedby="Enter task title"
+                        placeholder="Enter task title"
                         onChange={(e) => setTitle(e.target.value)}
                     />
                 </Form.Group>
@@ -86,6 +88,18 @@ const NewSimpleTask = () => {
                         />
                     </Form.Group>
                 </Col>
+                <Row style={row2Style}>
+                <Form.Group className="mb-3" controlId="formNotes">
+                    <Form.Control 
+                        as="textarea" 
+                        rows={5} 
+                        aria-describedby="Enter more details about task"
+                        placeholder="(Optional) Enter details about the task" 
+                        onChange={(e) => setNotes(e.target.value)}
+                        value={formNotes}
+                    />
+                </Form.Group>
+            </Row>
                 <Col xs="auto">
                     <Button variant="primary" type="submit">
                         Submit

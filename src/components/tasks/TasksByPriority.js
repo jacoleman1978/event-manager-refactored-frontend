@@ -63,6 +63,7 @@ const TasksByPriority = (props) => {
             <TaskGroup key={index} header={priority} data={data} headerStyle={headerStyle} sort={"priorities"}/>
         )
     });
+    
     return (
         <div>
             {groupTasksList}
