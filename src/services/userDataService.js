@@ -30,6 +30,11 @@ class UserDataService {
         axios.defaults.withCredentials = true
         return axios.post('http://localhost:3100/auth/search', data)
     }
+
+    static ChangePassword(data) {
+        axios.defaults.withCredentials = true
+        return axios.put('http://localhost:3100/auth/changepassword', data)
+    }
 }
 
 export default UserDataService;

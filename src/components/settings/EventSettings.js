@@ -56,12 +56,14 @@ const EventSettings = (props) => {
                         inline
                         label="Yes"
                         name="isAllDay"
+                        id="allDay"
                         type="radio"
                         defaultChecked={formIsAllDay}
                     />
                      <Form.Check 
                         inline
                         label="No"
+                        id="useTime"
                         name="isAllDay"
                         type="radio"
                         defaultChecked={!formIsAllDay}

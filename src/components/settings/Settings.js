@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ViewSettings from "./ViewSettings";
 import EventSettings from "./EventSettings";
+import ChangePassword from "./ChangePassword";
 import { CurrentUser } from "../../contexts/currentUser";
 import SettingsDataService from "../../services/settingsDataService";
 
@@ -19,9 +20,10 @@ const Settings = () => {
     }, [currentUser])
 
     return (
-        <div>
+        <div className="flex-center-wrap">
             <ViewSettings settings={settings} />
             <EventSettings settings={settings} />
+            <ChangePassword />
         </div>
     )
 }
