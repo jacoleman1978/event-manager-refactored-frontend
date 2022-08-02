@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import ViewSettings from "./ViewSettings";
+import EventSettings from "./EventSettings";
 import { CurrentUser } from "../../contexts/currentUser";
 import SettingsDataService from "../../services/settingsDataService";
+
 
 const Settings = () => {
     // Get currentUser from context
@@ -18,7 +20,8 @@ const Settings = () => {
 
     return (
         <div>
-            <ViewSettings settings={settings}/>
+            <ViewSettings settings={settings} />
+            <EventSettings settings={settings} />
         </div>
     )
 }

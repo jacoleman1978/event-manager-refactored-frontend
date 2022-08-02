@@ -7,7 +7,6 @@ class SettingsDataService {
     }
 
     static UpdateSettings(data) {
-        console.log(data)
         axios.defaults.withCredentials = true;
         return axios.put(`http://localhost:3100/settings/`, data)
     }

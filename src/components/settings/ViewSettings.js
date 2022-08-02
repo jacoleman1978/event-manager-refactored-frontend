@@ -20,8 +20,6 @@ const ViewSettings = (props) => {
             setStartWeek(settings.views.startOfWeek);
         }
     }, [settings])
-    
-
 
     // Uses the DataService to port the data to database when form submitted
     const handleSubmit = (e) => {
@@ -39,7 +37,7 @@ const ViewSettings = (props) => {
     }
     return (
         <div className="group-container">
-            <p className="flex-left-bold">Views:</p>
+            <p className="flex-left-bold">View Defaults:</p>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="flex-left-center" controlId="formEventsView">
                     <Form.Label>Default Events: </Form.Label>
@@ -110,7 +108,7 @@ const ViewSettings = (props) => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    Save Views
+                    Save View Defaults
                 </Button>
 
             </Form>
