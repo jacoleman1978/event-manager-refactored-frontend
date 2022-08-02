@@ -1,14 +1,9 @@
 import React from "react";
-import { Nav, Button } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 
 const ViewBtns = (props) => {
     // Props
-    const { isTask, isEvent, viewType} = props;
-
-    // TODO Maybe create context for settings
-    const handleSaveChanges = () => {
-
-    }
+    const { isTask, isEvent} = props;
 
     const btnDisplay = (isTask, isEvent) => {
         if (isTask === true) {
@@ -28,20 +23,7 @@ const ViewBtns = (props) => {
                     <Nav.Link href='/events/new'>New Event</Nav.Link>
                 </>
             )
-        } else if (viewType === 'settings') {
-            return (
-                <>
-                    <Button
-                        variant="secondary"
-                        type="button"
-                        onClick={handleSaveChanges}
-                        href='/settings'
-                    >
-                        Save Changes
-                    </Button>
-                </>
-            )
-        }
+        } 
     }
 
     return (

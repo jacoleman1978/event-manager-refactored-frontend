@@ -91,3 +91,7 @@ hr {
   align-items: center;
   gap: 1rem;
 }
+
+.dropdown-width {
+  width: 14rem;
+}
