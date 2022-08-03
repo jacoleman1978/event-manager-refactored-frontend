@@ -95,3 +95,7 @@ hr {
 .dropdown-width {
   width: 14rem;
 }
+
+.active {
+  background-color: darkseagreen !important;
+}

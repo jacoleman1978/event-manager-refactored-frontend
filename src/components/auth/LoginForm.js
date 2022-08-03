@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import UserDataService from '../../services/userDataService';
+import SettingsDataService from '../../services/settingsDataService';
 import { CurrentUser } from '../../contexts/currentUser';
 
 // Called from App.js
@@ -39,7 +40,34 @@ const LoginForm = () => {
             if (res.data.userName.length > 0) {
                 // Store user info in Context after successful login and redirect to default page
                 setCurrentUser(res.data.session);
-                navigate(`/tasks/priority`);
+
+                SettingsDataService.GetSettings().then(res => {
+                    let defaultViews = res.data.settings.views;
+                    let redirectPath = '';
+                    
+                    if (defaultViews.login === 'Events') {
+                        if (defaultViews.events === 'By List') {
+                            redirectPath = '/events/list/0';
+                        } else if (defaultViews.events === 'By Overview') {
+                            redirectPath = '/events/overview/0';
+                        } else if (defaultViews.events === 'By Day') {
+                            redirectPath = '/events/day/0';
+                        }
+                    } else if (defaultViews.login === 'Tasks') {
+                        if (defaultViews.tasks === 'By Priority') {
+                            redirectPath = '/tasks/priority';
+                        } else if (defaultViews.tasks === 'By Due Date') {
+                            redirectPath = '/tasks/duedate';
+                        }
+                    } else if (defaultViews.login === 'Settings') {
+                        redirectPath = '/settings';
+                    } else if (defaultViews.login === 'Groups') {
+                        redirectPath = '/groups';
+                    }
+
+                    navigate(redirectPath);
+
+                });
             } else {
                 setErrorFlag(true);
             }

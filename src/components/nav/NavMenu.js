@@ -22,6 +22,25 @@ const NavMenu = (props) => {
 
     let dropdownTitle = '';
     let defaultActive = '';
+    let defaultTasksPath = '';
+    let defaultEventsPath = '';
+
+    if (settings !== null) {
+        let defaultViews = settings.views;
+        if (defaultViews.tasks === 'By Priority') {
+            defaultTasksPath = '/tasks/priority';
+        } else if (defaultViews.tasks === 'By Due Date') {
+            defaultTasksPath = '/tasks/duedate';
+        }
+
+        if (defaultViews.events === 'By List') {
+            defaultEventsPath = '/events/list/0';
+        } else if (defaultViews.events === 'By Overview') {
+            defaultEventsPath = '/events/overview/0';
+        } else if (defaultViews.events === 'By Day') {
+            defaultEventsPath = '/events/day/0';
+        }
+    }
 
     if (isTask === true) {
         dropdownTitle = 'Tasks';
@@ -61,8 +80,8 @@ const NavMenu = (props) => {
                 <Nav fill variant="pills" className="me-auto" defaultActiveKey={defaultActive}>
                     <Navbar.Text>View: </Navbar.Text>
                     <NavDropdown title={dropdownTitle} id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/events/list/0">Events</NavDropdown.Item>
-                        <NavDropdown.Item href="/tasks/priority">Tasks</NavDropdown.Item>
+                        <NavDropdown.Item href={defaultEventsPath}>Events</NavDropdown.Item>
+                        <NavDropdown.Item href={defaultTasksPath}>Tasks</NavDropdown.Item>
                         <NavDropdown.Item href="/groups">Groups</NavDropdown.Item>
                         <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                     </NavDropdown>
