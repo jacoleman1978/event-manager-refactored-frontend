@@ -9,7 +9,7 @@ const NavMenu = (props) => {
     const {currentUser, setCurrentUser} = useContext(CurrentUser);
 
     // Props
-    const { isTask, isEvent, viewType } = props;
+    const { isTask, isEvent, viewType, settings } = props;
 
     useEffect(() => {
         UserDataService.CheckSessionUser().then(res => setCurrentUser(res.data));
@@ -21,11 +21,32 @@ const NavMenu = (props) => {
     };
 
     let dropdownTitle = '';
+    let defaultActive = '';
 
     if (isTask === true) {
         dropdownTitle = 'Tasks';
+
+        if (viewType === 'priority') {
+            defaultActive = '/tasks/priority';
+        } else if (viewType === 'duedate') {
+            defaultActive = '/tasks/duedate';
+        } else if (viewType === 'new') {
+            defaultActive = '/tasks/new';
+        }
+
     } else if (isEvent === true) {
         dropdownTitle = 'Events';
+
+        if (viewType === 'list') {
+            defaultActive = '/events/list/0';
+        } else if (viewType === 'overview') {
+            defaultActive = '/events/overview/0';
+        } else if (viewType === 'day') {
+            defaultActive = '/events/day/0';
+        } else if (viewType === 'new') {
+            defaultActive = '/events/new/0'
+        }
+
     } else if (viewType === 'groups') {
         dropdownTitle = "Groups";
     } else if (viewType === 'settings') {
@@ -37,7 +58,7 @@ const NavMenu = (props) => {
             <Navbar.Brand href='/'>Event Manager</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navebar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav fill variant="pills" className="me-auto">
+                <Nav fill variant="pills" className="me-auto" defaultActiveKey={defaultActive}>
                     <Navbar.Text>View: </Navbar.Text>
                     <NavDropdown title={dropdownTitle} id="basic-nav-dropdown">
                         <NavDropdown.Item href="/events/list/0">Events</NavDropdown.Item>
@@ -48,7 +69,7 @@ const NavMenu = (props) => {
                     <ViewBtns 
                         isTask={isTask} 
                         isEvent={isEvent} 
-                        viewType={viewType} 
+                        
                     />
                 </Nav>
             </Navbar.Collapse>

@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CurrentUser } from "../contexts/currentUser";
 import UserDataService from "../services/userDataService";
+import SettingsDataService from "../services/settingsDataService";
 import TasksByPriority from "./tasks/TasksByPriority";
 import TasksByDueDate from "./tasks/TasksByDueDate";
 import EventsByList from "./byListAndByDay/EventsByList";
@@ -21,6 +22,8 @@ const DisplayContainer = (props) => {
     // Props
     const { isTask, isEvent, viewType } = props;
 
+    let [settings, setSettings] = useState(null);
+
     // If there isn't a user in context, redirect to login
     useEffect(() => {
         if (currentUser === null) {
@@ -29,6 +32,8 @@ const DisplayContainer = (props) => {
                     navigate('/auth/login');
                 }
             })
+        } else if (settings === null) {
+            SettingsDataService.GetSettings().then(res => setSettings(res.data.settings))
         }
     }, [currentUser])
 
@@ -40,7 +45,7 @@ const DisplayContainer = (props) => {
             } else if (viewType === 'duedate') {
                 return <TasksByDueDate />
             } else if (viewType === 'new') {
-                return <NewTask />
+                return <NewTask settings={settings}/>
             }
 
         } else if (isEvent === true) {
@@ -56,7 +61,7 @@ const DisplayContainer = (props) => {
             return <Groups />
 
         } else if (viewType === 'settings') {
-            return <Settings />
+            return <Settings settings={settings}/>
         }
     }
 
@@ -66,6 +71,7 @@ const DisplayContainer = (props) => {
                 isTask={isTask} 
                 isEvent={isEvent} 
                 viewType={viewType} 
+                settings={settings}
             />
             {selectView(isTask, isEvent, viewType)}
         </>

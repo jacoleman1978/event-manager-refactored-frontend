@@ -9,7 +9,7 @@ const NewTask = () => {
     const { currentUser } = useContext(CurrentUser);
 
     // State for user settings
-    let [setSettings] = useState(null);
+    let [settings, setSettings] = useState(null);
 
     // Use state to keep track of info entered into the form
     let [formTitle, setTitle] = useState("");

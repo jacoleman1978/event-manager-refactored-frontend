@@ -33,7 +33,7 @@ class EventDataService {
 
     static GetEvents(data) {
         axios.defaults.withCredentials = true;
-        return axios.get('http://localhost:3100/event', data)
+        return axios.get('http://localhost:3100/event/all', data)
     }
 
     static GetEventById(data, eventId) {
