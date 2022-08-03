@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import SettingsDataService from "../../services/settingsDataService";
 
 const ViewSettings = (props) => {
-    const { settings } = props;
+    const { settings, setSettings } = props;
 
     // Use state to keep track of info entered into the form
 
@@ -33,7 +33,7 @@ const ViewSettings = (props) => {
             }
         }
         
-        SettingsDataService.UpdateSettings(data);
+        SettingsDataService.UpdateSettings(data).then(res => setSettings(res.data.settings));
     }
     return (
         <div className="group-container">

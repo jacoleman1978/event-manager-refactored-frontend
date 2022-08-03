@@ -61,7 +61,7 @@ const DisplayContainer = (props) => {
             return <Groups />
 
         } else if (viewType === 'settings') {
-            return <Settings settings={settings}/>
+            return <Settings settings={settings} setSettings={setSettings}/>
         }
     }
 
