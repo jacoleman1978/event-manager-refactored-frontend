@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import {Form, Button, Row, Col} from 'react-bootstrap';
 import EventDataService from "../../services/eventDataService";
 
-const NewSimpleTask = () => {
+const NewSimpleTask = (props) => {
+    // Get props
+    let {settings} = props;
+
     // Use state to keep track of info entered into the form
     let [formTitle, setTitle] = useState("");
-    let [formPriority, setPriority] = useState("Low");
+    let [formPriority, setPriority] = useState(settings.task.priority);
     let [formDueDate, setDueDate] = useState("");
     let [formNotes, setNotes] = useState("");
 
@@ -70,8 +73,13 @@ const NewSimpleTask = () => {
             </Row>
             <Row style={row2Style}>
                 <Col xs="auto">
-                    <Form.Group className="mb-3" controlId="formPriority">
-                        <Form.Select aria-label="Select a priority" required onChange={(e) => setPriority(e.target.value)}>
+                    <Form.Group className="mb-3" controlId="formPriority" >
+                        <Form.Select 
+                            aria-label="Select a priority" 
+                            required 
+                            defaultValue={formPriority}
+                            onChange={(e) => setPriority(e.target.value)}
+                        >
                             <option value="" disabled>Select a priority</option>
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>

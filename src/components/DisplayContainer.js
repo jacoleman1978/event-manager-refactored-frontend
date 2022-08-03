@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CurrentUser } from "../contexts/currentUser";
 import UserDataService from "../services/userDataService";
@@ -23,29 +23,51 @@ const DisplayContainer = (props) => {
     const { isTask, isEvent, viewType } = props;
 
     let [settings, setSettings] = useState(null);
+    let [settingsLoaded, setSettingsLoaded] = useState(false);
 
-    // If there isn't a user in context, redirect to login
+    if (currentUser === null) {
+        UserDataService.CheckSessionUser().then(res => {
+            if (res.data === null) {
+                navigate('/auth/login');
+            }
+        })
+    } 
+
     useEffect(() => {
-        if (currentUser === null) {
-            UserDataService.CheckSessionUser().then(res => {
-                if (res.data === null) {
-                    navigate('/auth/login');
-                }
-            })
-        } else if (settings === null) {
-            SettingsDataService.GetSettings().then(res => setSettings(res.data.settings))
+        if (settings !== null) {
+            setSettingsLoaded(true);
         }
-    }, [currentUser])
+    }, [settings])
+
+    if (settings === null) {
+        SettingsDataService.GetSettings().then(res => {
+            setSettings(res.data.settings);
+        })
+    }
+
+    const displayNavMenu = () => {
+        return (
+            <>
+                <NavMenu 
+                    isTask={isTask} 
+                    isEvent={isEvent} 
+                    viewType={viewType} 
+                    settings={settings}
+                />
+                {selectView(isTask, isEvent, viewType)}
+            </>
+        )
+    }
 
     // Determine view to use in display
     const selectView = (isTask, isEvent, viewType) => {
         if (isTask === true) {
             if (viewType === 'priority') {
-                return <TasksByPriority />
+                return <TasksByPriority settings={settings} />
             } else if (viewType === 'duedate') {
-                return <TasksByDueDate />
+                return <TasksByDueDate settings={settings} />
             } else if (viewType === 'new') {
-                return <NewTask settings={settings}/>
+                return <NewTask settings={settings} />
             }
 
         } else if (isEvent === true) {
@@ -67,13 +89,8 @@ const DisplayContainer = (props) => {
 
     return (
         <>
-            <NavMenu 
-                isTask={isTask} 
-                isEvent={isEvent} 
-                viewType={viewType} 
-                settings={settings}
-            />
-            {selectView(isTask, isEvent, viewType)}
+            {settingsLoaded === true ? displayNavMenu() : ""}
+            
         </>
     )
 }

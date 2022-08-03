@@ -4,6 +4,9 @@ import NewSimpleTask from "./NewSimpleTask";
 import EventDataService from "../../services/eventDataService";
 
 const TasksByPriority = (props) => {
+    // Get props
+    let {settings} = props;
+
     // Use State for data pulled from database
     let [taskData, setTaskData] = useState([]);
 
@@ -67,7 +70,7 @@ const TasksByPriority = (props) => {
     return (
         <div>
             {groupTasksList}
-            <NewSimpleTask />
+            <NewSimpleTask settings={settings} />
         </div>
     )
 }
