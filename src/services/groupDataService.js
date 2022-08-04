@@ -55,6 +55,11 @@ class GroupDataService {
         axios.defaults.withCredentials = true;
         return axios.get('http://localhost:3100/group/invitations')
     }
+
+    static GetGroupsCanEdit() {
+        axios.defaults.withCredentials = true;
+        return axios.get('http://localhost:3100/group/canedit')
+    }
 }
 
 export default GroupDataService;

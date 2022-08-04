@@ -31,11 +31,37 @@ hr {
   width: 30rem;
 }
 
+.new-doc-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: antiquewhite;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: solid black 1px;
+  border-radius: 0.5rem;
+}
+
 .flex-center-wrap {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+
+.flex-left-center-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flex-left-center-no-gap {
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
 
 .title {
@@ -62,6 +88,13 @@ hr {
   justify-content: left;
   align-items: center;
   gap: 0.5rem;
+  margin-bottom: 0rem;
+}
+
+.flex-left-center-no-gap {
+  display: flex;
+  justify-content: left;
+  align-items: center;
   margin-bottom: 0rem;
 }
 
@@ -93,9 +126,23 @@ hr {
 }
 
 .dropdown-width {
-  width: 14rem;
+  width: 9rem;
 }
 
 .active {
   background-color: darkseagreen !important;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-right: 0.5rem;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1rem;
+  gap: 1rem;
 }
