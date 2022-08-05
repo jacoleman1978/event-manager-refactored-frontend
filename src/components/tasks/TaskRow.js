@@ -27,12 +27,6 @@ const TaskRow = (props) => {
     const detailedView = () => {
         // If there is no task for the TaskGroup, display 'No tasks found'
 
-        // Style to use when detailed view is active
-        const detailedRowDisplay = {
-            display: "flex",
-            justifyContent: "center",
-        }
-
         // Style for each row
         const rowStyle = {
             display: "flex",
@@ -50,11 +44,19 @@ const TaskRow = (props) => {
             return simpleView()
         }
 
+        let groupList = task.groupIds.map((group) => {
+            return (
+                <li key={group._id}>
+                    {group.name}
+                </li>
+            )
+        })
+
         return (
-            <div style={detailedRowDisplay}>
+            <div className="flex-left-center-wrap">
                 <Card key={task._id + task.task.priority} style={rowStyle} >
-                    <Card.Body>
-                        <Card.Title><strong>{task.title}</strong></Card.Title>
+                    <Card.Body className="new-doc-container">
+                        <Card.Title className="title">{task.title}</Card.Title>
                         <hr />
                         <Card.Text>
                             <strong>Priority</strong>: {task.task.priority}
@@ -63,12 +65,17 @@ const TaskRow = (props) => {
                             <strong>Due Date</strong>: {dueDate}
                         </Card.Text>
                         <Card.Text>
+                            <strong>Groups</strong>: 
+                        </Card.Text>
+                        <ul>
+                            {groupList}
+                        </ul>
+                        <Card.Text>
                             <strong>Notes</strong>: {task.notes}
                         </Card.Text>
                     </Card.Body>
                 </Card>
             </div>
-            
         )
     }
 

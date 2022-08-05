@@ -25,18 +25,18 @@ const DisplayContainer = (props) => {
     let [settings, setSettings] = useState(null);
     let [settingsLoaded, setSettingsLoaded] = useState(false);
 
-    if (currentUser === null) {
-        UserDataService.CheckSessionUser().then(res => {
-            if (res.data === null) {
-                navigate('/auth/login');
-            }
-        })
-    } 
-
     useEffect(() => {
         if (settings !== null) {
             setSettingsLoaded(true);
         }
+
+        if (currentUser === null) {
+            UserDataService.CheckSessionUser().then(res => {
+                if (res.data === null) {
+                    navigate('/auth/login');
+                }
+            })
+        } 
     }, [settings])
 
     if (settings === null) {

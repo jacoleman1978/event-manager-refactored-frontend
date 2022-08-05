@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
@@ -80,7 +80,9 @@ const NewTask = (props) => {
         }
     }
 
-    GroupDataService.GetGroupsCanEdit().then(res => setGroupEditList(res.data.groupsCanEdit));
+    useEffect(() => {
+        GroupDataService.GetGroupsCanEdit().then(res => setGroupEditList(res.data.groupsCanEdit));
+    }, [settings])
 
     let groupList = groupEditList.map((group) => {
         return (
