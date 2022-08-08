@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TaskGroup from "./TaskGroup";
 import NewSimpleTask from "./NewSimpleTask";
 import EventDataService from "../../services/eventDataService";
+import getDayDifference from "../../helpers/getDayDifference";
 
 const TasksByDueDate = (props) => {
     // Get props
@@ -22,31 +23,10 @@ const TasksByDueDate = (props) => {
     let thisWeekTasks = [];
     let futureTasks = [];
 
-    // Need today's date, but do not want time to be part of it, since user selected due date did not have a time
-    const todayDate = new Date();
-    let todayYear = todayDate.getFullYear();
-    let todayMonth = todayDate.getMonth();
-    let todayDay = todayDate.getDate();
-    let today = new Date(todayYear, todayMonth, todayDay);
-
-    // Calculate the number of milliseconds(ms) in one day
-    const msInOneDay = 1000 * 60 * 60 * 24;
-
     // Function to sort tasks by dueDate categories and push them to an array of the same type
     const sortByDate = (task) => {
-        // Need dueDate, but do not want time to be part of it, since user selected due date did not have a time. Date in formate of 'YYYY-MM-DD'.
-        let deconstructedDueDate = task.allDay.endDate.split('-');
-        
-        let dueYear = deconstructedDueDate[0];
-        // Months in the date function are from 0 to 11, so need to subtract one from the actual month to get the correct integer to use in Date()
-        let dueMonth = deconstructedDueDate[1] - 1;
-        let dueDay = deconstructedDueDate[2].split('T')[0];
-
-        let dueDate = new Date(dueYear, dueMonth, dueDay)
         // Find the difference in ms between today and the dueDate
-        let daysUntilDue = (dueDate.getTime() - today.getTime()) / msInOneDay;
-
-        //console.log(daysUntilDue)
+        let daysUntilDue = getDayDifference(task.allDay.endDate)
 
         if (daysUntilDue < 0) {
             pastTasks.push(task);

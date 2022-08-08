@@ -39,7 +39,7 @@ const TaskRow = (props) => {
         let deconstructedDate = task.allDay.endDate.split("-");
 
         if (deconstructedDate.length === 3) {
-            dueDate = `${deconstructedDate[1]}/${deconstructedDate[2].split("T")[0]}/${deconstructedDate[0]}`
+            dueDate = `${deconstructedDate[1]}/${deconstructedDate[2]}/${deconstructedDate[0]}`
         } else {
             return simpleView()
         }

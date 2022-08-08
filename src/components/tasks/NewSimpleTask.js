@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Form, Button, Row, Col} from 'react-bootstrap';
 import EventDataService from "../../services/eventDataService";
+import getDefaultDate from "../../helpers/getDefaultDate";
 
 const NewSimpleTask = (props) => {
     // Get props
@@ -9,7 +10,7 @@ const NewSimpleTask = (props) => {
     // Use state to keep track of info entered into the form
     let [formTitle, setTitle] = useState("");
     let [formPriority, setPriority] = useState(settings.task.priority);
-    let [formDueDate, setDueDate] = useState("");
+    let [formEndDate, setEndDate] = useState(getDefaultDate(settings.allDay.endDate));
     let [formNotes, setNotes] = useState("");
 
     // Uses the DataService to port the data to database when form submitted
@@ -22,8 +23,8 @@ const NewSimpleTask = (props) => {
             },
             allDay: {
                 isIt: true,
-                startDate: new Date(),
-                endDate: formDueDate
+                startDate: getDefaultDate(settings.allDay.startDate),
+                endDate: formEndDate
             },
             recurring: {
                 isIt: false
@@ -89,10 +90,11 @@ const NewSimpleTask = (props) => {
                     </Form.Group>
                 </Col>
                 <Col xs="auto">
-                    <Form.Group controlId="formDueDate">
+                    <Form.Group controlId="formEndDate">
                         <Form.Control 
                             type="date" 
-                            required onChange={(e) => setDueDate(e.target.value)}
+                            defaultValue={formEndDate}
+                            required onChange={(e) => setEndDate(e.target.value)}
                         />
                     </Form.Group>
                 </Col>
