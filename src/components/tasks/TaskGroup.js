@@ -20,7 +20,7 @@ const TaskGroup = (props) => {
             return (
                 <li key={task._id} >
                     <div style={rowStyle}>
-                        <TaskRow task={task} needButtons={true} />
+                        <TaskRow task={task} />
                     </div>
                 </li>
             )
@@ -29,7 +29,7 @@ const TaskGroup = (props) => {
         const task = {_id: "", title: "No tasks found", task: {priority: ""}, allDay: {endDate: ""}, notes: ""}
         tasksList = [
             <li key={0}>
-                <TaskRow task={task} needButtons={false}/>
+                <TaskRow task={task} />
             </li>
         ];
     }
