@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
+import getDefaultDate from "../../helpers/getDefaultDate";
+import getDefaultTime from "../../helpers/getDefaultTime";
 
 const NewTask = (props) => {
     // Get props
@@ -11,10 +13,10 @@ const NewTask = (props) => {
     let [formTitle, setTitle] = useState("");
     let [formPriority, setPriority] = useState(settings.task.priority);
     let [formAllDay, setAllDay] = useState(settings.allDay.isIt);
-    let [formStartDate, setStartDate] = useState(new Date());
-    let [formEndDate, setEndDate] = useState(new Date());
-    let [formStartTime, setStartTime] = useState(null);
-    let [formEndTime, setEndTime] = useState(null);
+    let [formStartDate, setStartDate] = useState(getDefaultDate(settings.allDay.startDate));
+    let [formEndDate, setEndDate] = useState(getDefaultDate(settings.allDay.endDate));
+    let [formStartTime, setStartTime] = useState(getDefaultTime(settings.allDay.startTime));
+    let [formEndTime, setEndTime] = useState(getDefaultTime(settings.allDay.endTime));
     let [formGroups, setGroups] = useState([]);
     let [formNotes, setNotes] = useState("");
     let [groupEditList, setGroupEditList] = useState([]);
@@ -41,6 +43,8 @@ const NewTask = (props) => {
             notes: formNotes
         }
 
+        console.log(data)
+
         EventDataService.AddEvent(data);
     }
 
@@ -53,6 +57,7 @@ const NewTask = (props) => {
                         type="time" 
                         required 
                         className="dropdown-width"
+                        defaultValue={formStartTime}
                         onChange={(e) => setStartTime(e.target.value)}
                     />
                 </div>
@@ -63,6 +68,7 @@ const NewTask = (props) => {
                         type="time" 
                         required 
                         className="dropdown-width"
+                        defaultValue={formEndTime}
                         onChange={(e) => setEndTime(e.target.value)}
                     />
                 </div>
@@ -151,6 +157,7 @@ const NewTask = (props) => {
                                 type="date" 
                                 required 
                                 className="dropdown-width"
+                                defaultValue={formStartDate}
                                 onChange={(e) => setStartDate(e.target.value)}
                             />
                         </div>
@@ -161,6 +168,7 @@ const NewTask = (props) => {
                                 type="date" 
                                 required 
                                 className="dropdown-width"
+                                defaultValue={formEndDate}
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </div>
