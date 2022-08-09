@@ -23,7 +23,7 @@ const NewTask = (props) => {
     let [formGroups, setGroups] = useState([]);
     let [formNotes, setNotes] = useState("");
     let [groupEditList, setGroupEditList] = useState([]);
-    let [groupIds, setGroupIds] = useState([]);
+    let [checkedGroupIds, setCheckedGroupIds] = useState([]);
 
     // Uses the DataService to port the data to database when form submitted
     const handleSubmit = (e) => {
@@ -83,8 +83,12 @@ const NewTask = (props) => {
     const handleGroupCheck = (e) => {
         if (e.target.checked === true) {
             setGroups(formGroups => [...formGroups, e.target.id]);
+            setCheckedGroupIds(checkedGroupIds => [...checkedGroupIds, e.target.id])
         } else {
             setGroups(formGroups => formGroups.filter((group) => {
+                return group !== e.target.id
+            }))
+            setCheckedGroupIds(checkedGroupIds => checkedGroupIds.filter((group) => {
                 return group !== e.target.id
             }))
         }
@@ -98,14 +102,14 @@ const NewTask = (props) => {
                 EventDataService.GetEventById(eventId).then(res => {
                     let task = res.data.eventDoc
                     setTitle(task.title);
-                    setPriority(task.priority);
+                    setPriority(task.task.priority);
                     setAllDay(task.allDay);
                     setStartDate(task.allDay.startDate);
                     setEndDate(task.allDay.endDate);
                     setStartTime(task.allDay.startTime);
                     setEndTime(task.allDay.endTime);
                     setNotes(task.notes);
-                    setGroupIds(task.groupIds);
+                    setCheckedGroupIds(task.groupIds);
                 })
             } else {
                 setPriority(settings.task.priority);
@@ -118,16 +122,19 @@ const NewTask = (props) => {
         });
     }, [])
 
-
-
     let groupList = groupEditList.map((group) => {
-        
+        let isChecked = false;
+
+        if (checkedGroupIds.indexOf(group._id) > -1) {
+            isChecked = true;
+        }
         return (
             <Form.Check
                 key={group._id}
                 type="checkbox"
                 label={group.name}
                 name="groups-can-edit"
+                checked={isChecked}
                 id={group._id}
                 onChange={(e) => handleGroupCheck(e)}
             />
@@ -157,7 +164,7 @@ const NewTask = (props) => {
                             aria-label="Select a priority" 
                             required 
                             className="dropdown-width"
-                            defaultValue={formPriority}
+                            value={formPriority}
                             onChange={(e) => setPriority(e.target.value)}
                         >
                             <option value="" disabled>Select a priority</option>
