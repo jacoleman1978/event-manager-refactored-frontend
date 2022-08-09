@@ -49,7 +49,7 @@ const EventSettings = (props) => {
                 <Form.Group 
                     className="flex-left-center" 
                     controlId="formIsAllDay"
-                    onChange={(e) => setAllDay(e.target.label)}
+                    
                 >
                     <Form.Label>Default to all day: </Form.Label>
                     <Form.Check 
@@ -58,7 +58,8 @@ const EventSettings = (props) => {
                         name="isAllDay"
                         id="allDay"
                         type="radio"
-                        defaultChecked={formIsAllDay}
+                        onChange={(e) => setAllDay(true)}
+                        checked={formIsAllDay}
                     />
                      <Form.Check 
                         inline
@@ -66,7 +67,8 @@ const EventSettings = (props) => {
                         id="useTime"
                         name="isAllDay"
                         type="radio"
-                        defaultChecked={!formIsAllDay}
+                        onChange={(e) => setAllDay(false)}
+                        checked={!formIsAllDay}
                     />
                 </Form.Group>
 
