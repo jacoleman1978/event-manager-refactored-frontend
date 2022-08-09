@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
@@ -6,20 +7,23 @@ import getDefaultDate from "../../helpers/getDefaultDate";
 import getDefaultTime from "../../helpers/getDefaultTime";
 
 const NewTask = (props) => {
+    const { eventId } = useParams();
+
     // Get props
-    let {settings} = props;
+    let {settings, isEdit} = props;
 
     // Use state to keep track of info entered into the form
     let [formTitle, setTitle] = useState("");
-    let [formPriority, setPriority] = useState(settings.task.priority);
-    let [formAllDay, setAllDay] = useState(settings.allDay.isIt);
-    let [formStartDate, setStartDate] = useState(getDefaultDate(settings.allDay.startDate));
-    let [formEndDate, setEndDate] = useState(getDefaultDate(settings.allDay.endDate));
-    let [formStartTime, setStartTime] = useState(getDefaultTime(settings.allDay.startTime));
-    let [formEndTime, setEndTime] = useState(getDefaultTime(settings.allDay.endTime));
+    let [formPriority, setPriority] = useState("");
+    let [formAllDay, setAllDay] = useState(true);
+    let [formStartDate, setStartDate] = useState("");
+    let [formEndDate, setEndDate] = useState("");
+    let [formStartTime, setStartTime] = useState("");
+    let [formEndTime, setEndTime] = useState("");
     let [formGroups, setGroups] = useState([]);
     let [formNotes, setNotes] = useState("");
     let [groupEditList, setGroupEditList] = useState([]);
+    let [groupIds, setGroupIds] = useState([]);
 
     // Uses the DataService to port the data to database when form submitted
     const handleSubmit = (e) => {
@@ -87,10 +91,37 @@ const NewTask = (props) => {
     }
 
     useEffect(() => {
-        GroupDataService.GetGroupsCanEdit().then(res => setGroupEditList(res.data.groupsCanEdit));
-    }, [settings])
+        GroupDataService.GetGroupsCanEdit().then(res => {
+            setGroupEditList(res.data.groupsCanEdit)
+
+            if (isEdit) {
+                EventDataService.GetEventById(eventId).then(res => {
+                    let task = res.data.eventDoc
+                    setTitle(task.title);
+                    setPriority(task.priority);
+                    setAllDay(task.allDay);
+                    setStartDate(task.allDay.startDate);
+                    setEndDate(task.allDay.endDate);
+                    setStartTime(task.allDay.startTime);
+                    setEndTime(task.allDay.endTime);
+                    setNotes(task.notes);
+                    setGroupIds(task.groupIds);
+                })
+            } else {
+                setPriority(settings.task.priority);
+                setAllDay(settings.allDay.isIt);
+                setStartDate(getDefaultDate(settings.allDay.startDate));
+                setEndDate(getDefaultDate(settings.allDay.endDate));
+                setStartTime(getDefaultTime(settings.allDay.startTime));
+                setEndTime(getDefaultTime(settings.allDay.endTime));
+            }
+        });
+    }, [])
+
+
 
     let groupList = groupEditList.map((group) => {
+        
         return (
             <Form.Check
                 key={group._id}
@@ -105,7 +136,7 @@ const NewTask = (props) => {
 
     return (
         <div>
-            <p className="title">New Task</p>
+            {isEdit ? <p className="title">Edit Task</p> : <p className="title">New Task</p>}
             <Form onSubmit={handleSubmit} className="new-doc-container">
                 <Form.Group controlId="formTask" className="flex-left-center-wrap">
                     <div className="flex-left-center-no-gap">
@@ -114,8 +145,8 @@ const NewTask = (props) => {
                             className="input-width"
                             required
                             type="text"
+                            defaultValue={formTitle}
                             aria-describedby="Enter task title"
-                            placeholder="Enter task title"
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
@@ -180,7 +211,6 @@ const NewTask = (props) => {
                 <Form.Group controlId="formTask" >
                     <Form.Label>Groups to Add to Task: </Form.Label>
                     <div className="checkbox-list">
-                        
                         {groupList}
                     </div>
                 </Form.Group>
@@ -192,9 +222,8 @@ const NewTask = (props) => {
                         rows={5} 
                         aria-describedby="Enter more details about task"
                         className="input-width"
-                        placeholder="(Optional) Enter details about the task" 
+                        defaultValue={formNotes}
                         onChange={(e) => setNotes(e.target.value)}
-                        value={formNotes}
                     />
                 </Form.Group>
 

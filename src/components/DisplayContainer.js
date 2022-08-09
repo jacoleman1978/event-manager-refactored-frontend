@@ -67,7 +67,9 @@ const DisplayContainer = (props) => {
             } else if (viewType === 'duedate') {
                 return <TasksByDueDate settings={settings} />
             } else if (viewType === 'new') {
-                return <NewTask settings={settings} />
+                return <NewTask settings={settings} isEdit={false}/>
+            } else if (viewType === 'edit') {
+                return <NewTask settings={settings} isEdit={true}/>
             }
 
         } else if (isEvent === true) {

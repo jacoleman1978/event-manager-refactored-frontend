@@ -1,8 +1,12 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Card, Button } from "react-bootstrap";
 import { CurrentUser } from '../../contexts/currentUser';
+import EventDataService from "../../services/eventDataService";
 
 const TaskRow = (props) => {
+    const navigate = useNavigate();
+
     // Get currentUser from context
     const { currentUser } = useContext(CurrentUser);
 
@@ -11,7 +15,6 @@ const TaskRow = (props) => {
 
     // Set state for which view to display. view State changed by clicking on a list item.
     let [view, setView] = useState(true)
-    let [isTaskEditor, setIsTaskEditor] = useState(false);
 
     // This is the default view and only displays the task
     const simpleView = () => {
@@ -30,12 +33,17 @@ const TaskRow = (props) => {
 
     // The detailed view is displayed when the task list item is clicked.
     const detailedView = () => {
-        let taskEditors = [task.ownerId, ...task.editorIds];
+        let isTaskEditor = false;
+        let taskEditors = [task.ownerId];
 
-        if (taskEditors !== 'undefined') {
-            for (let editor of taskEditors) {
-                if (editor._id === currentUser.userId) {
-                    setIsTaskEditor(true)
+        for (let editorId of task.editorIds) {
+            taskEditors = [...taskEditors, editorId._id]
+        }
+        
+        for (let editor of taskEditors) {
+            if (editor !== 'undefined') {
+                if (editor === currentUser.userId) {
+                    isTaskEditor = true;
                     break;
                 }
             }
@@ -68,14 +76,16 @@ const TaskRow = (props) => {
 
         const completeTask = (e) => {
             e.preventDefault();
+            EventDataService.DeleteEvent(task._id);
         }
 
-        const editTask = () => {
-
+        const editTask = (e) => {
+            navigate(`/tasks/edit/${task._id}`);
         }
 
-        const deleteTask = () => {
-
+        const deleteTask = (e) => {
+            e.preventDefault();
+            EventDataService.DeleteEvent(task._id);
         }
 
         const displayButtonGroup = () => {
@@ -118,16 +128,16 @@ const TaskRow = (props) => {
                             <strong>Due Date</strong>: {dueDate}
                         </Card.Text>
                         <Card.Text>
-                            <strong>Groups</strong>: 
+                            <strong>Groups</strong>: {groupList.length === 0 ? "None" : ""}
                         </Card.Text>
-                        <ul>
-                            {groupList}
-                        </ul>
+
+                        {groupList.length > 0 ? <ul> {groupList} </ul>: ""}
+
                         <Card.Text>
                             <strong>Notes</strong>: {task.notes}
                         </Card.Text>
                     </Card.Body>
-                    {isTaskEditor === false ? displayButtonGroup() : ""}
+                    {isTaskEditor === true ? displayButtonGroup() : ""}
                 </Card>
             </div>
         )

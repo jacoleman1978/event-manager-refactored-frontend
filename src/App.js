@@ -23,6 +23,8 @@ function App() {
               element={ <DisplayContainer isTask={true} isEvent={false} viewType={'duedate'}/>} />
             <Route path='/tasks/new' 
               element={ <DisplayContainer isTask={true} isEvent={false} viewType={'new'}/>} />
+            <Route path='/tasks/edit/:eventId' 
+              element={ <DisplayContainer isTask={true} isEvent={false} viewType={'edit'}/>} />
             <Route path='/events/list/:week' 
               element={ <DisplayContainer isTask={false} isEvent={true} viewType={'list'}/>} />
             <Route path='/events/overview/:week' 

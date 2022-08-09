@@ -26,9 +26,9 @@ class EventDataService {
         return axios.put(`http://localhost:3100/event/${eventId}/update/removegroup`, data)
     }
 
-    static DeleteEvent(data, eventId) {
+    static DeleteEvent(eventId) {
         axios.defaults.withCredentials = true;
-        return axios.delete(`http://localhost:3100/event/${eventId}`, data)
+        return axios.delete(`http://localhost:3100/event/${eventId}`)
     }
 
     static GetEvents(data) {
@@ -36,9 +36,9 @@ class EventDataService {
         return axios.get('http://localhost:3100/event/all', data)
     }
 
-    static GetEventById(data, eventId) {
+    static GetEventById(eventId) {
         axios.defaults.withCredentials = true;
-        return axios.get(`http://localhost:3100/event/${eventId}`, data)
+        return axios.get(`http://localhost:3100/event/${eventId}`)
     }  
 }
 
