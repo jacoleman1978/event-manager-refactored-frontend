@@ -23,10 +23,10 @@ const NewTask = (props) => {
     let [formGroups, setGroups] = useState([]);
     let [formNotes, setNotes] = useState("");
     let [groupEditList, setGroupEditList] = useState([]);
-    let [checkedGroupIds, setCheckedGroupIds] = useState([]);
 
     // Uses the DataService to port the data to database when form submitted
     const handleSubmit = (e) => {
+        e.preventDefault()
         let data = {
             title: formTitle,
             task: {
@@ -44,12 +44,15 @@ const NewTask = (props) => {
                 isIt: false
             },
             groupIds: formGroups,
-            notes: formNotes
+            notes: formNotes,
+            lastUpdated: new Date()
         }
 
-        console.log(data)
-
-        EventDataService.AddEvent(data);
+        if (isEdit) {
+            EventDataService.UpdateEvent(data, eventId);
+        } else {
+            EventDataService.AddEvent(data);
+        }
     }
 
     const timeRangeTask = () => {
@@ -83,12 +86,8 @@ const NewTask = (props) => {
     const handleGroupCheck = (e) => {
         if (e.target.checked === true) {
             setGroups(formGroups => [...formGroups, e.target.id]);
-            setCheckedGroupIds(checkedGroupIds => [...checkedGroupIds, e.target.id])
         } else {
             setGroups(formGroups => formGroups.filter((group) => {
-                return group !== e.target.id
-            }))
-            setCheckedGroupIds(checkedGroupIds => checkedGroupIds.filter((group) => {
                 return group !== e.target.id
             }))
         }
@@ -103,13 +102,13 @@ const NewTask = (props) => {
                     let task = res.data.eventDoc
                     setTitle(task.title);
                     setPriority(task.task.priority);
-                    setAllDay(task.allDay);
+                    setAllDay(task.allDay.isIt);
                     setStartDate(task.allDay.startDate);
                     setEndDate(task.allDay.endDate);
                     setStartTime(task.allDay.startTime);
                     setEndTime(task.allDay.endTime);
                     setNotes(task.notes);
-                    setCheckedGroupIds(task.groupIds);
+                    setGroups(task.groupIds);
                 })
             } else {
                 setPriority(settings.task.priority);
@@ -125,7 +124,7 @@ const NewTask = (props) => {
     let groupList = groupEditList.map((group) => {
         let isChecked = false;
 
-        if (checkedGroupIds.indexOf(group._id) > -1) {
+        if (formGroups.indexOf(group._id) > -1) {
             isChecked = true;
         }
         return (
@@ -235,7 +234,7 @@ const NewTask = (props) => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    Create New Task
+                    {isEdit ? "Submit Edits" : "Create New Task"}
                 </Button>
             </Form>
         </div>
