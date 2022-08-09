@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
 import getDefaultDate from "../../helpers/getDefaultDate";
 import getDefaultTime from "../../helpers/getDefaultTime";
+import getDefaultViewPath from "../../helpers/getDefaultViewPath";
+
 
 const NewTask = (props) => {
     const { eventId } = useParams();
+
+    const navigate = useNavigate();
 
     // Get props
     let {settings, isEdit} = props;
@@ -25,7 +29,7 @@ const NewTask = (props) => {
     let [groupEditList, setGroupEditList] = useState([]);
 
     // Uses the DataService to port the data to database when form submitted
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         let data = {
             title: formTitle,
@@ -50,8 +54,16 @@ const NewTask = (props) => {
 
         if (isEdit) {
             EventDataService.UpdateEvent(data, eventId);
+
+            let navPath = await getDefaultViewPath()
+            
+            navigate(navPath);
         } else {
             EventDataService.AddEvent(data);
+            
+            let navPath = await getDefaultViewPath();
+            
+            navigate(navPath);
         }
     }
 
@@ -234,7 +246,7 @@ const NewTask = (props) => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    {isEdit ? "Submit Edits" : "Create New Task"}
+                    {isEdit ? "Save Edits" : "Create New Task"}
                 </Button>
             </Form>
         </div>

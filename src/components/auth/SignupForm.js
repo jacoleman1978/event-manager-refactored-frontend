@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import UserDataService from '../../services/userDataService';
-import SettingsDataService from '../../services/settingsDataService';
+import getDefaultViewPath from '../../helpers/getDefaultViewPath';
 
 // Called from App.js
 const SignupForm = () => {
@@ -35,41 +35,17 @@ const SignupForm = () => {
             };
 
             // Verify that userName is unique
-            UserDataService.IsSignupInfoUnique(data).then(res => {
+            UserDataService.IsSignupInfoUnique(data).then(async(res) => {
                 if (res.data.isUniqueUserName === false) {
                     setUserNameErrorFlag(true);
                 } else {
                     setUserNameErrorFlag(false);
 
                     // UserName is unique, so create user account and redirect to ...
-                    UserDataService.Signup(data).then(() => {
-                        SettingsDataService.GetSettings().then(res => {
-                            let defaultViews = res.data.settings.views;
-                            let redirectPath = '';
-                            
-                            if (defaultViews.login === 'Events') {
-                                if (defaultViews.events === 'By List') {
-                                    redirectPath = '/events/list/0';
-                                } else if (defaultViews.events === 'By Overview') {
-                                    redirectPath = '/events/overview/0';
-                                } else if (defaultViews.events === 'By Day') {
-                                    redirectPath = '/events/day/0';
-                                }
-                            } else if (defaultViews.login === 'Tasks') {
-                                if (defaultViews.tasks === 'By Priority') {
-                                    redirectPath = '/tasks/priority';
-                                } else if (defaultViews.tasks === 'By Due Date') {
-                                    redirectPath = '/tasks/duedate';
-                                }
-                            } else if (defaultViews.login === 'Settings') {
-                                redirectPath = '/settings';
-                            } else if (defaultViews.login === 'Groups') {
-                                redirectPath = '/groups';
-                            }
-        
-                            navigate(redirectPath);
-                        })
-                    });
+                    UserDataService.Signup(data);
+                    let navPath = await getDefaultViewPath();
+            
+                    navigate(navPath);
                 }
             });
         } else {
