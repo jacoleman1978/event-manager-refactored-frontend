@@ -74,7 +74,6 @@ const EventRow = (props) => {
                 groupData.push([groupId, res.data.groupDoc.name]);
             })
         })
-        console.log(groupData)
 
         let groupList = groupData.map((data) => {
             console.log(data)
@@ -85,15 +84,13 @@ const EventRow = (props) => {
             )
         })
 
-        console.log(groupList)
-
         const completeEvent = (e) => {
             e.preventDefault();
             EventDataService.DeleteEvent(event._id);
         }
 
         const editEvent = (e) => {
-            navigate(`/event/edit/${event._id}`);
+            navigate(`/events/edit/${event._id}`);
         }
 
         const deleteEvent = (e) => {

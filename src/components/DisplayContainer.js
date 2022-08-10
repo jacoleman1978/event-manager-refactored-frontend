@@ -87,7 +87,7 @@ const DisplayContainer = (props) => {
             }
 
         } 
-        else if (isEvent === true) {
+        else if (isEvent === true && eventsLoaded) {
             if (viewType === 'list') {
                 return <EventsByList settings={settings} events={events} />
             } else if (viewType === 'overview') {
@@ -111,8 +111,7 @@ const DisplayContainer = (props) => {
 
     return (
         <>
-            {settingsLoaded === true && isEvent && eventsLoaded ? displayNavMenu() : ""}
-            {settingsLoaded === true && isTask ? displayNavMenu() : ""}
+            {settingsLoaded === true  ? displayNavMenu() : ""}
         </>
     )
 }
