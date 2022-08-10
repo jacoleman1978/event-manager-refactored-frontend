@@ -61,7 +61,7 @@ const TasksByDueDate = (props) => {
     // Header background color
     let headerColors = ['red', 'orange', 'yellow', 'lightblue', 'lightgray']
     
-    let data =[];
+    let data = [];
 
     // Making a TaskGroup by dueDate and passing in the header and appropriate data as props
     groupTasksList = dueDateHeaders.map((dueDate, index) => {

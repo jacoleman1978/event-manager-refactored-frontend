@@ -31,9 +31,9 @@ class EventDataService {
         return axios.delete(`http://localhost:3100/event/${eventId}`)
     }
 
-    static GetEvents(data) {
+    static GetEvents() {
         axios.defaults.withCredentials = true;
-        return axios.get('http://localhost:3100/event/all', data)
+        return axios.get('http://localhost:3100/event/all')
     }
 
     static GetEventById(eventId) {

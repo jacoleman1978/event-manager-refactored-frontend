@@ -1,6 +1,6 @@
 import getDefaultDate from "./getDefaultDate";
 
-const getDayDifference = (dueDate) => {
+const getDayDifference = (date) => {
     // Need a date object in the format of 'YYYY-MM-DD'.
     const todayDate = getDefaultDate("Now");
     let todayDateArr =  todayDate.split('-');
@@ -10,11 +10,11 @@ const getDayDifference = (dueDate) => {
     const msInOneDay = 1000 * 60 * 60 * 24;
 
     // Need a date object in the format of 'YYYY-MM-DD'.
-    let dueDateArr =  dueDate.split('-')
-    let dueDateObject = new Date(parseInt(dueDateArr[0]), parseInt(dueDateArr[1] -1), parseInt(dueDateArr[2]));
+    let dateArr =  date.split('-')
+    let dateObject = new Date(parseInt(dateArr[0]), parseInt(dateArr[1] -1), parseInt(dateArr[2]));
 
     // Find the difference in ms between today and the dueDate
-    return (dueDateObject.getTime() - today.getTime()) / msInOneDay;
+    return (dateObject.getTime() - today.getTime()) / msInOneDay;
 }
 
 export default getDayDifference;

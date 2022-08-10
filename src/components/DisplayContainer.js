@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { CurrentUser } from "../contexts/currentUser";
 import UserDataService from "../services/userDataService";
 import SettingsDataService from "../services/settingsDataService";
+import EventDataService from "../services/eventDataService";
 import TasksByPriority from "./tasks/TasksByPriority";
 import TasksByDueDate from "./tasks/TasksByDueDate";
 import EventsByList from "./byListAndByDay/EventsByList";
 import EventsByOverview from "./byOverview/EventsByOverview";
 import EventsByDay from "./byListAndByDay/EventsByDay";
+import EventForm from "./byListAndByDay/EventForm";
 import Groups from "./groups/Groups";
 import Settings from "./settings/Settings";
 import NavMenu from "./nav/NavMenu";
@@ -24,10 +26,16 @@ const DisplayContainer = (props) => {
 
     let [settings, setSettings] = useState(null);
     let [settingsLoaded, setSettingsLoaded] = useState(false);
+    let [events, setEvents] = useState(null);
+    let [eventsLoaded, setEventsLoaded] = useState(false);
 
     useEffect(() => {
         if (settings !== null) {
             setSettingsLoaded(true);
+        }
+
+        if (events !== null) {
+            setEventsLoaded(true);
         }
 
         if (currentUser === null) {
@@ -37,7 +45,13 @@ const DisplayContainer = (props) => {
                 }
             })
         } 
-    }, [settings])
+
+        if (isEvent && currentUser !== null && events === null) {
+            EventDataService.GetEvents().then((res) => {
+                setEvents(res.data.events);
+            })
+        }
+    }, [settings, events])
 
     if (settings === null) {
         SettingsDataService.GetSettings().then(res => {
@@ -72,16 +86,22 @@ const DisplayContainer = (props) => {
                 return <NewTask settings={settings} isEdit={true}/>
             }
 
-        } else if (isEvent === true) {
+        } 
+        else if (isEvent === true) {
             if (viewType === 'list') {
-                return <EventsByList />
+                return <EventsByList settings={settings} events={events} />
             } else if (viewType === 'overview') {
-                return <EventsByOverview />
+                return <EventsByOverview settings={settings} events={events} />
             } else if (viewType === 'day') {
-                return <EventsByDay />
+                return <EventsByDay settings={settings} events={events} />
+            } else if (viewType === 'new') {
+                return <EventForm settings={settings} isEdit={false}/>
+            } else if (viewType === 'edit') {
+                return <EventForm settings={settings} isEdit={true}/>
             }
 
-        } else if (viewType === 'groups') {
+        } 
+        else if (viewType === 'groups') {
             return <Groups />
 
         } else if (viewType === 'settings') {
@@ -91,8 +111,8 @@ const DisplayContainer = (props) => {
 
     return (
         <>
-            {settingsLoaded === true ? displayNavMenu() : ""}
-            
+            {settingsLoaded === true && isEvent && eventsLoaded ? displayNavMenu() : ""}
+            {settingsLoaded === true && isTask ? displayNavMenu() : ""}
         </>
     )
 }

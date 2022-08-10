@@ -31,8 +31,10 @@ function App() {
               element={ <DisplayContainer isTask={false} isEvent={true} viewType={'overview'}/>} />
             <Route path='/events/day/:day' 
               element={ <DisplayContainer isTask={false} isEvent={true} viewType={'day'}/>} />
-              <Route path='/events/new' 
+            <Route path='/events/new' 
               element={ <DisplayContainer isTask={false} isEvent={true} viewType={'new'}/>} />
+            <Route path='/events/edit/:eventId' 
+              element={ <DisplayContainer isTask={false} isEvent={true} viewType={'edit'}/>} />
             <Route path='/groups' 
               element={ <DisplayContainer isTask={false} isEvent={false} viewType={'groups'}/>} />
             < Route path='/groups/new' 
