@@ -26,7 +26,7 @@ const DisplayContainer = (props) => {
 
     let [settings, setSettings] = useState(null);
     let [settingsLoaded, setSettingsLoaded] = useState(false);
-    let [events, setEvents] = useState(null);
+    let [events, setEvents] = useState([]);
     let [eventsLoaded, setEventsLoaded] = useState(false);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const DisplayContainer = (props) => {
             setSettingsLoaded(true);
         }
 
-        if (events !== null) {
+        if (events.length > 0) {
             setEventsLoaded(true);
         }
 
@@ -46,9 +46,9 @@ const DisplayContainer = (props) => {
             })
         } 
 
-        if (isEvent && currentUser !== null && events === null) {
+        if (isEvent && currentUser !== null && events.length === 0) {
             EventDataService.GetEvents().then((res) => {
-                setEvents(res.data.events);
+                setEvents(res.data.events)
             })
         }
     }, [settings, events])

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Card, Button } from "react-bootstrap";
 import { CurrentUser } from '../../contexts/currentUser';
 import EventDataService from "../../services/eventDataService";
-import GroupDataService from "../../services/groupDataService";
 
 const EventRow = (props) => {
     const navigate = useNavigate();
@@ -15,7 +14,7 @@ const EventRow = (props) => {
     const {event} = props;
 
     // Set state for which view to display. view State changed by clicking on a list item.
-    let [view, setView] = useState(true)
+    let [view, setView] = useState(true);
 
     // This is the default view and only displays the event
     const simpleView = () => {
@@ -67,19 +66,10 @@ const EventRow = (props) => {
             return simpleView()
         }
 
-        let groupData = []
-
-        event.groupIds.forEach((groupId) => {
-            GroupDataService.GetGroupById(groupId).then(res => {
-                groupData.push([groupId, res.data.groupDoc.name]);
-            })
-        })
-
-        let groupList = groupData.map((data) => {
-            console.log(data)
+        let groupList = event.groupIds.map((group) => {
             return (
-                <li key={data[0]}>
-                    {data[1]}
+                <li key={group._id}>
+                    {group.name}
                 </li>
             )
         })
