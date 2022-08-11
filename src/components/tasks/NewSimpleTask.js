@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import {Form, Button, Row, Col} from 'react-bootstrap';
+import {Form, Button} from 'react-bootstrap';
 import EventDataService from "../../services/eventDataService";
 import getDefaultDate from "../../helpers/getDefaultDate";
+import Title from "../form/Title";
+import Priority from "../form/Priority";
+import EndDate from "../form/EndDate";
+import Notes from "../form/Notes";
 
 const NewSimpleTask = (props) => {
     // Get props
@@ -35,88 +39,27 @@ const NewSimpleTask = (props) => {
         EventDataService.AddEvent(data);
     }
 
-    // Style for entire Form
-    const formStyle = {
-        border: "black 1px solid",
-        borderRadius: "2rem",
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column"
-    }
-
-    // Style for Row 1 of the Form
-    const row1Style = {
-        marginTop: "1rem",
-        marginLeft: "auto",
-        marginRight: "auto",
-        width: "99%"
-    }
-
-    // Style for Row 2 of the Form
-    const row2Style = {
-        display: "flex",
-        justifyContent: "center"
-    }
-
     // Form to add a new Task displayed on the Sorted pages. Only required fields present.
     return (
-        <Form style={formStyle} onSubmit={handleSubmit}>
-            <Row style={row1Style}>
-                <Form.Group className="mb-3" controlId="formTask">
-                    <Form.Control
-                        required
-                        type="text"
-                        aria-describedby="Enter task title"
-                        placeholder="Enter task title"
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                </Form.Group>
-            </Row>
-            <Row style={row2Style}>
-                <Col xs="auto">
-                    <Form.Group className="mb-3" controlId="formPriority" >
-                        <Form.Select 
-                            aria-label="Select a priority" 
-                            required 
-                            defaultValue={formPriority}
-                            onChange={(e) => setPriority(e.target.value)}
-                        >
-                            <option value="" disabled>Select a priority</option>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                            <option value="Critical">Critical</option>
-                        </Form.Select>
-                    </Form.Group>
-                </Col>
-                <Col xs="auto">
-                    <Form.Group controlId="formEndDate">
-                        <Form.Control 
-                            type="date" 
-                            defaultValue={formEndDate}
-                            required onChange={(e) => setEndDate(e.target.value)}
-                        />
-                    </Form.Group>
-                </Col>
-                <Row style={row2Style}>
-                <Form.Group className="mb-3" controlId="formNotes">
-                    <Form.Control 
-                        as="textarea" 
-                        rows={5} 
-                        aria-describedby="Enter more details about task"
-                        placeholder="(Optional) Enter details about the task" 
-                        onChange={(e) => setNotes(e.target.value)}
-                        value={formNotes}
-                    />
-                </Form.Group>
-            </Row>
-                <Col xs="auto">
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Col>
-            </Row>
-        </Form>
+        <div className="flex-center-wrap">
+            <Form className="new-simple-task" onSubmit={handleSubmit}>
+                <p className="title">New Simple Task</p>
+                
+                <Title formTitle={formTitle} setTitle={setTitle} label={"Task Title: "}/>
+        
+                <Priority formPriority={formPriority} setPriority={setPriority} label={"Priority: "} />
+
+                <EndDate formEndDate={formEndDate} setEndDate={setEndDate} label={"End Date: "} />
+                
+                <Notes formNotes={formNotes} setNotes={setNotes} />
+            
+                <Button variant="primary" type="submit">
+                    Create New Simple Task
+                </Button>
+            
+            </Form>
+        </div>
+
     )
 }
 
