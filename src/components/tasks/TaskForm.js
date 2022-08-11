@@ -6,7 +6,13 @@ import GroupDataService from "../../services/groupDataService";
 import getDefaultDate from "../../helpers/getDefaultDate";
 import getDefaultTime from "../../helpers/getDefaultTime";
 import getDefaultViewPath from "../../helpers/getDefaultViewPath";
-
+import Title from "../form/Title";
+import Priority from "../form/Priority";
+import AllDaySwitch from "../form/AllDaySwitch";
+import DateRange from "../form/DateRange";
+import TimeRange from "../form/TimeRange";
+import Groups from "../form/Groups";
+import Notes from "../form/Notes";
 
 const TaskForm = (props) => {
     const { eventId } = useParams();
@@ -67,44 +73,6 @@ const TaskForm = (props) => {
         }
     }
 
-    const timeRangeTask = () => {
-        return (
-            <div className="flex-left-center-wrap">
-                <div className="flex-left-center-no-gap">
-                    <Form.Label className="form-label">Start Time: </Form.Label>
-                    <Form.Control 
-                        type="time" 
-                        required 
-                        className="dropdown-width"
-                        defaultValue={formStartTime}
-                        onChange={(e) => setStartTime(e.target.value)}
-                    />
-                </div>
-
-                <div className="flex-left-center-no-gap">
-                    <Form.Label className="form-label">End Time: </Form.Label>
-                    <Form.Control 
-                        type="time" 
-                        required 
-                        className="dropdown-width"
-                        defaultValue={formEndTime}
-                        onChange={(e) => setEndTime(e.target.value)}
-                    />
-                </div>
-            </div>
-        )
-    }
-
-    const handleGroupCheck = (e) => {
-        if (e.target.checked === true) {
-            setGroups(formGroups => [...formGroups, e.target.id]);
-        } else {
-            setGroups(formGroups => formGroups.filter((group) => {
-                return group !== e.target.id
-            }))
-        }
-    }
-
     useEffect(() => {
         GroupDataService.GetGroupsCanEdit().then(res => {
             setGroupEditList(res.data.groupsCanEdit)
@@ -133,117 +101,28 @@ const TaskForm = (props) => {
         });
     }, [])
 
-    let groupList = groupEditList.map((group) => {
-        let isChecked = false;
-
-        if (formGroups.indexOf(group._id) > -1) {
-            isChecked = true;
-        }
-        return (
-            <Form.Check
-                key={group._id}
-                type="checkbox"
-                label={group.name}
-                name="groups-can-edit"
-                checked={isChecked}
-                id={group._id}
-                onChange={(e) => handleGroupCheck(e)}
-            />
-        )
-    })
-
     return (
         <div>
             {isEdit ? <p className="title">Edit Task</p> : <p className="title">New Task</p>}
             <Form onSubmit={handleSubmit} className="new-doc-container">
                 <Form.Group controlId="formTask" className="flex-left-center-wrap">
-                    <div className="flex-left-center-no-gap">
-                        <Form.Label>Task Title: </Form.Label>
-                        <Form.Control
-                            className="input-width"
-                            required
-                            type="text"
-                            defaultValue={formTitle}
-                            aria-describedby="Enter task title"
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </div>
+                    <Title formTitle={formTitle} setTitle={setTitle} label={"Task Title: "}/>
     
-                    <div className="flex-left-center-no-gap">
-                        <Form.Label>Priority: </Form.Label>
-                        <Form.Select 
-                            aria-label="Select a priority" 
-                            required 
-                            className="dropdown-width"
-                            value={formPriority}
-                            onChange={(e) => setPriority(e.target.value)}
-                        >
-                            <option value="" disabled>Select a priority</option>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                            <option value="Critical">Critical</option>
-                        </Form.Select>
-                    </div>
+                    <Priority formPriority={formPriority} setPriority={setPriority} label={"Priority: "} />
 
                 </Form.Group>
 
                 <Form.Group controlId="formDueDate" className="flex-col-center-left">
-                    <div className="flex-left-center-wrap">
-                        <Form.Check 
-                            type="switch"
-                            id="is-all-day"
-                            label="All Day"
-                            checked={formAllDay}
-                            onChange={() => setAllDay(!formAllDay)}
-                        />
-                    </div>
+                    <AllDaySwitch formAllDay={formAllDay} setAllDay={setAllDay} />
 
-                    <div className="flex-left-center-wrap">
-                        <div className="flex-left-center-no-gap">
-                            <Form.Label className="form-label">Start Date: </Form.Label>
-                            <Form.Control 
-                                type="date" 
-                                required 
-                                className="dropdown-width"
-                                defaultValue={formStartDate}
-                                onChange={(e) => setStartDate(e.target.value)}
-                            />
-                        </div>
+                    <DateRange formStartDate={formStartDate} setStartDate={setStartDate} formEndDate={formEndDate} setEndDate={setEndDate} />
 
-                        <div className="flex-left-center-no-gap">
-                            <Form.Label className="form-label">End Date: </Form.Label>
-                            <Form.Control 
-                                type="date" 
-                                required 
-                                className="dropdown-width"
-                                defaultValue={formEndDate}
-                                onChange={(e) => setEndDate(e.target.value)}
-                            />
-                        </div>
-                    </div>
-
-                    {formAllDay === false ? timeRangeTask() : ""}
+                    {formAllDay === false ?  <TimeRange formStartTime={formStartTime} setStartTime={setStartTime} formEndTime={formEndTime} setEndTime={setEndTime} /> : ""}
                 </Form.Group>
 
-                <Form.Group controlId="formTask" >
-                    <Form.Label>Groups to Add to Task: </Form.Label>
-                    <div className="checkbox-list">
-                        {groupList}
-                    </div>
-                </Form.Group>
+                <Groups groupEditList={groupEditList} formGroups={formGroups} setGroups={setGroups} label={"Groups to Add to Task: "} />
                     
-                <Form.Group controlId="formNotes" className="flex-left-center-wrap">
-                    <Form.Label className="form-label">Notes: </Form.Label>
-                    <Form.Control 
-                        as="textarea" 
-                        rows={5} 
-                        aria-describedby="Enter more details about task"
-                        className="input-width"
-                        defaultValue={formNotes}
-                        onChange={(e) => setNotes(e.target.value)}
-                    />
-                </Form.Group>
+                <Notes formNotes={formNotes} setNotes={setNotes} />
 
                 <Button variant="primary" type="submit">
                     {isEdit ? "Save Edits" : "Create New Task"}
