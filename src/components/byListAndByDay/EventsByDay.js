@@ -1,8 +1,17 @@
 import React from "react";
+import Day from "./Day";
 
-const EventsByDay = () => {
+const EventsByDay = (prop) => {
+
+    let event = {
+        _id: Math.random(),
+        name: "event name"
+    }
+
     return (
-        <>EventsByDay</>
+        <>
+            <Day event={event} />
+        </>
     )
 }
 

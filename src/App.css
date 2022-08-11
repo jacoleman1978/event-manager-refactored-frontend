@@ -151,3 +151,47 @@ p {
   margin-left: 1rem;
   gap: 1rem;
 }
+
+.hour-grid {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  grid-template-rows: repeat(4, 1.25rem);
+  grid-template-areas:
+    "zero zero"
+    "fifteen fifteen"
+    "thirty thirty"
+    "fourty-five fourty-five";
+  border: 1px solid black;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  border-collapse: collapse;
+  gap: 3px;
+  margin: 0rem 1rem 0.5rem 1rem;
+  background-color: tan;
+}
+
+.day-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(24, 1fr);
+}
+
+.cell-border {
+  font-size: smaller;
+  border: 0.5px solid lightgray;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+  border-radius: 0.5rem;
+  border-collapse: collapse;
+}
+
+.flex-left {
+  display: flex;
+  justify-content: left;
+  background-color: antiquewhite;
+}
+
+.flex-right {
+  display: flex;
+  justify-content: right;
+  background-color: antiquewhite;
+}
