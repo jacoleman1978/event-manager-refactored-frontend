@@ -70,6 +70,7 @@ p {
 }
 
 .title {
+  text-align: center;
   text-decoration: underline;
   font-size: larger;
   font-weight: bold;
@@ -194,4 +195,23 @@ p {
   display: flex;
   justify-content: right;
   background-color: antiquewhite;
+}
+
+.card-style {
+  display: flex;
+  margin-top: 5px;
+  padding-bottom: 0.5rem;
+  background-color: tan;
+}
+
+.card-container {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: antiquewhite;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: solid black 1px;
+  border-radius: 0.5rem;
 }

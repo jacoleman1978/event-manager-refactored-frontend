@@ -8,7 +8,7 @@ import getDefaultTime from "../../helpers/getDefaultTime";
 import getDefaultViewPath from "../../helpers/getDefaultViewPath";
 
 
-const NewTask = (props) => {
+const TaskForm = (props) => {
     const { eventId } = useParams();
 
     const navigate = useNavigate();
@@ -254,4 +254,4 @@ const NewTask = (props) => {
     )
 }
 
-export default NewTask;
+export default TaskForm;

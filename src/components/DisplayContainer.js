@@ -3,41 +3,31 @@ import { useNavigate } from "react-router-dom";
 import { CurrentUser } from "../contexts/currentUser";
 import UserDataService from "../services/userDataService";
 import SettingsDataService from "../services/settingsDataService";
-import EventDataService from "../services/eventDataService";
-import TasksByPriority from "./tasks/TasksByPriority";
-import TasksByDueDate from "./tasks/TasksByDueDate";
-import EventsByList from "./byListAndByDay/EventsByList";
-import EventsByOverview from "./byOverview/EventsByOverview";
-import EventsByDay from "./byListAndByDay/EventsByDay";
-import EventForm from "./byListAndByDay/EventForm";
+import Events from "./byListAndByDay/Events";
+import Tasks from "./tasks/Tasks";
 import Groups from "./groups/Groups";
 import Settings from "./settings/Settings";
 import NavMenu from "./nav/NavMenu";
-import NewTask from "./tasks/NewTask";
 
+// Called from App.js
 const DisplayContainer = (props) => {
     const navigate = useNavigate();
 
-    // Get currentUser from context
     const { currentUser } = useContext(CurrentUser);
 
-    // Props
     const { isTask, isEvent, viewType } = props;
 
+    // Use state to ensure other components won't be rendered until settings are loaded
     let [settings, setSettings] = useState(null);
     let [settingsLoaded, setSettingsLoaded] = useState(false);
-    let [events, setEvents] = useState([]);
-    let [eventsLoaded, setEventsLoaded] = useState(false);
 
     useEffect(() => {
+        // Settings have been fetched, so set flag
         if (settings !== null) {
             setSettingsLoaded(true);
         }
 
-        if (events.length > 0) {
-            setEventsLoaded(true);
-        }
-
+        // If user doesn't have a current session, redirect to the login view
         if (currentUser === null) {
             UserDataService.CheckSessionUser().then(res => {
                 if (res.data === null) {
@@ -45,21 +35,17 @@ const DisplayContainer = (props) => {
                 }
             })
         } 
+    }, [settings])
 
-        if (isEvent && currentUser !== null && events.length === 0) {
-            EventDataService.GetEvents().then((res) => {
-                setEvents(res.data.events)
-            })
-        }
-    }, [settings, events])
-
+    // If settings haven't been fetched, retrieve them
     if (settings === null) {
         SettingsDataService.GetSettings().then(res => {
             setSettings(res.data.settings);
         })
     }
 
-    const displayNavMenu = () => {
+    // Return the NavMenu with the selected view
+    const displayView = () => {
         return (
             <>
                 <NavMenu 
@@ -76,30 +62,10 @@ const DisplayContainer = (props) => {
     // Determine view to use in display
     const selectView = (isTask, isEvent, viewType) => {
         if (isTask === true) {
-            if (viewType === 'priority') {
-                return <TasksByPriority settings={settings} />
-            } else if (viewType === 'duedate') {
-                return <TasksByDueDate settings={settings} />
-            } else if (viewType === 'new') {
-                return <NewTask settings={settings} isEdit={false}/>
-            } else if (viewType === 'edit') {
-                return <NewTask settings={settings} isEdit={true}/>
-            }
-
+            return <Tasks settings={settings} viewType={viewType} />
         } 
-        else if (isEvent === true && eventsLoaded) {
-            if (viewType === 'list') {
-                return <EventsByList settings={settings} events={events} />
-            } else if (viewType === 'overview') {
-                return <EventsByOverview settings={settings} events={events} />
-            } else if (viewType === 'day') {
-                return <EventsByDay settings={settings} events={events} />
-            } else if (viewType === 'new') {
-                return <EventForm settings={settings} isEdit={false}/>
-            } else if (viewType === 'edit') {
-                return <EventForm settings={settings} isEdit={true}/>
-            }
-
+        else if (isEvent === true) {
+            return <Events settings={settings} viewType={viewType}/>
         } 
         else if (viewType === 'groups') {
             return <Groups />
@@ -109,9 +75,10 @@ const DisplayContainer = (props) => {
         }
     }
 
+    // If the settings are loaded display the view
     return (
         <>
-            {settingsLoaded === true  ? displayNavMenu() : ""}
+            {settingsLoaded === true  ? displayView() : ""}
         </>
     )
 }

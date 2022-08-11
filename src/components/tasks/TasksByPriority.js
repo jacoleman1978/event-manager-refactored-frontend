@@ -1,28 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import TaskGroup from "./TaskGroup";
 import NewSimpleTask from "./NewSimpleTask";
-import EventDataService from "../../services/eventDataService";
 
+// Called by Tasks.js
 const TasksByPriority = (props) => {
-    // Get props
-    let {settings} = props;
+    let {settings, tasks} = props;
 
-    // Use State for data pulled from database
-    let [taskData, setTaskData] = useState([]);
-
-    useEffect(() => {
-        EventDataService.GetTasks().then(res => {
-            setTaskData(res.data.tasks)})
-    }, [])
-
-    // Need to fill groupTaskList whether sorting by priority or dueDate
-    let groupTasksList =[];
-    let criticalTasks = []
+    // Arrays to hold tasks of the different priorities
+    let criticalTasks = [];
     let highTasks = [];
     let mediumTasks = [];
     let lowTasks = [];
 
-    // Function to sort tasks by priority and push them to an array of the same type
+    // Puts a task into the appropriate array based on the priority of the task
     const sortByPriority = (task) => {
         let priority = task.task.priority;
 
@@ -33,43 +23,48 @@ const TasksByPriority = (props) => {
         } else if (priority === "Medium") {
             mediumTasks.push(task);
         } else {
-            lowTasks.push(task)
+            lowTasks.push(task);
         }
     }
 
-    // Iterating through all of the todos and using the sorting function
-    for (let task of taskData) {
+    // Sort all of the tasks
+    for (let task of tasks) {
         sortByPriority(task);
     }
 
-    // Creating an array of arrays, where each inner array represents a specific priority
-    let sortedTasks = [criticalTasks, highTasks, mediumTasks, lowTasks];
-    
-    // Defining the headers to be used when sorting by priority
-    const priorityHeaders = [
-        'Critical: Do this task and ignore everything else!', 
-        'High: Needs to be completed soon', 
-        'Medium: No rush to be completed', 
-        'Low: Just a reminder for now'
-    ];
+    // Collect all of the tasks sorted by priority into an array
+    let collectedTasks = [
+        {
+            header: 'Critical: Do this task and ignore everything else!',
+            headerColor: 'red',
+            sortedTasks: criticalTasks
+        },
+        {
+            header: 'High: Needs to be completed soon',
+            headerColor: 'orange',
+            sortedTasks: highTasks
+        },
+        {
+            header: 'Medium: No rush to be completed',
+            headerColor: 'yellow',
+            sortedTasks: mediumTasks
+        },
+        {
+            header: 'Low: Just a reminder for now',
+            headerColor: 'lightblue',
+            sortedTasks: lowTasks
+        }
+    ]
 
-    // Header background color
-    let headerColors = ['red', 'orange', 'yellow', 'lightblue'];
-
-    let data =[];
-
-    // Making a TaskGroup by priority and passing in the header and appropriate data as props
-    groupTasksList = priorityHeaders.map((priority, index) => {
-        data = sortedTasks[index];
-        let headerStyle = {backgroundColor: headerColors[index], borderRadius: "0.5rem"}
+    let displayTasks = collectedTasks.map((taskGroup, index) => {
         return (
-            <TaskGroup key={index} header={priority} data={data} headerStyle={headerStyle} sort={"priorities"}/>
+            <TaskGroup key={index} tasks={taskGroup} />
         )
-    });
+    })
     
     return (
         <div>
-            {groupTasksList}
+            {displayTasks}
             <NewSimpleTask settings={settings} />
         </div>
     )
