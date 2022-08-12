@@ -1,12 +1,36 @@
 import React from "react";
 
+
 const FifteenMin = (props) => {
-    let {hour, time, event} = props;
+    let {hour, fifteenLabel, currentEvents} = props;
+
+    let time = fifteenLabel.time;
+
+    let numEvents = currentEvents.length;
+
+    let dayEventsDisplay = {
+        display: "grid",
+        gridTemplateColumns: `repeat(${numEvents}, 1fr)`,
+        gridTemplateRows: "1fr",
+        width: "100%"
+    }
+
+    let eventDisplay = currentEvents.map((event) => {
+        return (
+            <div key={`${hour}:${time}-${event._id}`} className="flex-left">
+                {event.title}
+            </div>
+        )
+    })
 
     return (
         <>
-            <div id={`${hour}:${time}`} key={`${hour}:${time}`} className="cell-border flex-right">{time}</div>
-            <div id={`${hour}:${time}-${event.name}`} key={`${hour}:${time}-${event.name}`} className="cell-border flex-left"></div>
+            <div id={`${hour}${time}`} key={`${hour}:${time}-time`} className="cell-border flex-right">{time}</div>
+            <div id={`${hour}${time}`} key={`${hour}:${time}-events`} className="cell-border flex-left">
+                <div style={dayEventsDisplay}>
+                    {eventDisplay}
+                </div>
+            </div>
         </>
     )
 }
