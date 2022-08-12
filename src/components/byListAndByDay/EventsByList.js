@@ -24,9 +24,9 @@ const EventsByList = (props) => {
     // Make an EventGroup by day, passing in header and appropriate data as props
     let groupEventsList = dayHeaders.map((dateString, index) => {
         data = sortedEvents[index];
-        let headerStyle = {backgroundColor: headerColors[index], borderRadius: "0.5rem"}
+        let headerStyle = {backgroundColor: headerColors[index], borderRadius: "0.5rem"};
         return (
-            <EventGroup key={index} header={dateString} data={data} headerStyle={headerStyle} sort={"list"} />
+            <EventGroup key={index} header={dateString} data={data} headerStyle={headerStyle}/>
         )
     })
 

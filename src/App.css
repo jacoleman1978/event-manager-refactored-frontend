@@ -171,6 +171,19 @@ p {
   background-color: tan;
 }
 
+.collapsed-hour-grid {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  grid-template-rows:  1.25rem;
+  border: 1px solid black;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  border-collapse: collapse;
+  gap: 3px;
+  margin: 0rem 1rem 0.5rem 1rem;
+  background-color: tan;
+}
+
 .day-grid {
   display: grid;
   grid-template-columns: 1fr;

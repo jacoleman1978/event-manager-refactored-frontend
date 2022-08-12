@@ -6,6 +6,7 @@ import EventsByOverview from "../byOverview/EventsByOverview";
 import EventForm from "./EventForm";
 import getDayDifference from "../../helpers/getDayDifference";
 
+// Called from DisplayContainer.js
 const Events = (props) => {
     let {viewType, settings} = props;
 
@@ -15,12 +16,14 @@ const Events = (props) => {
 
     useEffect(() => {
         if (eventsLoaded === false) {
+            // If events have not been fetched, retrieve them
             if (events.length === 0) {
                 EventDataService.GetEvents().then((res) => {
                     setEvents(res.data.events)
                 })
             }
     
+            // If events have been fetched, set the loaded flag and sort the events
             if (events.length > 0) {
                 setEventsLoaded(true);
 
@@ -30,14 +33,14 @@ const Events = (props) => {
                 }
 
                 // Create an array of arrays, representing the sorted events
-                setSortedEvents([eventsToday, eventsPlusOne, eventsPlusTwo, eventsPlusThree, eventsPlusFour, eventsPlusFive, eventsPlusSix]);
+                setSortedEvents([eventsPlusZero, eventsPlusOne, eventsPlusTwo, eventsPlusThree, eventsPlusFour, eventsPlusFive, eventsPlusSix]);
             }
         }
     }, [events])
 
 
-    // Create arrays to hold events for today plus additional days, up to a week total
-    let eventsToday = [];
+    // Create arrays to hold events for up to a week total
+    let eventsPlusZero = [];
     let eventsPlusOne = [];
     let eventsPlusTwo = [];
     let eventsPlusThree = [];
@@ -45,13 +48,13 @@ const Events = (props) => {
     let eventsPlusFive = [];
     let eventsPlusSix = [];
 
-    // Sorts events by day of week and pushes them to the appropriate array
+    // Sort events by day of week and pushes them to the appropriate array
     const sortByDay = (event) => {
         let daysUntilStart = getDayDifference(event.allDay.startDate);
         let daysUntilDue = getDayDifference(event.allDay.endDate);
 
         if (daysUntilStart <= 0 && daysUntilDue >= 0) {
-            eventsToday.push(event);
+            eventsPlusZero.push(event);
         } 
         
         if (daysUntilStart <= 1 && daysUntilDue >= 1) {
@@ -86,7 +89,7 @@ const Events = (props) => {
             } else if (viewType === 'overview') {
                 return <EventsByOverview settings={settings} events={events} />
             } else if (viewType === 'day') {
-                return <EventsByDay settings={settings} sortedEvents={sortedEvents[0]} />
+                return <EventsByDay settings={settings} events={sortedEvents[0]} />
             } else if (viewType === 'new') {
                 return <EventForm settings={settings} isEdit={false}/>
             } else if (viewType === 'edit') {
