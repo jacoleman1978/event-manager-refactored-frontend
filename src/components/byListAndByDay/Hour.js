@@ -78,7 +78,6 @@ const Hour = (props) => {
         return (
             <FifteenMin key={`${hour}:${fifteen.minutes}`} hour={hour} fifteenLabel={fifteen} currentEvents={currentEvents} maximumEventsPerHour={maximumEventsPerHour}/>
         )
-        
     })
 
     return (

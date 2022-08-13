@@ -26,15 +26,9 @@ const EventGroup = (props) => {
             )
         });
     } else {
-        const event = {_id: "", title: "No tasks found", allDay: {
-            startDate: "",
-            endDate: "",
-            startTime: "",
-            endTime: ""
-            }, notes: "", editorIds: [], ownerId: ""}
         eventsList = [
             <li key={0}>
-                <EventRow event={event} />
+                {"No tasks found"}
             </li>
         ];
     }

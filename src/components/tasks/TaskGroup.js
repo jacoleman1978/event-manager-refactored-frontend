@@ -22,10 +22,9 @@ const TaskGroup = (props) => {
             )
         });
     } else {
-        const task = {_id: "", title: "No tasks found", task: {priority: ""}, allDay: {endDate: ""}, notes: "", editorIds: [], ownerId: ""}
         tasksDisplay = [
             <li key={0}>
-                <TaskRow task={task} />
+                {"No tasks found"}
             </li>
         ];
     }

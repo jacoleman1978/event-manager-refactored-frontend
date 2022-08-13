@@ -1,8 +1,11 @@
-import React from "react";
-
+import React, { useState } from "react";
+import SimpleView from "../eventViews/SimpleView";
+import DetailedView from "../eventViews/DetailedView";
 
 const FifteenMin = (props) => {
     let {hour, fifteenLabel, currentEvents, maximumEventsPerHour} = props;
+
+    let [isSimpleView, setView] = useState(true);
 
     let time = fifteenLabel.time;
 
@@ -15,8 +18,8 @@ const FifteenMin = (props) => {
 
     let eventDisplay = currentEvents.map((event) => {
         return (
-            <div key={`${hour}:${time}-${event._id}`} className="flex-left">
-                {event.title}
+            <div onClick={() => {setView(!isSimpleView)}} key={`${event._id}-view`} className="flex-left">
+                {isSimpleView ? <SimpleView event={event} /> : <DetailedView event={event} type={"event"} />}
             </div>
         )
     })

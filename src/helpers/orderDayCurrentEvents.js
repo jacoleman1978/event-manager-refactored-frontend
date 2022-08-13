@@ -45,7 +45,6 @@ const orderDayCurrentEvents = (events, previousEvents, currentEvents) => {
 
         if (wasFound === false) {
             let firstBlankPosition = getFirstBlankPosition(currentEvents);
-            console.log(firstBlankPosition)
 
             currentEvents[firstBlankPosition] = event;
         } 

@@ -8,7 +8,7 @@ const getFirstBlankPosition = (events) => {
         
         if (splitId[0] === "None") {
             firstBlankPosition = counter;
-            console.log(firstBlankPosition)
+
             return firstBlankPosition
         }
 
