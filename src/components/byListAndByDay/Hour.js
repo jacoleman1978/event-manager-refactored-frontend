@@ -4,7 +4,7 @@ import getCurrentEventsTemplateList from "../../helpers/getCurrentEventsTemplate
 import orderDayCurrentEvents from "../../helpers/orderDayCurrentEvents";
 
 const Hour = (props) => {
-    let {hour, events} = props;
+    let {hour, events, maximumEventsPerHour} = props;
 
     let fifteenLabels = [
         {
@@ -33,7 +33,7 @@ const Hour = (props) => {
 
     let fifteens = fifteenLabels.map((fifteen) => {
         let timeRangeEvents = [];
-        let previousEvents = tempEvents;
+        let previousEvents = [...tempEvents];
 
         for (let event of events) {
             let startTimeSplit = event.allDay.startTime.split(":");
@@ -46,10 +46,17 @@ const Hour = (props) => {
             let labelMinutes = parseInt(fifteen.minutes);
 
             if (hour === startTimeHour) {
-                if (startTimeHour !== endTimeHour && labelMinutes >= startTimeMinutes) {
-                    timeRangeEvents = [...timeRangeEvents, event];
+                if (startTimeHour !== endTimeHour) {
+                    if (labelMinutes >= startTimeMinutes) {
+                        timeRangeEvents = [...timeRangeEvents, event];
+                    } else if (startTimeMinutes > labelMinutes) {
+                        timeRangeEvents = [...timeRangeEvents, event];
+                    }
+                    
                 } else if (startTimeHour === endTimeHour) {
-                    if (startTimeMinutes <= labelMinutes && endTimeMinutes >= labelMinutes + 15) {
+                    if (startTimeMinutes >= labelMinutes && startTimeMinutes < labelMinutes + 15) {
+                        timeRangeEvents = [...timeRangeEvents, event];
+                    } else if (startTimeMinutes <= labelMinutes && endTimeMinutes > labelMinutes) {
                         timeRangeEvents = [...timeRangeEvents, event];
                     }
                 }
@@ -62,14 +69,14 @@ const Hour = (props) => {
             }
         }
 
-        let currentEvents = getCurrentEventsTemplateList(timeRangeEvents.length, previousEvents.length);
+        let currentEvents = getCurrentEventsTemplateList(maximumEventsPerHour);
 
         currentEvents = orderDayCurrentEvents(timeRangeEvents, previousEvents, currentEvents);
 
-        tempEvents = currentEvents;
+        tempEvents = [...currentEvents];
 
         return (
-            <FifteenMin key={`${hour}:${fifteen.minutes}`} hour={hour} fifteenLabel={fifteen} currentEvents={currentEvents} />
+            <FifteenMin key={`${hour}:${fifteen.minutes}`} hour={hour} fifteenLabel={fifteen} currentEvents={currentEvents} maximumEventsPerHour={maximumEventsPerHour}/>
         )
         
     })

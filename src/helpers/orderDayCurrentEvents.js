@@ -18,7 +18,9 @@ const orderDayCurrentEvents = (events, previousEvents, currentEvents) => {
                 // The event is already in the same position as the previous time slot
                 if (index === previousIndex) {
                     // Put the event in the currentEvents spot at the same index, if one hasn't already been placed there
-                    if (currentEvents[index]._id === "None") {
+                    let splitId = currentEvents[index]._id.split("-");
+
+                    if (splitId[0] === "None") {
                         currentEvents[index] = event;
                         wasFound = true;
 
@@ -36,13 +38,14 @@ const orderDayCurrentEvents = (events, previousEvents, currentEvents) => {
 
                 } else {
                     currentEvents[previousIndex] = event;
-                    wasFound = true
+                    wasFound = true;
                 }
             } 
         })
 
         if (wasFound === false) {
             let firstBlankPosition = getFirstBlankPosition(currentEvents);
+            console.log(firstBlankPosition)
 
             currentEvents[firstBlankPosition] = event;
         } 

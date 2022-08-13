@@ -2,15 +2,13 @@ import React from "react";
 
 
 const FifteenMin = (props) => {
-    let {hour, fifteenLabel, currentEvents} = props;
+    let {hour, fifteenLabel, currentEvents, maximumEventsPerHour} = props;
 
     let time = fifteenLabel.time;
 
-    let numEvents = currentEvents.length;
-
     let dayEventsDisplay = {
         display: "grid",
-        gridTemplateColumns: `repeat(${numEvents}, 1fr)`,
+        gridTemplateColumns: `repeat(${maximumEventsPerHour}, 1fr)`,
         gridTemplateRows: "1fr",
         width: "100%"
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Hour from "./Hour";
 import EventGroup from "./EventGroup";
+import getSortedEventsByHour from "../../helpers/getSortedEventsByHour";
 
 // Called from Events.js
 const EventsByDay = (props) => {
@@ -11,9 +12,8 @@ const EventsByDay = (props) => {
     let [timeRangeEvents, setTimeRangeEvents] = useState([]);
     let [hoursDisplay, setHoursDisplay] = useState([]);
 
-    let hourLabels = [];
-
     useEffect(() => {
+        // If there are events and they haven't been sorted, sort them into allDay events and events with a time range
         if (events.length > 0 && isSorted === false) {
             let tempAllDay = [];
             let tempTimeRange = [];
@@ -34,33 +34,27 @@ const EventsByDay = (props) => {
     }, [events])
 
     useEffect(() => {
+        // If the events were sorted into allDay and events with a time range, and events have not been sorted by hour, do so
         if (isSorted && hoursDisplay.length === 0) {
-            for (let i = 0; i < 24; i++) {
-                hourLabels = [...hourLabels, i];
+            let sortedEvents = getSortedEventsByHour(timeRangeEvents);
+
+            // Find the maximum number of events that will be displayed during the same hour
+            let maximumEventsPerHour = 0;
+
+            for (let group of sortedEvents) {
+                if (group.events.length > maximumEventsPerHour) {
+                    maximumEventsPerHour = group.events.length;
+                }
             }
 
-            let hours = hourLabels.map((hour) => {
-                let eventsThisHour = [];
-        
-                for (let event of timeRangeEvents) {
-                    let eventStartSplit = event.allDay.startTime.split(":");
-                    let eventStartHour = parseInt(eventStartSplit[0]);
-                    let eventEndSplit = event.allDay.endTime.split(":");
-                    let eventEndHour = parseInt(eventEndSplit[0]);
-                    let eventEndMinutes = parseInt(eventEndSplit[1]);
-                    
-                    if (hour >= eventStartHour && hour <= eventEndHour) {
-                        if (hour < eventEndHour) {
-                            eventsThisHour = [...eventsThisHour, event];
-                        } else if (hour === eventEndHour && eventEndMinutes > 0) {
-                            eventsThisHour = [...eventsThisHour, event];
-                        }
-                    }
-                }
-        
+            // Create the hoursDisplay array
+            let hours = sortedEvents.map((hourGroup) => {
+                let hour = hourGroup.hour;
+                let eventsThisHour = hourGroup.events;
+
                 if (eventsThisHour.length > 0) {
                     return (
-                        <Hour key={`${hour}`} hour={hour} events={eventsThisHour} />
+                        <Hour key={`${hour}`} hour={hour} events={eventsThisHour} maximumEventsPerHour={maximumEventsPerHour}/>
                     )
                 } else {
                     return (
