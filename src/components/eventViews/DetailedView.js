@@ -3,6 +3,8 @@ import { Card } from "react-bootstrap"
 import getDisplayDateFormated from "../../helpers/getDisplayDateFormated";
 import DisplayButtonGroup from "./DisplayButtonGroup";
 import { CurrentUser } from '../../contexts/currentUser';
+import CardTitleWithValue from "../cards/CardTitleWithValue";
+import CardTitleWithList from "../cards/CardTitleWIthList";
 
 const DetailedView = (props) => {  
     let {event, type} = props;
@@ -27,7 +29,9 @@ const DetailedView = (props) => {
         )
     }
 
-    let editorList = event.editorIds.map((editor) => {
+    let editors = event.editorIds.filter((editor) => editor._id !== event.ownerId._id)
+
+    let editorList = editors.map((editor) => {
         return (
             <li key={editor._id}>
                 {`${editor.firstName} ${editor.lastName}`}
@@ -69,57 +73,31 @@ const DetailedView = (props) => {
                     <hr />
                 <Card.Body className="card-container">
                     <div>
-                        {type === "task" ? <Card.Text className="flex-left-center-no-gap"><strong>Priority</strong>: {event.task.priority}</Card.Text> : ""}
+                        {type === "task" ? <CardTitleWithValue title={"Priority"} value={event.task.priority} /> : ""}
 
-                        <Card.Text className="flex-left-center-no-gap">
-                            <strong>Start Date</strong>: {startDate}
-                        </Card.Text>
+                        <CardTitleWithValue title={"Start Date"} value={startDate} />
+                        
+                        <CardTitleWithValue title={"End Date"} value={endDate} />
 
-                        <Card.Text className="flex-left-center-no-gap">
-                            <strong>End Date</strong>: {endDate}
-                        </Card.Text>
+                        <CardTitleWithValue title={"Start Time"} value={event.allDay.startTime} />
 
-                        <Card.Text className="flex-left-center-no-gap">
-                            <strong>Start Time</strong>: {event.allDay.startTime}
-                        </Card.Text>
+                        <CardTitleWithValue title={"End Time"} value={event.allDay.endTime} />
 
-                        <Card.Text className="flex-left-center-no-gap">
-                            <strong>End Time</strong>: {event.allDay.endTime}
-                        </Card.Text>
+                        <CardTitleWithValue title={"Notes"} value={event.notes} />
 
-                        <Card.Text className="flex-left-center-no-gap">
-                            <strong>Notes</strong>: {event.notes}
-                        </Card.Text>
                     </div>
 
-                    <div className="flex-col-center-left">
-                        <Card.Text>
-                            <strong>Owner</strong>: {ownerName(event)}
-                        </Card.Text>
+                    <div className="flex-col-center-left-no-gap">
+                        <CardTitleWithValue title={"Owner"} value={ownerName(event)} />
 
-                        <div>
-                            <Card.Text className="flex-left-center-no-gap">
-                                <strong>Editors</strong>: {editorList.length === 0 ? "None" : ""}
-                            </Card.Text>
+                        <CardTitleWithList title={"Editors"} list={editorList} />
 
-                            {editorList.length > 0 ? <ul> {editorList} </ul>: ""}
-                        </div>
+                        <CardTitleWithList title={"Viewers"} list={viewerList} />
 
-                        <div>
-                            <Card.Text className="flex-left-center-no-gap">
-                                <strong>Viewers</strong>: {viewerList.length === 0 ? "None" : ""}
-                            </Card.Text>
-
-                            {viewerList.length > 0 ? <ul> {viewerList} </ul>: ""}
-                        </div>
                     </div>
 
                     <div>
-                        <Card.Text className="flex-left-center-no-gap">
-                            <strong>Groups</strong>: {groupList.length === 0 ? "None" : ""}
-                        </Card.Text>
-
-                        {groupList.length > 0 ? <ul> {groupList} </ul>: ""}
+                        <CardTitleWithList title={"Groups"} list={groupList} />
                     </div>
 
                 </Card.Body>
