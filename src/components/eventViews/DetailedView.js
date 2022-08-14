@@ -7,7 +7,7 @@ import CardTitleWithValue from "../cards/CardTitleWithValue";
 import CardTitleWithList from "../cards/CardTitleWIthList";
 
 const DetailedView = (props) => {  
-    let {event, type} = props;
+    let {event, type, isWeek} = props;
 
     const { currentUser } = useContext(CurrentUser);
 
@@ -66,8 +66,14 @@ const DetailedView = (props) => {
         return false
     }
 
+    let cardStyle = {};
+
+    if (isWeek === true) {
+        cardStyle["width"] = "13rem";
+    }
+
     return (
-        <div className="flex-left-center-wrap" key={`${event._id}-detailed`}>
+        <div className="flex-left-center-wrap" key={`${event._id}-detailed`} style={cardStyle}>
             <Card key={event._id} className="card-style" >
                 <Card.Title className="title">{event.title}</Card.Title>
                     <hr />

@@ -19,6 +19,7 @@ const ViewBtns = (props) => {
                 <>
                     <Nav.Link href='/events/list/0'>By List</Nav.Link>
                     <Nav.Link href='/events/overview/0'>By Overview</Nav.Link>
+                    <Nav.Link href='/events/week/0'>By Week</Nav.Link>
                     <Nav.Link href='/events/day/0'>By Day</Nav.Link>
                     <Nav.Link href='/events/new'>New Event</Nav.Link>
                 </>

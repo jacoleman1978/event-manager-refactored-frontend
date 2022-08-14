@@ -2,7 +2,6 @@ import React from "react";
 import EventRow from "./EventRow";
 
 const EventGroup = (props) => {
-    // Props
     const {header, data, headerStyle} = props;
 
     // eventssList will be filled in the conditional below
@@ -20,7 +19,7 @@ const EventGroup = (props) => {
             return (
                 <li key={`${event._id}-${Math.random() * 1000}`} >
                     <div style={rowStyle}>
-                        <EventRow event={event} />
+                        <EventRow event={event} isWeek={false}/>
                     </div>
                 </li>
             )
@@ -41,9 +40,9 @@ const EventGroup = (props) => {
     // headerStyle was passed in as prop from EventList and determines the background color of each header.
     return (
         <div style={groupStyle}>
-            <div style={headerStyle}>
-                {header}
-            </div>
+
+            {header.length > 0 ? <div style={headerStyle}>{header}</div> : ""}
+            
             <ul>
                 {eventsList}
             </ul>

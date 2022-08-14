@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import EventDataService from "../../services/eventDataService";
 import EventsByList from "./EventsByList";
+import EventsByWeek from "./EventsByWeek";
 import EventsByDay from "./EventsByDay";
 import EventsByOverview from "../byOverview/EventsByOverview";
 import EventForm from "./EventForm";
@@ -86,6 +87,8 @@ const Events = (props) => {
         if (eventsLoaded) {
             if (viewType === 'list') {
                 return <EventsByList settings={settings} sortedEvents={sortedEvents} />
+            } else if (viewType === 'week') {
+                return <EventsByWeek settings={settings} events={sortedEvents} />
             } else if (viewType === 'overview') {
                 return <EventsByOverview settings={settings} events={events} />
             } else if (viewType === 'day') {

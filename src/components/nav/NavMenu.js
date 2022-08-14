@@ -39,6 +39,8 @@ const NavMenu = (props) => {
             defaultEventsPath = '/events/overview/0';
         } else if (defaultViews.events === 'By Day') {
             defaultEventsPath = '/events/day/0';
+        } else if (defaultViews.events === 'By Week') {
+            defaultEventsPath = '/events/week/0';
         }
     }
 
@@ -64,6 +66,8 @@ const NavMenu = (props) => {
             defaultActive = '/events/day/0';
         } else if (viewType === 'new') {
             defaultActive = '/events/new/0'
+        } else if (viewType === 'week') {
+            defaultActive = '/events/week/0'
         }
 
     } else if (viewType === 'groups') {
