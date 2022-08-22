@@ -1,98 +1,82 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams } from 'react-router-dom';
+import { CurrentUser } from "../../contexts/currentUser";
 import EventDataService from "../../services/eventDataService";
 import EventsByList from "./EventsByList";
+import WeekHeader from "./WeekHeader";
 import EventsByWeek from "./EventsByWeek";
 import EventsByDay from "./EventsByDay";
 import EventsByOverview from "../byOverview/EventsByOverview";
 import EventForm from "./EventForm";
-import getDayDifference from "../../helpers/getDayDifference";
+import getSortedEventsByUser from "../../helpers/getSortedEventsByUser";
+import getDateRange from "../../helpers/getDateRange";
 
 // Called from DisplayContainer.js
 const Events = (props) => {
     let {viewType, settings} = props;
 
+    const { currentUser } = useContext(CurrentUser);
+
+    let offsetBy = 0;
+
+    if (viewType === 'week') {
+        let { week } = useParams();
+        offsetBy = week;
+    } else if (viewType === 'day') {
+        let { day } = useParams();
+        offsetBy = day;
+    }
+
     let [events, setEvents] = useState([]);
     let [eventsLoaded, setEventsLoaded] = useState(false);
-    let [sortedEvents, setSortedEvents] = useState([]);
+    let [dateRangeEventsByUser, setDateRangeEventsByUser] = useState(null);
 
     useEffect(() => {
         if (eventsLoaded === false) {
+            let dateRange = getDateRange(viewType, offsetBy);
+
             // If events have not been fetched, retrieve them
             if (events.length === 0) {
                 EventDataService.GetEvents().then((res) => {
                     setEvents(res.data.events)
                 })
             }
-    
+
             // If events have been fetched, set the loaded flag and sort the events
             if (events.length > 0) {
                 setEventsLoaded(true);
 
-                // Iterating through all of the events using the sorting function
-                for (let event of events) {
-                    sortByDay(event);
-                }
+                let sortedEvents = getSortedEventsByUser(dateRange, events);
 
-                // Create an array of arrays, representing the sorted events
-                setSortedEvents([eventsPlusZero, eventsPlusOne, eventsPlusTwo, eventsPlusThree, eventsPlusFour, eventsPlusFive, eventsPlusSix]);
+                setDateRangeEventsByUser(sortedEvents);
             }
         }
-    }, [events])
 
+    }, [events, currentUser])
 
-    // Create arrays to hold events for up to a week total
-    let eventsPlusZero = [];
-    let eventsPlusOne = [];
-    let eventsPlusTwo = [];
-    let eventsPlusThree = [];
-    let eventsPlusFour = [];
-    let eventsPlusFive = [];
-    let eventsPlusSix = [];
+    const selectView = () => {
+        if (eventsLoaded && currentUser !== null && dateRangeEventsByUser !== null) {
+            let userId = currentUser.userId;
 
-    // Sort events by day of week and pushes them to the appropriate array
-    const sortByDay = (event) => {
-        let daysUntilStart = getDayDifference(event.allDay.startDate);
-        let daysUntilDue = getDayDifference(event.allDay.endDate);
+            let weeklyDisplay = [];
 
-        if (daysUntilStart <= 0 && daysUntilDue >= 0) {
-            eventsPlusZero.push(event);
-        } 
-        
-        if (daysUntilStart <= 1 && daysUntilDue >= 1) {
-            eventsPlusOne.push(event);
-        } 
-        
-        if (daysUntilStart <= 2 && daysUntilDue >= 2) {
-            eventsPlusTwo.push(event);
-        } 
-        
-        if (daysUntilStart <= 3 && daysUntilDue >= 3) {
-            eventsPlusThree.push(event);
-        } 
-        
-        if (daysUntilStart <= 4 && daysUntilDue >= 4) {
-            eventsPlusFour.push(event);
-        } 
-        
-        if (daysUntilStart <= 5 && daysUntilDue >= 5) {
-            eventsPlusFive.push(event);
-        } 
-        
-        if (daysUntilStart <= 6 && daysUntilDue >= 6) {
-            eventsPlusSix.push(event);
-        }
-    }
+            for (let user in dateRangeEventsByUser) {
+                weeklyDisplay = [...weeklyDisplay, <EventsByWeek key={user} settings={settings} events={dateRangeEventsByUser[user]} />]
+            }
 
-    const selectView = (viewType) => {
-        if (eventsLoaded) {
             if (viewType === 'list') {
-                return <EventsByList settings={settings} sortedEvents={sortedEvents} />
+                return <EventsByList settings={settings} events={dateRangeEventsByUser[userId]} />
             } else if (viewType === 'week') {
-                return <EventsByWeek settings={settings} events={sortedEvents} />
+                return (
+                <>
+                    <WeekHeader offsetBy={offsetBy}/>
+                    {weeklyDisplay}
+                </>
+                )
             } else if (viewType === 'overview') {
                 return <EventsByOverview settings={settings} events={events} />
             } else if (viewType === 'day') {
-                return <EventsByDay settings={settings} events={sortedEvents[0]} />
+                return <EventsByDay settings={settings} events={dateRangeEventsByUser[userId]["events"]} />
             } else if (viewType === 'new') {
                 return <EventForm settings={settings} isEdit={false}/>
             } else if (viewType === 'edit') {

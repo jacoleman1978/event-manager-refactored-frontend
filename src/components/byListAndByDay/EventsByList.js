@@ -1,9 +1,12 @@
 import React from "react";
 import EventGroup from "./EventGroup";
+import getSortedEventsByWeek from "../../helpers/getSortedEventsByWeek";
 
 const EventsByList = (props) => {
     // Get props
-    let {sortedEvents} = props;
+    let {events} = props;
+    
+    let sortedEvents = getSortedEventsByWeek(events);
 
     // Define titles of day headers
     let dayHeaders = [];

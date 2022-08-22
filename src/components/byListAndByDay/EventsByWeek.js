@@ -1,14 +1,13 @@
 import React from "react";
-import WeekHeader from "./WeekHeader";
 import WeekGroup from "./WeekGroup";
+import getSortedEventsByWeek from "../../helpers/getSortedEventsByWeek";
 
 const EventsByWeek = (props) => {
     let {events} = props;
 
-    let weekEventList = [[{title: "User's Name"}]];
-    weekEventList = [...weekEventList, ...events]
+    let sortedEvents = getSortedEventsByWeek(events)
 
-    let weekEvents = weekEventList.map((dayEvents, index) => {
+    let weekEvents = sortedEvents.map((dayEvents, index) => {
         return (
             <div key={index} className="week-day">
                 <WeekGroup key={index} events={dayEvents} />
@@ -18,8 +17,8 @@ const EventsByWeek = (props) => {
 
     return (
         <>
-            <WeekHeader />
             <div className="week-row">
+                <div className="week-day">{events.fullName}</div>
                 {weekEvents}
             </div>
         </>

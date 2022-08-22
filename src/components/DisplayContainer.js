@@ -65,7 +65,7 @@ const DisplayContainer = (props) => {
             return <Tasks settings={settings} viewType={viewType} />
         } 
         else if (isEvent === true) {
-            return <Events settings={settings} viewType={viewType}/>
+            return <Events settings={settings} viewType={viewType} />
         } 
         else if (viewType === 'groups') {
             return <Groups />

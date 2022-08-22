@@ -14,7 +14,7 @@ const EventGroup = (props) => {
     }
 
     // If the data passed in has data in it, send each event to the the EventRow React Component. Otherwise pass in an object that will display 'No events found' under the priority.
-    if (data.length > 0) {
+    if (data !== 'undefined') {
         eventsList = data.map((event) => {
             return (
                 <li key={`${event._id}-${Math.random() * 1000}`} >
