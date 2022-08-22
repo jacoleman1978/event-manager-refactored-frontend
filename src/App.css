@@ -125,6 +125,10 @@ p {
   width: 18rem;
 }
 
+.week-btn-width {
+  width: 10rem;
+}
+
 .flex-centered {
   display: flex;
   justify-content: center;
@@ -274,4 +278,10 @@ p {
   border: solid black 1px;
   font-size: small;
   padding-top: 0.25rem;
+}
+
+.week-btn-group {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem;
 }

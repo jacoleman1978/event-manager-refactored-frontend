@@ -4,7 +4,7 @@ import getSortedEventsByWeek from "../../helpers/getSortedEventsByWeek";
 
 const EventsByList = (props) => {
     // Get props
-    let {events, dateRange} = props;
+    let {events, dateRange, offsetBy} = props;
     
     let sortedEvents = getSortedEventsByWeek(events, dateRange);
 
@@ -14,9 +14,9 @@ const EventsByList = (props) => {
     let day = date.getDate();
 
     for (let i = 0; i < 7; i++) {
-        let headerDate = date
-        headerDate.setDate(day + i);
-        dayHeaders.push(headerDate.toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
+        let headerDate = new Date(date.getTime())
+        headerDate.setDate(day + i + offsetBy * 7);
+        dayHeaders.push(headerDate.toLocaleDateString('en-us', { weekday:"long", month:"numeric", day:"numeric"}));
     }
 
     // Header background color

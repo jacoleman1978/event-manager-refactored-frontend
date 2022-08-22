@@ -9,8 +9,7 @@ import EventsByDay from "./EventsByDay";
 import EventForm from "./EventForm";
 import getSortedEventsByUser from "../../helpers/getSortedEventsByUser";
 import getDateRange from "../../helpers/getDateRange";
-import NextWeekBtn from "./NextWeekBtn";
-import PreviousWeekBtn from "./PreviousWeekBtn";
+import OffsetButtonGroup from "./OffsetButtonGroup";
 
 // Called from DisplayContainer.js
 const Events = (props) => {
@@ -21,7 +20,7 @@ const Events = (props) => {
     let offsetBy = 0;
     let params = "";
 
-    if (viewType === 'week') {
+    if (viewType === 'week' || viewType === 'list') {
         let { week } = useParams();
         params = week;
         offsetBy = week;
@@ -29,7 +28,7 @@ const Events = (props) => {
         let { day } = useParams();
         params = day;
         offsetBy = day;
-    }
+    } 
 
     let dateRange = getDateRange(viewType, offsetBy);
 
@@ -37,10 +36,10 @@ const Events = (props) => {
     let [eventsLoaded, setEventsLoaded] = useState(false);
     let [dateRangeEventsByUser, setDateRangeEventsByUser] = useState(null);
     let [weeklyDisplay, setWeeklyDisplay] = useState(null);
+    let [listEvents, setListEvents] = useState(null);
 
     useEffect(() => {
         if (eventsLoaded === false) {
-            
 
             // If events have not been fetched, retrieve them
             if (events.length === 0) {
@@ -56,8 +55,9 @@ const Events = (props) => {
 
             let sortedEvents = getSortedEventsByUser(dateRange, events);
 
-            let display = [];
+            setListEvents(sortedEvents[currentUser.userId]);
 
+            let display = [];
             for (let user in sortedEvents) {
                 display = [...display, <EventsByWeek key={user} events={sortedEvents[user]} dateRange={dateRange}/>]
             }
@@ -72,16 +72,18 @@ const Events = (props) => {
             let userId = currentUser.userId;
 
             if (viewType === 'list') {
-                return <EventsByList events={dateRangeEventsByUser[userId]} dateRange={dateRange} />
+                return (
+                    <>
+                        <EventsByList events={listEvents} dateRange={dateRange} offsetBy={offsetBy}/>
+                        <OffsetButtonGroup viewType={viewType}/>
+                    </>
+                )
             } else if (viewType === 'week') {
                 return (
                 <>
                     <WeekHeader offsetBy={offsetBy}/>
                     {weeklyDisplay}
-                    <div>
-                        <PreviousWeekBtn />
-                        <NextWeekBtn />
-                    </div>
+                    <OffsetButtonGroup viewType={viewType}/>
                 </>
                 )
             } else if (viewType === 'day') {
