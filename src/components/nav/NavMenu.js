@@ -35,8 +35,6 @@ const NavMenu = (props) => {
 
         if (defaultViews.events === 'By List') {
             defaultEventsPath = '/events/list/0';
-        } else if (defaultViews.events === 'By Overview') {
-            defaultEventsPath = '/events/overview/0';
         } else if (defaultViews.events === 'By Day') {
             defaultEventsPath = '/events/day/0';
         } else if (defaultViews.events === 'By Week') {
@@ -75,6 +73,10 @@ const NavMenu = (props) => {
     } else if (viewType === 'settings') {
         dropdownTitle = 'Settings';
     }
+
+    const btnStyle = {
+        marginLeft: "0.5rem"
+    }
     
     return (
         <Navbar expand='lg'>
@@ -95,10 +97,13 @@ const NavMenu = (props) => {
                         
                     />
                 </Nav>
+                
             </Navbar.Collapse>
+            {currentUser !== null ? <>{currentUser.fullName}</> : ""}
 
             {currentUser !== null ? 
                 <Button 
+                    style={btnStyle}
                     variant="primary" 
                     type="button" 
                     onClick={handleLogoutClick} 

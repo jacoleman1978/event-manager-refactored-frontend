@@ -6,7 +6,6 @@ import EventsByList from "./EventsByList";
 import WeekHeader from "./WeekHeader";
 import EventsByWeek from "./EventsByWeek";
 import EventsByDay from "./EventsByDay";
-import EventsByOverview from "../byOverview/EventsByOverview";
 import EventForm from "./EventForm";
 import getSortedEventsByUser from "../../helpers/getSortedEventsByUser";
 import getDateRange from "../../helpers/getDateRange";
@@ -73,8 +72,6 @@ const Events = (props) => {
                     {weeklyDisplay}
                 </>
                 )
-            } else if (viewType === 'overview') {
-                return <EventsByOverview settings={settings} events={events} />
             } else if (viewType === 'day') {
                 return <EventsByDay settings={settings} events={dateRangeEventsByUser[userId]["events"]} />
             } else if (viewType === 'new') {

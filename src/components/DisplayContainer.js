@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { CurrentUser } from "../contexts/currentUser";
 import UserDataService from "../services/userDataService";
 import SettingsDataService from "../services/settingsDataService";
-import Events from "./byListAndByDay/Events";
+import Events from "./events/Events";
 import Tasks from "./tasks/Tasks";
 import Groups from "./groups/Groups";
 import Settings from "./settings/Settings";
