@@ -3,9 +3,9 @@ import WeekGroup from "./WeekGroup";
 import getSortedEventsByWeek from "../../helpers/getSortedEventsByWeek";
 
 const EventsByWeek = (props) => {
-    let {events} = props;
+    let {events, dateRange} = props;
 
-    let sortedEvents = getSortedEventsByWeek(events)
+    let sortedEvents = getSortedEventsByWeek(events, dateRange)
 
     let weekEvents = sortedEvents.map((dayEvents, index) => {
         return (

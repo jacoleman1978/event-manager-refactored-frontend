@@ -4,9 +4,9 @@ import getSortedEventsByWeek from "../../helpers/getSortedEventsByWeek";
 
 const EventsByList = (props) => {
     // Get props
-    let {events} = props;
+    let {events, dateRange} = props;
     
-    let sortedEvents = getSortedEventsByWeek(events);
+    let sortedEvents = getSortedEventsByWeek(events, dateRange);
 
     // Define titles of day headers
     let dayHeaders = [];

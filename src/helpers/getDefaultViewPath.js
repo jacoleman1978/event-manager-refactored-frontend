@@ -8,8 +8,8 @@ const getDefaultViewPath = async () => {
         if (defaultViews.login === 'Events') {
             if (defaultViews.events === 'By List') {
                 redirectPath = '/events/list/0';
-            } else if (defaultViews.events === 'By Overview') {
-                redirectPath = '/events/overview/0';
+            } else if (defaultViews.events === 'By Week') {
+                redirectPath = '/events/week/0';
             } else if (defaultViews.events === 'By Day') {
                 redirectPath = '/events/day/0';
             }

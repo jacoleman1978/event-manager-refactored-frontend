@@ -51,7 +51,7 @@ const ViewSettings = (props) => {
                         <option value="" disabled>Select a default view</option>
                         <option value="By Day">By Day</option>
                         <option value="By List">By List</option>
-                        <option value="By Overview">By Overview</option>
+                        <option value="By Overview">By Week</option>
                     </Form.Select>
                 </Form.Group>
 

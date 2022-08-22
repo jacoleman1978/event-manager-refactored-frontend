@@ -17,8 +17,9 @@ const getDateRange = (viewType, offsetBy) => {
     } else if (viewType === 'week' || viewType === 'list') {
         date.setDate(day + offsetBy * 7);
         dateRange.startDate = getDisplayDate(date);
+        day = date.getDate();
 
-        date.setDate(day + 7);
+        date.setDate(day + 6);
         dateRange.endDate = getDisplayDate(date);
     }
 
