@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 import { CurrentUser } from "../../contexts/currentUser";
 import EventDataService from "../../services/eventDataService";
 import EventsByList from "./EventsByList";
@@ -38,6 +39,16 @@ const Events = (props) => {
     let [weeklyDisplay, setWeeklyDisplay] = useState(null);
     let [listEvents, setListEvents] = useState(null);
     let [dayEvents, setDayEvents] = useState(null);
+    let [membersList, setMembersList] = useState([]);
+    let [membersToDisplay, setMembersToDisplay] = useState([]);
+    let [checkboxFlag, setCheckboxFlag] = useState(false);
+    let [nextPrevBtnFlag, setNextPrevBtnFlag] = useState(false);
+
+    useEffect(() => {
+        if (currentUser !== null) {
+            setMembersToDisplay([currentUser.userId]);
+        }
+    }, [nextPrevBtnFlag])
 
     useEffect(() => {
         if (eventsLoaded === false) {
@@ -58,16 +69,72 @@ const Events = (props) => {
 
             setDayEvents(sortedEvents[currentUser.userId]["events"]);
             setListEvents(sortedEvents[currentUser.userId]);
+            setMembersList(getGroupMembersChecklist(sortedEvents));
 
-            let display = [];
-            for (let user in sortedEvents) {
-                display = [...display, <EventsByWeek key={user} events={sortedEvents[user]} dateRange={dateRange}/>]
+            if (membersToDisplay.length === 0) {
+                setMembersToDisplay([currentUser.userId])
             }
+
+            let display = membersToDisplay.map((user) => {
+                return (
+                    <EventsByWeek key={user} events={sortedEvents[user]} dateRange={dateRange}/>
+                )
+            })
+
             setWeeklyDisplay(display);
             setDateRangeEventsByUser(sortedEvents);
         }
 
-    }, [events, currentUser, params])
+    }, [events, currentUser, params, checkboxFlag])
+
+    const getGroupMembersChecklist = (events) => {
+        let formattedUserList = [];
+
+        for (let user in events) {
+            if (events[user].userId !== currentUser.userId) {
+                formattedUserList = [
+                    ...formattedUserList, 
+                    {
+                        userId: events[user].userId,
+                        userName: events[user].userName,
+                        fullName: events[user].fullName
+                    }
+                ]
+            }
+        }
+
+        let checklist = formattedUserList.map((user) => {
+            return (
+                <li key={`${user.userName}`} className="list-items">
+                    <Form.Check 
+                        key={`${user.userId}`}
+                        type="checkbox"
+                        id={`${user.userId}`}
+                        onChange={(e) => handleMembersDisplay(user.userId, e)}
+                    />
+                    {user.fullName}
+                </li>
+            )
+        })
+
+        return checklist
+    }
+
+    let tempMembersList = [];
+
+    const handleMembersDisplay = (userId, e) => {
+        tempMembersList = membersToDisplay;
+        if (e.target.checked === true) {
+            tempMembersList = [...tempMembersList, userId];
+        } else if (e.target.checked === false) {
+            const index = tempMembersList.indexOf(userId);
+            if(index > -1) {
+                tempMembersList.splice(index, 1);
+            }
+        }
+        setMembersToDisplay(tempMembersList);
+        setCheckboxFlag(!checkboxFlag);
+    }
 
     const selectView = () => {
         if (eventsLoaded && currentUser !== null && dateRangeEventsByUser !== null) {
@@ -81,9 +148,18 @@ const Events = (props) => {
             } else if (viewType === 'week') {
                 return (
                 <>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label className="flex-left-bold">People With Common Events:</Form.Label>
+                            <ul>
+                                {membersList.length > 0 ? membersList : "None"}
+                            </ul>
+                                
+                        </Form.Group>
+                    </Form>
                     <WeekHeader offsetBy={offsetBy}/>
                     {weeklyDisplay}
-                    <OffsetButtonGroup viewType={viewType}/>
+                    <OffsetButtonGroup viewType={viewType} nextPrevBtnFlag={nextPrevBtnFlag} setNextPrevBtnFlag={setNextPrevBtnFlag} />
                 </>
                 )
             } else if (viewType === 'day') {

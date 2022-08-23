@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 const NextBtn = (props) => {
-    let {viewType} = props;
+    let {viewType, nextPrevBtnFlag, setNextPrevBtnFlag} = props;
 
     let offsetBy = 0;
 
@@ -18,6 +18,7 @@ const NextBtn = (props) => {
     let navigate = useNavigate();
     
     const handleNextBtnClick = () => {
+        setNextPrevBtnFlag(!nextPrevBtnFlag);
         navigate(`/events/${viewType}/${parseInt(offsetBy) + 1}`)
     }
 

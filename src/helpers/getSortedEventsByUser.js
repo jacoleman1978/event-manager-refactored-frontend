@@ -5,7 +5,7 @@ const getSortedEventsByUser = (dateRange, events, currentUser) => {
         return {}
     }
     let eventsByUser = {}
-    eventsByUser[currentUser.userId] = {events: [], userName: currentUser.userName, fullName: currentUser.fullName};
+    eventsByUser[currentUser.userId] = {events: [], userName: currentUser.userName, fullName: currentUser.fullName, userId: currentUser.userId};
 
     for (let event of events) {
         let users = [];
@@ -14,10 +14,11 @@ const getSortedEventsByUser = (dateRange, events, currentUser) => {
             users = [...users, ...event.editorIds, ...event.viewerIds, event.ownerId];
 
             for (let user of users) {
-                if (user._id.toString() in eventsByUser) {
+                let userId = user._id.toString()
+                if (userId in eventsByUser) {
                     let isEventPresent = false;
 
-                    let userEvents = [...eventsByUser[user._id.toString()]["events"]];
+                    let userEvents = [...eventsByUser[userId]["events"]];
 
                     for(let listedEvent of userEvents) {
                         if (event._id === listedEvent._id) {
@@ -26,14 +27,15 @@ const getSortedEventsByUser = (dateRange, events, currentUser) => {
                     }
 
                     if (isEventPresent === false) {
-                        eventsByUser[user._id.toString()]["events"].push(event)
+                        eventsByUser[userId]["events"].push(event)
                     }
                     
                 } else {
-                    eventsByUser[user._id.toString()] = {};
-                    eventsByUser[user._id.toString()]["events"] = [event];
-                    eventsByUser[user._id.toString()]["userName"] = user.userName;
-                    eventsByUser[user._id.toString()]["fullName"] = `${user.firstName} ${user.lastName}`;
+                    eventsByUser[userId] = {};
+                    eventsByUser[userId]["events"] = [event];
+                    eventsByUser[userId]["userName"] = user.userName;
+                    eventsByUser[userId]["fullName"] = `${user.firstName} ${user.lastName}`;
+                    eventsByUser[userId]["userId"] = userId;
                 }
             }
 
