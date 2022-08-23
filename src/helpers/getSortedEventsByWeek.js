@@ -11,6 +11,10 @@ const getSortedEventsByWeek = (events, dateRange) => {
     let eventsPlusFive = [];
     let eventsPlusSix = [];
 
+    if (events === undefined) {
+        return [eventsPlusZero, eventsPlusOne, eventsPlusTwo, eventsPlusThree, eventsPlusFour, eventsPlusFive, eventsPlusSix]
+    }
+
     // Sort events by day of week and pushes them to the appropriate array
     const sortByDay = (event) => {
         let daysUntilStart = getDayDifference(event.allDay.startDate);

@@ -17,10 +17,12 @@ const EventsByWeek = (props) => {
 
     return (
         <>
-            <div className="week-row">
-                <div className="week-day">{events.fullName}</div>
-                {weekEvents}
-            </div>
+            {events !== undefined ? 
+                <div className="week-row">
+                    <div className="week-day">{events.fullName}</div>
+                    {weekEvents}
+                </div> : ""}
+            
         </>
     )
 }
