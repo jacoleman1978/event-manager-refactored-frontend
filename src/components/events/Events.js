@@ -23,11 +23,11 @@ const Events = (props) => {
     if (viewType === 'week' || viewType === 'list') {
         let { week } = useParams();
         params = week;
-        offsetBy = week;
+        offsetBy = parseInt(week);
     } else if (viewType === 'day') {
         let { day } = useParams();
         params = day;
-        offsetBy = day;
+        offsetBy = parseInt(day);
     } 
 
     let dateRange = getDateRange(viewType, offsetBy);
@@ -37,6 +37,7 @@ const Events = (props) => {
     let [dateRangeEventsByUser, setDateRangeEventsByUser] = useState(null);
     let [weeklyDisplay, setWeeklyDisplay] = useState(null);
     let [listEvents, setListEvents] = useState(null);
+    let [dayEvents, setDayEvents] = useState(null);
 
     useEffect(() => {
         if (eventsLoaded === false) {
@@ -50,11 +51,12 @@ const Events = (props) => {
         }
 
         // If events have been fetched, set the loaded flag and sort the events
-        if (events.length > 0) {
+        if (events.length > 0 && currentUser !== null) {
             setEventsLoaded(true);
 
-            let sortedEvents = getSortedEventsByUser(dateRange, events);
+            let sortedEvents = getSortedEventsByUser(dateRange, events, currentUser);
 
+            setDayEvents(sortedEvents[currentUser.userId]["events"]);
             setListEvents(sortedEvents[currentUser.userId]);
 
             let display = [];
@@ -69,8 +71,6 @@ const Events = (props) => {
 
     const selectView = () => {
         if (eventsLoaded && currentUser !== null && dateRangeEventsByUser !== null) {
-            let userId = currentUser.userId;
-
             if (viewType === 'list') {
                 return (
                     <>
@@ -87,7 +87,22 @@ const Events = (props) => {
                 </>
                 )
             } else if (viewType === 'day') {
-                return <EventsByDay settings={settings} events={dateRangeEventsByUser[userId]["events"]} />
+                // Define titles of day headers
+                let date = new Date();
+                let day = date.getDate();
+
+                date.setDate(day + offsetBy);
+                date.toLocaleDateString('en-us', { weekday:"long", month:"numeric", day:"numeric"});
+
+                let headerStyle = {backgroundColor: "red", borderRadius: "0.5rem"};
+
+                return (
+                    <>
+                        <div style={headerStyle}>{date.toLocaleDateString('en-us', { weekday:"long", month:"numeric", day:"numeric"})}</div>
+                        <OffsetButtonGroup viewType={viewType}/>
+                        <EventsByDay events={dayEvents} viewType={viewType}/>
+                    </>
+                )
             } else if (viewType === 'new') {
                 return <EventForm settings={settings} isEdit={false}/>
             } else if (viewType === 'edit') {

@@ -280,7 +280,7 @@ p {
   padding-top: 0.25rem;
 }
 
-.week-btn-group {
+.offset-btn-group {
   display: flex;
   justify-content: space-around;
   margin: 1rem;

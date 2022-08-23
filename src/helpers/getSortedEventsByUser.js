@@ -1,11 +1,11 @@
 import isEventWithinDateRange from "./isEventWithinDateRange";
 
-const getSortedEventsByUser = (dateRange, events) => {
+const getSortedEventsByUser = (dateRange, events, currentUser) => {
     if (events.length === 0) {
         return {}
     }
-    
-    let eventsByUser = {};
+    let eventsByUser = {}
+    eventsByUser[currentUser.userId] = {events: [], userName: currentUser.userName, fullName: currentUser.fullName};
 
     for (let event of events) {
         let users = [];

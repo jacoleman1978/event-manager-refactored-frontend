@@ -1,14 +1,14 @@
 import React from "react";
-import PreviousWeekBtn from "./PreviousWeekBtn";
-import NextWeekBtn from "./NextWeekBtn";
+import PreviousBtn from "./PreviousBtn";
+import NextBtn from "./NextBtn";
 
 const OffsetButtonGroup = (props) => {
     let {viewType} = props;
 
     return (
-        <div className="week-btn-group">
-            <PreviousWeekBtn viewType={viewType} />
-            <NextWeekBtn viewType={viewType} />
+        <div className="offset-btn-group">
+            <PreviousBtn viewType={viewType} />
+            <NextBtn viewType={viewType} />
         </div>
     )
 }
