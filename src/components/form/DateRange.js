@@ -2,9 +2,7 @@ import React from "react";
 import StartDate from "./StartDate";
 import EndDate from "./EndDate";
 
-const DateRange = (props) => {
-    let { formStartDate, setStartDate, formEndDate, setEndDate} = props;
-
+const DateRange = ({formStartDate, setStartDate, formEndDate, setEndDate}) => {
     return (
         <div className="flex-left-center-wrap">
             <StartDate formStartDate={formStartDate} setStartDate={setStartDate} label={"Start Date: "} />

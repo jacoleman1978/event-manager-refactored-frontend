@@ -1,12 +1,10 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 
-const ViewBtns = (props) => {
-    // Props
-    const { isTask, isEvent} = props;
-
+// Called from NavMenu.js
+const ViewBtns = ({isTask, isEvent}) => {
     const btnDisplay = (isTask, isEvent) => {
-        if (isTask === true) {
+        if (isTask) {
             return (
                 <>
                     <Nav.Link href='/tasks/priority'>By Priority</Nav.Link>
@@ -14,7 +12,7 @@ const ViewBtns = (props) => {
                     <Nav.Link href='/tasks/new'>New Task</Nav.Link>
                 </>
             )
-        } else if (isEvent === true) {
+        } else if (isEvent) {
             return (
                 <>
                     <Nav.Link href='/events/list/0'>By List</Nav.Link>

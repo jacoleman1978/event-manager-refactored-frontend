@@ -1,76 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TaskGroup from "./TaskGroup";
 import NewSimpleTask from "./NewSimpleTask";
-import getDayDifference from "../../helpers/getDayDifference";
+import sortTasksByDueDate from "./helpers/sortTasksByDueDate"
 
 // Called by Tasks.js
-const TasksByDueDate = (props) => {
-    let {settings, tasks} = props;
+const TasksByDueDate = ({settings, tasks}) => {
+    let [displayTasks, setDisplayTasks] = useState([]);
 
-    // Arrays to hold tasks with different due dates
-    let pastTasks = [];
-    let todayTasks = [];
-    let tomorrowTasks = [];
-    let thisWeekTasks = [];
-    let futureTasks = [];
+    useEffect(() => {
+        // If there are tasks, sort them and set TaskGroup component for each due date
+        if (tasks.length > 0) {
+            let sortedTasksDisplay = [];
+            
+            let taskDueDates = sortTasksByDueDate(tasks);
 
-    // Puts a task into the appropriate array based on the priority of the task
-    const sortByDate = (task) => {
-        // Find the difference in ms between today and the dueDate
-        let daysUntilDue = getDayDifference(task.allDay.endDate)
-
-        if (daysUntilDue < 0) {
-            pastTasks.push(task);
-        } else if (daysUntilDue === 0) {
-            todayTasks.push(task);
-        } else if (daysUntilDue === 1) {
-            tomorrowTasks.push(task);
-        } else if (daysUntilDue <= 7) {
-            thisWeekTasks.push(task);
-        } else {
-            futureTasks.push(task);
-        }
-    }
+            for (let taskDueDateGroup in taskDueDates) {
+                sortedTasksDisplay = [...sortedTasksDisplay, <TaskGroup key={taskDueDateGroup} tasks={taskDueDates[taskDueDateGroup]} />]
+            }
     
-    // Iterating through all of the tasks and using the sorting function
-    for (let task of tasks) {
-        sortByDate(task);
-    }
-
-    // Creating an array of arrays, where each inner array represents a specific dueDate category
-    let collectedTasks = [
-        {
-            header: 'Past Due',
-            headerColor: 'red',
-            sortedTasks: pastTasks
-        },
-        {
-            header: 'Due Today',
-            headerColor: 'orange',
-            sortedTasks: todayTasks
-        },
-        {
-            header: 'Due Tomorrow',
-            headerColor: 'yellow',
-            sortedTasks: tomorrowTasks
-        },
-        {
-            header: 'Due Within the Next 7 Days',
-            headerColor: 'lightblue',
-            sortedTasks: thisWeekTasks
-        },
-        {
-            header: 'Future Due Dates',
-            headerColor: 'lightgray',
-            sortedTasks: futureTasks
-        },
-    ]
-    
-    let displayTasks = collectedTasks.map((taskGroup, index) => {
-        return (
-            <TaskGroup key={index} tasks={taskGroup} />
-        )
-    })
+            setDisplayTasks(sortedTasksDisplay);
+        } 
+    }, [tasks])
 
     return (
         <div>

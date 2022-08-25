@@ -10,23 +10,15 @@ import Settings from "./settings/Settings";
 import NavMenu from "./nav/NavMenu";
 
 // Called from App.js
-const DisplayContainer = (props) => {
+const DisplayContainer = ({ isTask, isEvent, viewType }) => {
     const navigate = useNavigate();
 
     const { currentUser } = useContext(CurrentUser);
 
-    const { isTask, isEvent, viewType } = props;
-
-    // Use state to ensure other components won't be rendered until settings are loaded
     let [settings, setSettings] = useState(null);
-    let [settingsLoaded, setSettingsLoaded] = useState(false);
+    let [areSettingsLoaded, setAreSettingsLoaded] = useState(false);
 
     useEffect(() => {
-        // Settings have been fetched, so set flag
-        if (settings !== null) {
-            setSettingsLoaded(true);
-        }
-
         // If user doesn't have a current session, redirect to the login view
         if (currentUser === null) {
             UserDataService.CheckSessionUser().then(res => {
@@ -35,17 +27,24 @@ const DisplayContainer = (props) => {
                 }
             })
         } 
+
+        // If settings are null, get them
+        if (settings === null) {
+            SettingsDataService.GetSettings().then(res => {
+                setSettings(res.data.settings);
+            })
+        }
+    }, [])
+
+    useEffect(() => {
+        // Settings retrieved, so set flag to display NavMenu and selected view
+        if (settings !== null && !areSettingsLoaded) {
+            setAreSettingsLoaded(true);
+        }
     }, [settings])
 
-    // If settings haven't been fetched, retrieve them
-    if (settings === null) {
-        SettingsDataService.GetSettings().then(res => {
-            setSettings(res.data.settings);
-        })
-    }
-
     // Return the NavMenu with the selected view
-    const displayView = () => {
+    const displayNavAndView = () => {
         return (
             <>
                 <NavMenu 
@@ -78,7 +77,7 @@ const DisplayContainer = (props) => {
     // If the settings are loaded display the view
     return (
         <>
-            {settingsLoaded === true  ? displayView() : ""}
+            {areSettingsLoaded ? displayNavAndView() : ""}
         </>
     )
 }

@@ -4,7 +4,7 @@ import GroupDataService from "../../services/groupDataService";
 import UserDataService from "../../services/userDataService";
 
 const InviteUser = (props) => {
-    const {group, setNewInviteFlag} = props;
+    const {group} = props;
 
     let groupId = group._id;
 
@@ -42,8 +42,6 @@ const InviteUser = (props) => {
         }
 
         GroupDataService.InviteGroupMember(data);
-
-        setNewInviteFlag(true);
     }
 
     const handleSearch = (e) => {

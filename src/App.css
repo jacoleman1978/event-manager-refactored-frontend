@@ -24,6 +24,120 @@ p {
   margin-bottom: 0rem;
 }
 
+strong {
+  margin-right: 0.25rem;
+}
+
+.flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top-bottom-margins {
+  margin: 1rem 0rem;
+}
+
+.flex-left-center-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-style {
+  display: flex;
+  margin-top: 5px;
+  padding-bottom: 0.5rem;
+  background-color: tan;
+}
+
+.title {
+  text-align: center;
+  text-decoration: underline;
+  font-size: larger;
+  font-weight: bold;
+  margin-bottom: 0rem;
+}
+
+.sm-bottom-padding {
+  padding-bottom: 0.5rem;
+}
+
+.card-container {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: antiquewhite;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: solid black 1px;
+  border-radius: 0.5rem;
+}
+
+.remove-bottom-margin {
+  margin-bottom: 0rem;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-right: 0.5rem;
+}
+
+.dropdown-width {
+  width: 9rem;
+}
+
+.flex-col-center-left-no-gap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  gap: 0rem;
+  margin-bottom: 0rem;
+}
+
+.left-margin {
+  margin-left: 1rem;
+}
+
+.flex-center-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.flex-left-center-no-gap {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 0rem;
+}
+
+.new-simple-task {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid black 1px;
+  border-radius: 4rem;
+  margin: 0rem 3rem;
+  padding: 1rem 3rem;
+  width: 30rem;
+  background-color: antiquewhite;
+}
+
+
+
+
+
+
+
 .group-container {
   display: flex;
   flex-direction: column;
@@ -49,33 +163,10 @@ p {
   border-radius: 0.5rem;
 }
 
-.flex-center-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.flex-left-center-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  align-items: center;
-  gap: 1rem;
-}
-
 .flex-left-center-no-gap {
   display: flex;
   justify-content: left;
   align-items: center;
-}
-
-.title {
-  text-align: center;
-  text-decoration: underline;
-  font-size: larger;
-  font-weight: bold;
-  margin-bottom: 0rem;
 }
 
 .border {
@@ -95,13 +186,6 @@ p {
   justify-content: left;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0rem;
-}
-
-.flex-left-center-no-gap {
-  display: flex;
-  justify-content: left;
-  align-items: center;
   margin-bottom: 0rem;
 }
 
@@ -129,26 +213,8 @@ p {
   width: 10rem;
 }
 
-.flex-centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.dropdown-width {
-  width: 9rem;
-}
-
 .active {
   background-color: darkseagreen !important;
-}
-
-.form-label {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  margin-right: 0.5rem;
 }
 
 .checkbox-list {
@@ -212,37 +278,6 @@ p {
 .flex-right {
   display: flex;
   justify-content: right;
-  background-color: antiquewhite;
-}
-
-.card-style {
-  display: flex;
-  margin-top: 5px;
-  padding-bottom: 0.5rem;
-  background-color: tan;
-}
-
-.card-container {
-  display: flex;
-  justify-content: left;
-  flex-wrap: wrap;
-  gap: 2rem;
-  background-color: antiquewhite;
-  margin: 0.5rem;
-  padding: 0.5rem 1rem;
-  border: solid black 1px;
-  border-radius: 0.5rem;
-}
-
-.new-simple-task {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: solid black 1px;
-  border-radius: 4rem;
-  margin: 0rem 3rem;
-  padding: 1rem 3rem;
-  width: 30rem;
   background-color: antiquewhite;
 }
 

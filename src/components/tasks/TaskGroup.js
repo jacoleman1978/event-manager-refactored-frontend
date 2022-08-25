@@ -2,9 +2,7 @@ import React from "react";
 import TaskRow from "./TaskRow";
 
 // Called by TasksByDueDate.js and TasksByPriority.js
-const TaskGroup = (props) => {
-    const {tasks} = props;
-
+const TaskGroup = ({tasks}) => {
     // tasksList will be filled in the conditional below
     let tasksDisplay =[];
 
@@ -29,14 +27,9 @@ const TaskGroup = (props) => {
         ];
     }
 
-    // Style for the GroupTask
-    const groupStyle = {
-        margin: "1rem 0rem"
-    }
-
     // headerStyle was passed in as prop from TaskList and determines the background color of each header.
     return (
-        <div style={groupStyle}>
+        <div className="top-bottom-margins">
             <div style={headerStyle}>
                 {tasks.header}
             </div>

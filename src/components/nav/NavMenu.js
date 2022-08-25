@@ -3,80 +3,24 @@ import { Navbar, Button, Nav, NavDropdown } from "react-bootstrap";
 import { CurrentUser } from "../../contexts/currentUser";
 import UserDataService from "../../services/userDataService";
 import ViewBtns from "./ViewBtns";
+import getDefaultTasksPath from "./helpers/getDefaultTasksPath";
+import getDefaultEventsPath from "./helpers/getDefaultEventsPath";
+import getActiveView from "./helpers/getActiveView";
 
-const NavMenu = (props) => {
-    // Store current user session after successful login
+// Called from DisplayContainer.js
+const NavMenu = ({ isTask, isEvent, viewType, settings }) => {
     const {currentUser, setCurrentUser} = useContext(CurrentUser);
-
-    // Props
-    const { isTask, isEvent, viewType, settings } = props;
 
     useEffect(() => {
         UserDataService.CheckSessionUser().then(res => setCurrentUser(res.data));
-    }, [setCurrentUser])
+    }, [])
+
+    // Sets display option for View and highlights active Nav button, if applicaple
+    let {dropdownTitle, defaultActive} = getActiveView(isTask, isEvent, viewType);
     
-    // When logout button is clicked, clear the session
-    const handleLogoutClick = () => {
-        UserDataService.Logout();
-    };
-
-    let dropdownTitle = '';
-    let defaultActive = '';
-    let defaultTasksPath = '';
-    let defaultEventsPath = '';
-
-    if (settings !== null) {
-        let defaultViews = settings.views;
-        if (defaultViews.tasks === 'By Priority') {
-            defaultTasksPath = '/tasks/priority';
-        } else if (defaultViews.tasks === 'By Due Date') {
-            defaultTasksPath = '/tasks/duedate';
-        }
-
-        if (defaultViews.events === 'By List') {
-            defaultEventsPath = '/events/list/0';
-        } else if (defaultViews.events === 'By Day') {
-            defaultEventsPath = '/events/day/0';
-        } else if (defaultViews.events === 'By Week') {
-            defaultEventsPath = '/events/week/0';
-        }
-    }
-
-    if (isTask === true) {
-        dropdownTitle = 'Tasks';
-
-        if (viewType === 'priority') {
-            defaultActive = '/tasks/priority';
-        } else if (viewType === 'duedate') {
-            defaultActive = '/tasks/duedate';
-        } else if (viewType === 'new') {
-            defaultActive = '/tasks/new';
-        }
-
-    } else if (isEvent === true) {
-        dropdownTitle = 'Events';
-
-        if (viewType === 'list') {
-            defaultActive = '/events/list/0';
-        } else if (viewType === 'overview') {
-            defaultActive = '/events/overview/0';
-        } else if (viewType === 'day') {
-            defaultActive = '/events/day/0';
-        } else if (viewType === 'new') {
-            defaultActive = '/events/new/0'
-        } else if (viewType === 'week') {
-            defaultActive = '/events/week/0'
-        }
-
-    } else if (viewType === 'groups') {
-        dropdownTitle = "Groups";
-    } else if (viewType === 'settings') {
-        dropdownTitle = 'Settings';
-    }
-
-    const btnStyle = {
-        marginLeft: "0.5rem"
-    }
+    // Use default setting values to set redirection path when Events or Tasks are selected from View: dropdown menue
+    let defaultTasksPath = getDefaultTasksPath(settings.views.tasks);
+    let defaultEventsPath = getDefaultEventsPath(settings.views.events);
     
     return (
         <Navbar expand='lg'>
@@ -94,23 +38,27 @@ const NavMenu = (props) => {
                     <ViewBtns 
                         isTask={isTask} 
                         isEvent={isEvent} 
-                        
                     />
                 </Nav>
                 
             </Navbar.Collapse>
-            {currentUser !== null ? <>{currentUser.fullName}</> : ""}
 
-            {currentUser !== null ? 
-                <Button 
-                    style={btnStyle}
-                    variant="primary" 
-                    type="button" 
-                    onClick={handleLogoutClick} 
-                    href='/auth/login'
-                >
-                    Logout
-                </Button> : ""}
+            <div className="flex-centered">
+                {currentUser !== null ? <>{currentUser.fullName}</> : ""}
+
+                {currentUser !== null ? 
+                    <Button 
+                        className="logout-btn"
+                        variant="danger" 
+                        type="button" 
+                        onClick={UserDataService.Logout} 
+                        href='/auth/login'
+                    >
+                        Logout
+                    </Button> : ""
+                }
+            </div>
+
         </Navbar>
     )
 }

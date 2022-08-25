@@ -7,7 +7,7 @@ const CardTitleWithList = (props) => {
     return (
         <>
             <Card.Text className="flex-left-center-no-gap">
-                <strong>{title}</strong>: {list.length === 0 ? "None" : ""}
+                <strong>{title}:</strong> {list.length === 0 ? "None" : ""}
             </Card.Text>
 
             {list.length > 0 ? <ul> {list} </ul>: ""}

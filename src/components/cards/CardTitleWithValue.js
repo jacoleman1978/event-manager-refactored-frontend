@@ -6,7 +6,7 @@ const CardTitleWithValue = (props) => {
 
     return (
         <Card.Text className="flex-left-center-no-gap">
-            <strong>{title}</strong>: {value}
+            <strong>{title}:</strong> {value}
         </Card.Text>
     )
 }

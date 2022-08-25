@@ -5,7 +5,7 @@ import InviteUser from "./InviteUser";
 
 const EditGroup = (props) => {
     // Get props
-    const {group, newInviteFlag, setNewInviteFlag} = props;
+    const {group} = props;
 
     let [groupName, setGroupName] = useState(group.name);
     let [changedPermissionList, setPermission] = useState([]);
@@ -13,6 +13,7 @@ const EditGroup = (props) => {
     let [groupViewersList, setViewersList] = useState([]);
     let [groupInvitedList, setInvitedList] = useState([]);
     let [usersToRemoveList, setUsersToRemove] = useState([]);
+    let [updateToggle, setUpdateToggle] = useState(false);
 
     let usersToRemove = [];
 
@@ -59,8 +60,6 @@ const EditGroup = (props) => {
     const makeInviteesList = (groupInvitations) => {
         const invitees = groupInvitations.map((inviteeId) => {
             let userId = inviteeId._id
-
-            setNewInviteFlag(false);
     
             return (
                 <li key={`${inviteeId.userName}`} className="list-items">
@@ -87,16 +86,15 @@ const EditGroup = (props) => {
             makeUserList(group.viewerIds, 'Viewer');
         }
         
-
-        if (newInviteFlag === true) {
-            GroupDataService.GetGroupById(group._id).then(res => 
-                makeInviteesList(res.data.groupDoc.inviteeIds)    
-            )
-        }
-    }, [newInviteFlag])
+        GroupDataService.GetGroupById(group._id).then(res => 
+            makeInviteesList(res.data.groupDoc.inviteeIds)    
+        )
+    }, [updateToggle])
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        setUpdateToggle(!updateToggle);
 
         let data = {
             groupId: group._id,
@@ -190,7 +188,7 @@ const EditGroup = (props) => {
 
                 <InviteUser 
                     group={group} 
-                    setNewInviteFlag={setNewInviteFlag}
+
                 />
             </div>
         </div>

@@ -1,8 +1,7 @@
 import React from "react";
 
-const SimpleView = (props) => {
-    let {event} = props;
-
+// Called from TaskRow.js
+const SimpleView = ({event}) => {
     return (
         <>
             <div key={`${event._id}-simple`}  >

@@ -7,11 +7,8 @@ import Priority from "../form/Priority";
 import EndDate from "../form/EndDate";
 import Notes from "../form/Notes";
 
-const NewSimpleTask = (props) => {
-    // Get props
-    let {settings} = props;
-
-    // Use state to keep track of info entered into the form
+// Called from TasksByPriority.js and TasksByDueDate.js
+const NewSimpleTask = ({settings}) => {
     let [formTitle, setTitle] = useState("");
     let [formPriority, setPriority] = useState(settings.task.priority);
     let [formEndDate, setEndDate] = useState(getDefaultDate(settings.allDay.endDate));

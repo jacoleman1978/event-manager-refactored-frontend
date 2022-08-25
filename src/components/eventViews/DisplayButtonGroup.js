@@ -3,17 +3,17 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import EventDataService from "../../services/eventDataService";
 
-const DisplayButtonGroup = (props) => {
-    let {event, type} = props;
-
+// Called from DetailedView.js
+const DisplayButtonGroup = ({event, type}) => {
     const navigate = useNavigate();
 
+    // TODO: Archive the event
     const completeEvent = (e) => {
         e.preventDefault();
         EventDataService.DeleteEvent(event._id);
     }
 
-    const editEvent = (e) => {
+    const editEvent = () => {
         navigate(`/${type}s/edit/${event._id}`);
     }
 

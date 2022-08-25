@@ -5,16 +5,17 @@ import DisplayButtonGroup from "./DisplayButtonGroup";
 import { CurrentUser } from '../../contexts/currentUser';
 import CardTitleWithValue from "../cards/CardTitleWithValue";
 import CardTitleWithList from "../cards/CardTitleWIthList";
+import CardTitleWithValueNextLine from "../cards/CardTitleWithValueNextLine";
 
-const DetailedView = (props) => {  
-    let {event, type, isWeek} = props;
-
+// Called from TaskRow.js
+const DetailedView = ({event, type, isWeek}) => {  
     const { currentUser } = useContext(CurrentUser);
 
     // Format the start and end dates for display
     let startDate = getDisplayDateFormated(event.allDay.startDate);
     let endDate = getDisplayDateFormated(event.allDay.endDate);
 
+    // Generate list items for display of group names
     let groupList = event.groupIds.map((group) => {
         return (
             <li key={group._id}>
@@ -23,14 +24,17 @@ const DetailedView = (props) => {
         )
     })
 
+    // Get full name of event owner
     let ownerName = (event) => {
         return (
             `${event.ownerId.firstName} ${event.ownerId.lastName}`
         )
     }
 
+    // Filter out the event owner from the event editorIds
     let editors = event.editorIds.filter((editor) => editor._id !== event.ownerId._id)
 
+    // Generate list items for display of event editor names
     let editorList = editors.map((editor) => {
         return (
             <li key={editor._id}>
@@ -39,6 +43,7 @@ const DetailedView = (props) => {
         )
     })
 
+    // Generate list items for display of event viewer names
     let viewerList = event.viewerIds.map((viewer) => {
         return (
             <li key={viewer._id}>
@@ -48,6 +53,7 @@ const DetailedView = (props) => {
     })
 
     // Determine if the current user is listed as the owner or an editor of the event
+    // Used to determine whether complete, edit and delete buttons are shown for the event
     const isEventEditor = () => {
         let eventEditors = [event.ownerId._id];
 
@@ -66,46 +72,44 @@ const DetailedView = (props) => {
         return false
     }
 
-    let cardStyle = {};
-
-    if (isWeek === true) {
-        cardStyle["width"] = "13rem";
-    }
-
     return (
-        <div className="flex-left-center-wrap" key={`${event._id}-detailed`} style={cardStyle}>
+        <div className="flex-left-center-wrap" key={`${event._id}-detailed`} style={isWeek ? {width: "13rem"} : {}}>
             <Card key={event._id} className="card-style" >
                 <Card.Title className="title">{event.title}</Card.Title>
                     <hr />
-                <Card.Body className="card-container">
-                    <div>
-                        {type === "task" ? <CardTitleWithValue title={"Priority"} value={event.task.priority} /> : ""}
+                <Card.Body className="sm-bottom-padding">
+                    <div className="card-container">
+                        <div>
+                            {type === "task" ? <CardTitleWithValue title={"Priority"} value={event.task.priority} /> : ""}
 
-                        <CardTitleWithValue title={"Start Date"} value={startDate} />
-                        
-                        <CardTitleWithValue title={"End Date"} value={endDate} />
+                            <CardTitleWithValueNextLine title={"Start Date"} value={startDate} />
 
-                        <CardTitleWithValue title={"Start Time"} value={event.allDay.startTime} />
+                            <CardTitleWithValueNextLine title={"End Date"} value={endDate} />
 
-                        <CardTitleWithValue title={"End Time"} value={event.allDay.endTime} />
+                            <CardTitleWithValue title={"Start Time"} value={event.allDay.startTime} />
 
+                            <CardTitleWithValue title={"End Time"} value={event.allDay.endTime} />
+
+                        </div>
+
+                        <div>
+                            <CardTitleWithValue title={"Owner"} value={ownerName(event)} />
+
+                            <CardTitleWithList title={"Editors"} list={editorList} />
+
+                            <CardTitleWithList title={"Viewers"} list={viewerList} />
+
+                        </div>
+
+                        <div>
+                            <CardTitleWithList title={"Groups"} list={groupList} />
+                        </div>
+                    </div>
+
+                    <div className="card-container remove-bottom-margin">
                         <CardTitleWithValue title={"Notes"} value={event.notes} />
-
                     </div>
-
-                    <div className="flex-col-center-left-no-gap">
-                        <CardTitleWithValue title={"Owner"} value={ownerName(event)} />
-
-                        <CardTitleWithList title={"Editors"} list={editorList} />
-
-                        <CardTitleWithList title={"Viewers"} list={viewerList} />
-
-                    </div>
-
-                    <div>
-                        <CardTitleWithList title={"Groups"} list={groupList} />
-                    </div>
-
+                    
                 </Card.Body>
                 {isEventEditor() ? <DisplayButtonGroup event={event} type={type} /> : ""}
             </Card>
