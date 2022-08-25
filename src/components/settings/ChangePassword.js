@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Form, Button } from "react-bootstrap";
 import UserDataService from "../../services/userDataService";
+import PasswordInput from "./PasswordInput";
 
 const ChangePassword = () => {
     // Use state to keep track of info entered into the form
@@ -35,39 +36,11 @@ const ChangePassword = () => {
         <div className="group-container">
             <p className="flex-left-bold">Change Password:</p>
             <Form onSubmit={handleSubmit} >
-                <Form.Group controlId="formCurrentPwd" className="flex-left-center">
-                    <Form.Label>Current:</Form.Label>
-                    <Form.Control
-                        required
-                        className="input-width"
-                        type="password"
-                        aria-describedby="Enter current password"
-                        placeholder="Enter current password"
-                        onChange={(e) => setCurrentPwd(e.target.value)}
-                    />
-                </Form.Group>
+                <PasswordInput label={"Current"} setPassword={setCurrentPwd} />
 
-                <Form.Group controlId="formNewPwd" className="flex-left-center">
-                    <Form.Label>New Password:</Form.Label>
-                    <Form.Control 
-                        type="password"
-                        className="input-width"
-                        placeholder="Enter new password"
-                        onChange={(e) => setNewPwd(e.target.value)}
-                        required
-                    />
-                </Form.Group>
+                <PasswordInput label={"New"} setPassword={setNewPwd} />
 
-                <Form.Group controlId="formVerifyNewPwd" className="flex-left-center">
-                    <Form.Label>Verify Password:</Form.Label>
-                    <Form.Control 
-                        type="password"
-                        className="input-width"
-                        placeholder="Verify new password"
-                        onChange={(e) => setVerifyNewPwd(e.target.value)}
-                        required
-                    />
-                </Form.Group>
+                <PasswordInput label={"Verify"} setPassword={setVerifyNewPwd} />
                 
                 {passwordErrorFlag ? passwordMismatchErrorMessage : ""}
 

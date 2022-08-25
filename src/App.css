@@ -131,13 +131,6 @@ strong {
   width: 30rem;
   background-color: antiquewhite;
 }
-
-
-
-
-
-
-
 .group-container {
   display: flex;
   flex-direction: column;
@@ -150,6 +143,30 @@ strong {
   border-radius: 0.5rem;
   width: 30rem;
 }
+
+.flex-left-bold {
+  display: flex;
+  justify-content: left;
+  font-weight: bold;
+  margin-bottom: 0rem;
+}
+
+.flex-left-center {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0rem;
+}
+
+
+
+
+
+
+
+
+
 
 .new-doc-container {
   display: flex;
@@ -181,27 +198,12 @@ strong {
   gap: 0.5rem;
 }
 
-.flex-left-center {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0rem;
-}
-
 .flex-col-center-left {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: left;
   gap: 0.5rem;
-  margin-bottom: 0rem;
-}
-
-.flex-left-bold {
-  display: flex;
-  justify-content: left;
-  font-weight: bold;
   margin-bottom: 0rem;
 }
 

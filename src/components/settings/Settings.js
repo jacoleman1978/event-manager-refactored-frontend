@@ -5,13 +5,9 @@ import ChangePassword from "./ChangePassword";
 import { CurrentUser } from "../../contexts/currentUser";
 import SettingsDataService from "../../services/settingsDataService";
 
-
-const Settings = (props) => {
-    // Get currentUser from context
+// Called from DisplayContainer.js
+const Settings = ({settings, setSettings}) => {
     const { currentUser } = useContext(CurrentUser);
-
-    // State for user settings
-    let {settings, setSettings} = props;
 
     useEffect(() => {
         if (settings === null) {    
