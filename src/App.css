@@ -113,6 +113,12 @@ strong {
   gap: 1rem;
 }
 
+.flex-center-wrap-no-gap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .flex-left-center-no-gap {
   display: flex;
   justify-content: left;

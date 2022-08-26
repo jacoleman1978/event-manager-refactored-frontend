@@ -2,10 +2,9 @@ import React from "react";
 import GroupMembership from "./GroupMemberShip";
 import EditGroup from "./EditGroup";
 
-const OwnedGroup = (props) => {
-    // Get props
-    const {group, editFlag} = props;
-
+// Called from Groups.js
+const OwnedGroup = ({group, editFlag}) => {
+    // The editFlag toggles between the Edit Event Form and a group card
     return (
         <>
             {editFlag === true ? 

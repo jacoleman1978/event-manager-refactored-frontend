@@ -7,10 +7,10 @@ import GroupMembership from "./GroupMemberShip";
 import GroupInvitations from "./GroupInvitations";
 import NewGroupForm from "./NewGroupForm";
 
-const Groups = (props) => {
+// Called from DisplayContainer.js
+const Groups = () => {
     const { currentUser } = useContext(CurrentUser);
 
-    // Use State for data pulled from database
     let [ownedGroup, setOwnedGroup] = useState([]);
     let [groupMemberships, setGroupMemberships] = useState([]);
     let [groupInvitations, setGroupInvitations] = useState([]);
@@ -26,28 +26,24 @@ const Groups = (props) => {
         }
     }, [currentUser])
 
+    // Generate a display list of groups owned by the user
     let ownedGroups = ownedGroup.map((group, i) => {
         return (
-            <OwnedGroup group={group} editFlag={editFlag}  key={`owned-${i}`}/>
+            <OwnedGroup group={group} editFlag={editFlag} key={`owned-${i}`}/>
         )
     });
 
+    // Generate a display list of groups that the user is a member of, but does not own
     let membershipList = groupMemberships.map((group, i) => {
         return (
             <GroupMembership group={group} key={`member-${i}`}/>
         )
     });
 
-    const groupSectionStyle = {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center"
-    }
-
     return (
         <div>
             <p className="title">Group Invitations</p>
-            <div style={groupSectionStyle}>
+            <div className="flex-center-wrap-no-gap">
                 <GroupInvitations groupInvitations={groupInvitations} />
             </div>
 
@@ -68,17 +64,16 @@ const Groups = (props) => {
                 </div>
             </div>
 
-            <div style={groupSectionStyle}>
+            <div className="flex-center-wrap-no-gap">
                 {ownedGroups}
             </div>
             
             <p className="title">Group Membership</p>
-            <div style={groupSectionStyle}>
+            <div className="flex-center-wrap-no-gap">
                 {membershipList}
             </div>
 
-        </div>
-        
+        </div> 
     )
 }
 
