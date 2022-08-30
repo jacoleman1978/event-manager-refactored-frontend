@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { CurrentUser } from '../../contexts/currentUser';
 import GroupDataService from "../../services/groupDataService";
 import OwnedGroup from "./OwnedGroup";
-import GroupMembership from "./GroupMemberShip";
+import GroupMembership from "./GroupMembership";
 import GroupInvitations from "./GroupInvitations";
 import NewGroupForm from "./NewGroupForm";
 

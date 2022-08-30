@@ -1,26 +1,23 @@
 import React, {useState} from "react";
 import { Form, Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
+import TextInputWrapper from "../form/TextInputWrapper";
 
 const NewGroupForm = () => {
     let [groupName, setGroupName] = useState("");
-
-    const handleCreateGroup = () => {
-        GroupDataService.NewGroup({groupName: groupName});
-    }
 
     return (
         <div>
             <p className="title">Create a New Group</p>
             <Form className="group-container">
+                
                 <Form.Group className="flex-left-center">
-                    <Form.Label className="flex-left-bold">Name:</Form.Label>
-                    <Form.Control className="input-width" onChange={(e) => setGroupName(e.target.value)}/>
+                    <TextInputWrapper label={"Name"} defaultValue={""} setStateValue={setGroupName} />
                     <Button 
                         size="sm"
                         variant="success" 
                         type="button"
-                        onClick={() => handleCreateGroup()}
+                        onClick={() => GroupDataService.NewGroup({groupName: groupName})}
                     >
                         Create Group
                     </Button>

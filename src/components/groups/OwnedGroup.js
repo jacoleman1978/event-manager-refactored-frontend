@@ -1,5 +1,5 @@
 import React from "react";
-import GroupMembership from "./GroupMemberShip";
+import GroupMembership from "./GroupMembership";
 import EditGroup from "./EditGroup";
 
 // Called from Groups.js

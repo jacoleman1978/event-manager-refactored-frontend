@@ -25,7 +25,7 @@ p {
 }
 
 strong {
-  margin-right: 0.25rem;
+  margin-right: 0.03rem;
 }
 
 .flex-centered {
@@ -150,6 +150,18 @@ strong {
   width: 30rem;
 }
 
+.group-container-no-set-width {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  background-color: antiquewhite;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: solid black 1px;
+  border-radius: 0.5rem;
+}
+
 .flex-left-bold {
   display: flex;
   justify-content: left;
@@ -165,7 +177,9 @@ strong {
   margin-bottom: 0rem;
 }
 
-
+.small-gap {
+  gap: 0.5rem;
+}
 
 
 

@@ -1,57 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
+import getFullUserName from "./helpers/getFullUserName";
 
-const GroupInvitations = (props) => {
-    // Get props
-    const {groupInvitations} = props;
-
-    let [inviteFlag, setInviteFlag] = useState(false);
-
-    useEffect(() => {
-        if (inviteFlag === true) {
-
-        }
-    }, [inviteFlag])
-
-    const handleAcceptInvite = (groupId) => {
-        setInviteFlag(true);
-        GroupDataService.AcceptGroupInvite(groupId);
-        setInviteFlag(false)
-    }
-
-    const listStyle = {
-        display: "flex",
-        marginBottom: "0.5rem",
-        gap: "0.3rem"
-    }
-
-    const buttonStyle = {
-        marginRight: "0.5rem"
-    }
-
-    let invitationList = groupInvitations.map((group, i) => {
-        let owner = `${group.ownerId.firstName} ${group.ownerId.lastName}`;
-
+const GroupInvitations = ({groupInvitations}) => {
+    let invitationList = groupInvitations.map((group) => {
         return (
-            <div style={listStyle} key={group.name}>
+            <div className="flex-left-center" key={group.name}>
                 <Button 
                     size="sm"
                     variant="primary" 
                     type="button"
-                    onClick={() => handleAcceptInvite({groupId: group._id})}
-                    style={buttonStyle}
+                    onClick={() => GroupDataService.AcceptGroupInvite({groupId: group._id})}
                 >
-                    Accept
+                    Accept Invitation
                 </Button>
-                <strong>{group.name}</strong>
-                {` owned by ${owner}`}
+
+                <p>
+                    From <strong>{group.name}</strong> Group
+                    {` owned by ${getFullUserName(group.ownerId)}`}
+                </p>
+
             </div>
         )
     });
 
     return (
-        <div className="group-container">
+        <div className="group-container-no-set-width small-gap">
             {invitationList.length > 0 ? invitationList : "None"}
         </div>
     )
