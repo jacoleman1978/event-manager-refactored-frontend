@@ -1,10 +1,10 @@
 /*
--onChange handler of remove checkboxes
+-onChange handler of checkboxes
 -Adds the userId to addId if a user's remove box is checked.
 -Adds the userId to removeId if a user's box is unchecked.
 -Returns the checkboxAction object.
 */
-const handleRemoveCheckboxChange = (userId, e) => {
+const handleCheckboxChange = (userId, e) => {
     let checkboxAction = {
         addId: "",
         removeId: ""
@@ -20,4 +20,4 @@ const handleRemoveCheckboxChange = (userId, e) => {
     return checkboxAction
 }
 
-export default handleRemoveCheckboxChange;
+export default handleCheckboxChange;

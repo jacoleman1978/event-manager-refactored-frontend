@@ -15,7 +15,6 @@ const ViewBtns = ({isTask, isEvent}) => {
         } else if (isEvent) {
             return (
                 <>
-                    <Nav.Link href='/events/list/0'>By List</Nav.Link>
                     <Nav.Link href='/events/week/0'>By Week</Nav.Link>
                     <Nav.Link href='/events/day/0'>By Day</Nav.Link>
                     <Nav.Link href='/events/new'>New Event</Nav.Link>

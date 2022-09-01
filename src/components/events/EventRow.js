@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import SimpleView from "../eventViews/SimpleView";
 import DetailedView from "../eventViews/DetailedView";
 
-const EventRow = (props) => {
-    const {event, isWeek} = props;
-
+// Called from WeekGroup.js
+const EventRow = ({event, isWeek}) => {
     // Set state for which view to display. view State changed by clicking on a list item.
     let [isSimpleView, setView] = useState(true);
 

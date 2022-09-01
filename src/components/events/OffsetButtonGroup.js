@@ -2,13 +2,12 @@ import React from "react";
 import PreviousBtn from "./PreviousBtn";
 import NextBtn from "./NextBtn";
 
-const OffsetButtonGroup = (props) => {
-    let {viewType, nextPrevBtnFlag, setNextPrevBtnFlag} = props;
-
+// Called from EventsByDay.js and EventsByWeek.js
+const OffsetButtonGroup = ({viewType}) => {
     return (
         <div className="offset-btn-group">
-            <PreviousBtn viewType={viewType} nextPrevBtnFlag={nextPrevBtnFlag} setNextPrevBtnFlag={setNextPrevBtnFlag} />
-            <NextBtn viewType={viewType} nextPrevBtnFlag={nextPrevBtnFlag} setNextPrevBtnFlag={setNextPrevBtnFlag} />
+            <PreviousBtn viewType={viewType}/>
+            <NextBtn viewType={viewType}/>
         </div>
     )
 }

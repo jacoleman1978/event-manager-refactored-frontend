@@ -4,6 +4,7 @@ const getSortedEventsByUser = (dateRange, events, currentUser) => {
     if (events.length === 0) {
         return {}
     }
+
     let eventsByUser = {}
     eventsByUser[currentUser.userId] = {events: [], userName: currentUser.userName, fullName: currentUser.fullName, userId: currentUser.userId};
 

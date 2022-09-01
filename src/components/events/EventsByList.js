@@ -1,11 +1,10 @@
 import React from "react";
 import EventGroup from "./EventGroup";
+import OffsetButtonGroup from "./OffsetButtonGroup";
 import getSortedEventsByWeek from "../../helpers/getSortedEventsByWeek";
 
-const EventsByList = (props) => {
-    // Get props
-    let {events, dateRange, offsetBy} = props;
-    
+// Called from Events.js
+const EventsByList = ({events, dateRange, offsetBy, viewType}) => {    
     let sortedEvents = getSortedEventsByWeek(events, dateRange);
 
     // Define titles of day headers
@@ -36,6 +35,7 @@ const EventsByList = (props) => {
     return (
         <div>
             {groupEventsList}
+            <OffsetButtonGroup viewType={viewType}/>
         </div>
     )
 }

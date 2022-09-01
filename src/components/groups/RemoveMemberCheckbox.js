@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import handleRemoveCheckboxChange from "./helpers/handleRemoveCheckboxChange";
+import handleCheckboxChange from "../../helpers/handleCheckboxChange";
 
 // Called from makeMembersList.js
 const RemoveMemberCheckbox = ({userId, setCheckboxAction}) => {
@@ -9,7 +9,7 @@ const RemoveMemberCheckbox = ({userId, setCheckboxAction}) => {
             type="checkbox"
             id={`${userId}-Remove`}
             label={`Remove`}
-            onChange={(e) => setCheckboxAction(handleRemoveCheckboxChange(userId, e))}
+            onChange={(e) => setCheckboxAction(handleCheckboxChange(userId, e))}
         />
     )
 }

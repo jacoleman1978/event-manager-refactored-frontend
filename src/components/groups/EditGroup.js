@@ -5,7 +5,7 @@ import GroupNameInput from "./GroupNameInput";
 import MembersList from "./MembersList";
 import InvitedList from "./InvitedList";
 import updateGroup from "./helpers/updateGroup";
-import updateMembersToRemove from "./helpers/updateMembersToRemove";
+import updateCheckedUsers from "../../helpers/updateCheckedUsers";
 import updateMemberChange from "./helpers/updateMemberChange";
 
 const EditGroup = ({group}) => {
@@ -17,7 +17,7 @@ const EditGroup = ({group}) => {
 
     useEffect(() => {
         if (checkboxAction.addId !== "" || checkboxAction.removeId !== "") {
-            setUsersToRemove(updateMembersToRemove(checkboxAction, usersToRemoveList));
+            setUsersToRemove(updateCheckedUsers(checkboxAction, usersToRemoveList));
         }
     }, [checkboxAction])
 

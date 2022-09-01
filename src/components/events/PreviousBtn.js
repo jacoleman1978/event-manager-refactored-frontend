@@ -2,12 +2,12 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-const PreviousBtn = (props) => {
-    let {viewType, nextPrevBtnFlag, setNextPrevBtnFlag} = props;
 
+// Called from OffsetButtonGroup.js
+const PreviousBtn = ({viewType}) => {
     let offsetBy = 0;
 
-    if (viewType === 'week' || viewType === 'list') {
+    if (viewType === 'week') {
         let { week } = useParams();
         offsetBy = week;
     } else if (viewType === 'day') {
@@ -18,7 +18,6 @@ const PreviousBtn = (props) => {
     let navigate = useNavigate();
     
     const handlePreviousBtnClick = () => {
-        setNextPrevBtnFlag(!nextPrevBtnFlag);
         navigate(`/events/${viewType}/${parseInt(offsetBy) - 1}`)
     }
     return (

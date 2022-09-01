@@ -1,10 +1,9 @@
 import React from "react";
 import EventRow from "./EventRow";
 
-const WeekGroup = (props) => {
-    const {events} = props;
-
-    // eventssList will be filled in the conditional below
+// Called from Week.js
+const WeekGroup = ({events}) => {
+    // eventsList will be filled in the conditional below
     let eventsList =[];
 
     // If the data passed in has data in it, send each event to the the EventRow React Component. Otherwise pass in an object that will display 'No events found' under the priority.
