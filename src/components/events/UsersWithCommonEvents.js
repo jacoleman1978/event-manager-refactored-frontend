@@ -20,10 +20,10 @@ const UsersWithCommonEvents = ({events, setCheckboxAction, dateRange}) => {
     }, [ currentUser, events, dateRange])
 
     return (
-        <Form>
+        <Form className="week-wrapper">
             <Form.Group>
                 <Form.Label className="flex-left-bold">People With Common Events:</Form.Label>
-                <ul>
+                <ul className="flex-left-center-wrap">
                     {checkboxUsersList.length > 0 ? checkboxUsersList : "None"}
                 </ul>
                     

@@ -85,8 +85,10 @@ const EventsByWeek = ({viewType, currentUser}) => {
         <>
             {checkboxDisplay}
 
-            <WeekHeader offsetBy={offsetBy} />
-            {weeklyDisplay}
+            <div className="week-wrapper">
+                <WeekHeader offsetBy={offsetBy} />
+                {weeklyDisplay}
+            </div>
 
             <OffsetButtonGroup viewType={viewType} />
         </>
