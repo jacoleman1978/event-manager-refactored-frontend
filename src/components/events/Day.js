@@ -1,37 +1,54 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { CurrentUser } from "../../contexts/currentUser";
+import EventDataService from "../../services/eventDataService";
 import Hour from "./Hour";
 import EventGroup from "./EventGroup";
+import getSortedEventsByUser from "../../helpers/getSortedEventsByUser";
 import getSortedEventsByHour from "../../helpers/getSortedEventsByHour";
 
 // Called from EventsByDay.js
-const Day = (props) => {
-    let {day} = useParams();
+const Day = ({dateRange, viewType}) => {
+    const { currentUser } = useContext(CurrentUser);
 
-    let {events} = props;
-
+    let [date, setDate] = useState("");
+    let [reloadToggle, setReloadToggle] = useState(false);
     let [allDayEvents, setAllDayEvents] = useState([]);
     let [timeRangeEvents, setTimeRangeEvents] = useState([]);
     let [hoursDisplay, setHoursDisplay] = useState([]);
 
+    if (date.startDate !== dateRange.startDate) {
+        setDate(dateRange);
+        setReloadToggle(!reloadToggle)
+    }
+
+    // On intial loading of the page, event data is retrieved, sorted and filtered for display
     useEffect(() => {
-        // If there are events, sort them into allDay events and events with a time range
-        if (events.length > 0 ) {
+        EventDataService.GetEvents().then((res) => {
+            let events = res.data.events;
+
+            // Takes the user's events and all the group members of that user and returns an object with userId keys
+            let eventsSortedByUser = getSortedEventsByUser(dateRange, events, currentUser);
+
+            let eventsForDay = eventsSortedByUser[currentUser.userId].events
+
+            // If there are events, sort them into allDay events and events with a time range
             let tempAllDay = [];
             let tempTimeRange = [];
 
-            for (let event of events) {
-                if (event.allDay.isIt) {
-                    tempAllDay = [...tempAllDay, event];
-                } else {
-                    tempTimeRange = [...tempTimeRange, event];
+            if (eventsForDay.length > 0 ) {
+                for (let event of eventsForDay) {
+                    if (event.allDay.isIt) {
+                        tempAllDay = [...tempAllDay, event];
+                    } else {
+                        tempTimeRange = [...tempTimeRange, event];
+                    }
                 }
             }
 
             setAllDayEvents(tempAllDay);
             setTimeRangeEvents(tempTimeRange);
-        }
-    }, [events, day])
+        })
+    }, [reloadToggle])
 
     useEffect(() => {
         let sortedEvents = getSortedEventsByHour(timeRangeEvents);
@@ -66,14 +83,21 @@ const Day = (props) => {
 
         setHoursDisplay(hours)
         
-    }, [day])
+    }, [timeRangeEvents, allDayEvents])
 
-    let headerStyle = {backgroundColor: "cornflowerblue", borderRadius: "0.5rem"};
+    let headerStyle = {
+        backgroundColor: "cornflowerblue", 
+        borderRadius: "0.5rem",
+        margin: "0.5rem 0.5rem 0rem 0.5rem"
+    };
 
     return (
         <>
-            <EventGroup key={"all-day-events"} header={"All Day Events"} data={allDayEvents} headerStyle={headerStyle} />
-            {hoursDisplay}
+            <EventGroup key={"all-day-events"} header={"All Day Events"} data={allDayEvents} headerStyle={headerStyle} viewType={viewType} />
+            <div className="outline sm-top-padding">
+                {hoursDisplay}
+            </div>
+            
         </>
     )
     }

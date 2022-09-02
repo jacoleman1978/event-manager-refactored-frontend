@@ -66,6 +66,10 @@ strong {
   padding-bottom: 0.5rem;
 }
 
+.sm-top-padding {
+  padding-top: 0.5rem;
+}
+
 .card-container {
   display: flex;
   justify-content: left;
@@ -167,6 +171,7 @@ strong {
   justify-content: left;
   font-weight: bold;
   margin-bottom: 0rem;
+  font-size: small;
 }
 
 .flex-left-center {
@@ -188,7 +193,7 @@ strong {
   align-items: left;
   background-color: tan;
   margin: 0.5rem;
-  padding: 0.75rem;
+  padding: 0.35rem;
   border: solid black 1px;
   border-radius: 0.5rem;
 }
@@ -249,12 +254,20 @@ strong {
   display: flex;
   justify-content: left;
   align-items: center;
-  gap: 0.5rem;
   border-radius: 0.5rem;
   font-size: small;
   background-color: antiquewhite;
   padding-left: 0.5rem;
-  margin: 0.25rem;
+}
+
+.outline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid black 1px;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  background-color:floralwhite;
 }
 
 
@@ -323,11 +336,11 @@ strong {
     "thirty thirty"
     "fourty-five fourty-five";
   border: 1px solid black;
-  padding: 0.25rem;
+  padding: 0.35rem;
   border-radius: 0.5rem;
   border-collapse: collapse;
   gap: 3px;
-  margin: 0rem 1rem 0.5rem 1rem;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
   background-color: tan;
 }
 
@@ -336,11 +349,11 @@ strong {
   grid-template-columns: 1fr 6fr;
   grid-template-rows:  1.25rem;
   border: 1px solid black;
-  padding: 0.25rem;
+  padding: 0.35rem;
   border-radius: 0.5rem;
   border-collapse: collapse;
   gap: 3px;
-  margin: 0rem 1rem 0.5rem 1rem;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
   background-color: tan;
 }
 

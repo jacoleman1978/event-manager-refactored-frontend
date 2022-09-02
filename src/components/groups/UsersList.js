@@ -15,7 +15,9 @@ const UsersList = ({userHeader, userDocs}) => {
         <>
             <div className="flex-left-bold">{userHeader}:</div>
             <ul>
-                {users.length > 0 ? users : "None"}
+                {users.length > 0 ? users : <li key={"None"} className="list-items">
+                None
+            </li>}
             </ul>
         </>
     )
