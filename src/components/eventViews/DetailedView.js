@@ -93,7 +93,7 @@ const DetailedView = ({event, type, isWeek}) => {
                         </div>
 
                         <div>
-                            <CardTitleWithValue title={"Owner"} value={ownerName(event)} />
+                            <CardTitleWithValueNextLine title={"Owner"} value={ownerName(event)} />
 
                             <CardTitleWithList title={"Editors"} list={editorList} />
 
