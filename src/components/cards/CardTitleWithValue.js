@@ -5,7 +5,7 @@ const CardTitleWithValue = (props) => {
     let {title, value} = props;
 
     return (
-        <Card.Text className="flex-left-center-no-gap">
+        <Card.Text className="flex-left-center-no-gap xxsmall-gap">
             <strong>{title}:</strong> {value}
         </Card.Text>
     )

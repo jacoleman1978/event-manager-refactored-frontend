@@ -2,12 +2,17 @@ import React from "react";
 import StartDate from "./StartDate";
 import EndDate from "./EndDate";
 
-const DateRange = ({formStartDate, setStartDate, formEndDate, setEndDate}) => {
+const DateRange = ({formStartDate, setStartDate, formEndDate, setEndDate, formAllDay}) => {
     return (
-        <div className="flex-left-center-wrap">
-            <StartDate formStartDate={formStartDate} setStartDate={setStartDate} label={"Start Date: "} />
+        <div className="flex-left-center-wrap xxsmall-gap">
+            <div className="flex-left-center-no-gap outline-inner">
+                <StartDate formStartDate={formStartDate} setStartDate={setStartDate} label={"Start Date: "} />
+            </div>
+            
 
-            <EndDate formEndDate={formEndDate} setEndDate={setEndDate} label={"End Date: "} />
+            <div className="flex-left-center-no-gap outline-inner">
+                <EndDate formEndDate={formAllDay ? formEndDate : formStartDate} setEndDate={setEndDate} label={"End Date: "} />
+            </div>
         </div>
     )
 }

@@ -28,7 +28,7 @@ const Events = ({viewType, settings}) => {
 
         } else if (viewType === 'edit') {
             return <EventForm settings={settings} isEdit={true}/>
-
+    
         }
     }
 

@@ -27,7 +27,10 @@ const DetailedView = ({event, type, isWeek}) => {
     // Get full name of event owner
     let ownerName = (event) => {
         return (
-            `${event.ownerId.firstName} ${event.ownerId.lastName}`
+            <li key={event.ownerId} className="remove-bullet-pt">
+                {`${event.ownerId.firstName} ${event.ownerId.lastName}`}
+            </li>
+            
         )
     }
 
@@ -77,7 +80,7 @@ const DetailedView = ({event, type, isWeek}) => {
             <Card key={event._id} className="card-style" >
                 <Card.Title className="title">{event.title}</Card.Title>
                     <hr />
-                <Card.Body className="sm-bottom-padding">
+                <div className="sm-bottom-padding">
                     <div className="card-container">
                         <div>
                             {type === "task" ? <CardTitleWithValue title={"Priority"} value={event.task.priority} /> : ""}
@@ -93,7 +96,7 @@ const DetailedView = ({event, type, isWeek}) => {
                         </div>
 
                         <div>
-                            <CardTitleWithValueNextLine title={"Owner"} value={ownerName(event)} />
+                            <CardTitleWithList title={"Owner"} list={[ownerName(event)]} />
 
                             <CardTitleWithList title={"Editors"} list={editorList} />
 
@@ -110,7 +113,7 @@ const DetailedView = ({event, type, isWeek}) => {
                         <CardTitleWithValue title={"Notes"} value={event.notes} />
                     </div>
                     
-                </Card.Body>
+                </div>
                 {isEventEditor() ? <DisplayButtonGroup event={event} type={type} /> : ""}
             </Card>
         </div>

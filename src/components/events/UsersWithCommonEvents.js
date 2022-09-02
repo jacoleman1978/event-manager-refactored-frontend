@@ -24,7 +24,7 @@ const UsersWithCommonEvents = ({events, setCheckboxAction, dateRange}) => {
             <Form.Group>
                 <Form.Label className="flex-left-bold">People With Common Events:</Form.Label>
                 <ul className="flex-left-center-wrap">
-                    {checkboxUsersList.length > 0 ? checkboxUsersList : "None"}
+                    {checkboxUsersList.length > 0 ? checkboxUsersList : <li key={"None"} className="list-items week-btn-width">None</li>}
                 </ul>
                     
             </Form.Group>

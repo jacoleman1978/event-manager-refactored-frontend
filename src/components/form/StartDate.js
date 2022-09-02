@@ -6,7 +6,7 @@ const StartDate = (props) => {
 
     return (
         <div className="flex-left-center-no-gap">
-            <Form.Label className="form-label">{label}</Form.Label>
+            <Form.Label className="remove-bottom-margin">{label}</Form.Label>
             <Form.Control 
                 type="date" 
                 required 

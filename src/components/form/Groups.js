@@ -21,21 +21,24 @@ const Groups = (props) => {
             isChecked = true;
         }
         return (
-            <Form.Check
-                key={group._id}
-                type="checkbox"
-                label={group.name}
-                name="groups-can-edit"
-                checked={isChecked}
-                id={group._id}
-                onChange={(e) => handleGroupCheck(e)}
-            />
+            <div className="outline-inner">
+                <Form.Check
+                    key={group._id}
+                    type="checkbox"
+                    label={group.name}
+                    name="groups-can-edit"
+                    checked={isChecked}
+                    id={group._id}
+                    onChange={(e) => handleGroupCheck(e)}
+                />
+            </div>
+
         )
     })
 
     return (
         <Form.Group controlId="formTask" >
-            <Form.Label>{label}</Form.Label>
+            <Form.Label className="remove-bottom-margin">{label}</Form.Label>
             <div className="checkbox-list">
                 {groupList}
             </div>
