@@ -43,11 +43,12 @@ const Groups = () => {
     return (
         <div>
             <p className="title">Group Invitations</p>
-            <div className="flex-center-wrap-no-gap">
+            <div className="flex-center-wrap-no-gap outline">
                 <GroupInvitations groupInvitations={groupInvitations} />
             </div>
 
-            <div className="flex-centered">
+            <p className="title">Create a New Group</p>
+            <div className="flex-centered outline">
                 <NewGroupForm />
             </div>
             
@@ -64,13 +65,13 @@ const Groups = () => {
                 </div>
             </div>
 
-            <div className="flex-center-wrap-no-gap">
+            <div className="flex-center-wrap-no-gap outline-row">
                 {ownedGroups}
             </div>
             
             <p className="title">Group Membership</p>
-            <div className="flex-center-wrap-no-gap">
-                {membershipList}
+            <div className="flex-center-wrap-no-gap outline-row">
+                {membershipList.length > 0 ? membershipList : <div className="outline-inner">None</div>}
             </div>
 
         </div> 

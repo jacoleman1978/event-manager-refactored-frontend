@@ -14,13 +14,10 @@ import TimeRange from "../form/TimeRange";
 import Groups from "../form/Groups";
 import Notes from "../form/Notes";
 
-const TaskForm = (props) => {
+const TaskForm = ({settings, isEdit}) => {
     const { eventId } = useParams();
 
     const navigate = useNavigate();
-
-    // Get props
-    let {settings, isEdit} = props;
 
     // Use state to keep track of info entered into the form
     let [formTitle, setTitle] = useState("");
@@ -104,15 +101,15 @@ const TaskForm = (props) => {
     return (
         <div>
             {isEdit ? <p className="title">Edit Task</p> : <p className="title">New Task</p>}
-            <Form onSubmit={handleSubmit} className="new-doc-container">
-                <Form.Group controlId="formTask" className="flex-left-center-wrap">
+            <Form onSubmit={handleSubmit} className="outline small-top-margin">
+                <Form.Group controlId="formTask" className="week-wrapper">
                     <Title formTitle={formTitle} setTitle={setTitle} label={"Task Title: "}/>
     
                     <Priority formPriority={formPriority} setPriority={setPriority} label={"Priority: "} />
 
                 </Form.Group>
 
-                <Form.Group controlId="formDueDate" className="flex-col-center-left">
+                <Form.Group controlId="formDueDate" className="week-wrapper">
                     <AllDaySwitch formAllDay={formAllDay} setAllDay={setAllDay} />
 
                     <DateRange formStartDate={formStartDate} setStartDate={setStartDate} formEndDate={formEndDate} setEndDate={setEndDate} />
@@ -120,11 +117,18 @@ const TaskForm = (props) => {
                     {formAllDay === false ?  <TimeRange formStartTime={formStartTime} setStartTime={setStartTime} formEndTime={formEndTime} setEndTime={setEndTime} /> : ""}
                 </Form.Group>
 
-                <Groups groupEditList={groupEditList} formGroups={formGroups} setGroups={setGroups} label={"Groups to Add to Task: "} />
-                    
-                <Notes formNotes={formNotes} setNotes={setNotes} />
+                <div className="week-wrapper">
+                    <Groups groupEditList={groupEditList} formGroups={formGroups} setGroups={setGroups} label={"Groups to Add to Task: "} />
+                </div>
 
-                <Button variant="primary" type="submit">
+                <div className="week-wrapper">
+                    <Notes formNotes={formNotes} setNotes={setNotes} />
+                </div>
+
+                    
+                
+
+                <Button variant="primary" type="submit" className="align-self bottom-margin">
                     {isEdit ? "Save Edits" : "Create New Task"}
                 </Button>
             </Form>

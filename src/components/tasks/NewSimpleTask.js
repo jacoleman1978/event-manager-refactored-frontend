@@ -38,19 +38,24 @@ const NewSimpleTask = ({settings}) => {
 
     // Form to add a new Task displayed on the Sorted pages. Only required fields present.
     return (
-        <div className="flex-center-wrap">
-            <Form className="new-simple-task" onSubmit={handleSubmit}>
-                <p className="title">New Simple Task</p>
-                
-                <Title formTitle={formTitle} setTitle={setTitle} label={"Task Title: "}/>
-        
-                <Priority formPriority={formPriority} setPriority={setPriority} label={"Priority: "} />
-
-                <EndDate formEndDate={formEndDate} setEndDate={setEndDate} label={"End Date: "} />
-                
-                <Notes formNotes={formNotes} setNotes={setNotes} />
+        <div>
+            <p className="title">New Simple Task</p>
+            <Form className="outline small-top-margin" onSubmit={handleSubmit}>
+                <Form.Group className="week-wrapper">
+                    <Title formTitle={formTitle} setTitle={setTitle} label={"Task Title: "}/>
             
-                <Button variant="primary" type="submit">
+                    <Priority formPriority={formPriority} setPriority={setPriority} label={"Priority: "} />
+
+                    <EndDate formEndDate={formEndDate} setEndDate={setEndDate} label={"End Date: "} />
+                </Form.Group>
+                
+
+                <Form.Group className="week-wrapper">
+                    <Notes formNotes={formNotes} setNotes={setNotes} />
+                </Form.Group>
+                
+            
+                <Button variant="primary" type="submit" className="align-self bottom-margin">
                     Create New Simple Task
                 </Button>
             

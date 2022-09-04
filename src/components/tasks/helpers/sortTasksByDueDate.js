@@ -10,17 +10,17 @@ const sortTasksByDueDate = (tasks) => {
     let taskDueDates = {
         past: {
             header: 'Past Due',
-            headerColor: 'red',
+            headerColor: 'lightcoral',
             sortedTasks: []
         },
         today: {
             header: 'Due Today',
-            headerColor: 'orange',
+            headerColor: 'lightsalmon',
             sortedTasks: []
         },
         tomorrow: {
             header: 'Due Tomorrow',
-            headerColor: 'yellow',
+            headerColor: 'lightyellow',
             sortedTasks: []
         },
         week: {

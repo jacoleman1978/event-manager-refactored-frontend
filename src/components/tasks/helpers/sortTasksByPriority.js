@@ -8,17 +8,17 @@ const sortTasksByPriority = (tasks) => {
     let taskPriorities = {
         critical: {
             header: 'Critical: Do this task and ignore everything else!',
-            headerColor: 'red',
+            headerColor: 'lightcoral',
             sortedTasks: []
         },
         high: {
             header: 'High: Needs to be completed soon',
-            headerColor: 'orange',
+            headerColor: 'lightsalmon',
             sortedTasks: []
         },
         medium: {
             header: 'Medium: No rush to be completed',
-            headerColor: 'yellow',
+            headerColor: 'lightyellow',
             sortedTasks: []
         },
         low: {

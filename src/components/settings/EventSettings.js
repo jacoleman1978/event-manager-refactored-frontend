@@ -50,7 +50,6 @@ const EventSettings = (props) => {
     }
     return (
         <div className="group-container">
-            <p className="flex-left-bold">Event and Task Defaults:</p>
             <Form onSubmit={handleSubmit}>
 
                 <DefaultAllDayRadio setAllDay={setAllDay} formIsAllDay={formIsAllDay} />

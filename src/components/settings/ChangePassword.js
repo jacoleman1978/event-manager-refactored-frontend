@@ -34,7 +34,6 @@ const ChangePassword = () => {
 
     return (
         <div className="group-container">
-            <p className="flex-left-bold">Change Password:</p>
             <Form onSubmit={handleSubmit} >
                 <PasswordInput label={"Current"} setPassword={setCurrentPwd} />
 

@@ -10,7 +10,7 @@ const DateRange = ({formStartDate, setStartDate, formEndDate, setEndDate, formAl
             </div>
             
 
-            <div className="flex-left-center-no-gap outline-inner">
+            <div className="flex-left-center-no-gap">
                 <EndDate formEndDate={formAllDay ? formEndDate : formStartDate} setEndDate={setEndDate} label={"End Date: "} />
             </div>
         </div>

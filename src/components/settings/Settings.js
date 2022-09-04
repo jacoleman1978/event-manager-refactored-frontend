@@ -17,9 +17,21 @@ const Settings = ({settings, setSettings}) => {
 
     return (
         <div className="flex-center-wrap">
-            <ViewSettings settings={settings} setSettings={setSettings}/>
-            <EventSettings settings={settings} setSettings={setSettings}/>
-            <ChangePassword />
+            <div>
+                <p className="title">View Defaults:</p>
+                <ViewSettings settings={settings} setSettings={setSettings}/>
+            </div>
+            
+            <div>
+                <p className="title">Event and Task Defaults:</p>
+                <EventSettings settings={settings} setSettings={setSettings}/>
+            </div>
+            
+            <div>
+                <p className="title">Change Password:</p>
+                <ChangePassword />
+            </div>
+            
         </div>
     )
 }

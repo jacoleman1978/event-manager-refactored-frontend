@@ -5,8 +5,8 @@ const Priority = (props) => {
     let {formPriority, setPriority, label} = props;
 
     return (
-        <div className="flex-left-center-no-gap">
-            <Form.Label>{label}</Form.Label>
+        <div className="flex-left-center-no-gap outline-inner">
+            <Form.Label className="remove-bottom-margin">{label}</Form.Label>
             <Form.Select 
                 aria-label={label}
                 required 

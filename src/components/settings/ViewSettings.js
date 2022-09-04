@@ -37,7 +37,6 @@ const ViewSettings = ({settings, setSettings}) => {
     }
     return (
         <div className="group-container">
-            <p className="flex-left-bold">View Defaults:</p>
             <Form onSubmit={handleSubmit}>
                 <DefaultEventsSelector setEventsView={setEventsView} formEventsView={formEventsView} />
 

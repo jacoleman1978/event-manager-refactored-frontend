@@ -8,9 +8,7 @@ const NewGroupForm = () => {
 
     return (
         <div>
-            <p className="title">Create a New Group</p>
             <Form className="group-container">
-                
                 <Form.Group className="flex-left-center">
                     <TextInputWrapper label={"Name"} defaultValue={""} setStateValue={setGroupName} />
                     <Button 

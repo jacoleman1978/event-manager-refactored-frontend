@@ -199,6 +199,10 @@ strong {
   gap: 0.5rem;
 }
 
+.xsmall-gap {
+  gap: 0.35rem;
+}
+
 .xxsmall-gap {
   gap: 0.1rem;
 }
@@ -281,10 +285,24 @@ strong {
   flex-direction: column;
   justify-content: center;
   border: solid black 1px;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   margin: 1rem;
-  background-color:floralwhite;
+  background-color:rgb(137, 95, 40);
   gap: 0rem;
+}
+
+.outline-row {
+  display: flex;
+  flex-wrap: wrap;
+  border: solid black 1px;
+  border-radius: 1rem;
+  margin: 1rem;
+  background-color:rgb(137, 95, 40);
+  gap: 0rem;
+}
+
+.med-padding {
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
 }
 
 .remove-bullet-pt {
@@ -333,6 +351,12 @@ strong {
 
 .border {
   border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.med-border {
+  border: solid black 1px;
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
