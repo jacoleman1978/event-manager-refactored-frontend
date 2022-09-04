@@ -21,7 +21,7 @@ const Groups = (props) => {
             isChecked = true;
         }
         return (
-            <div className="outline-inner">
+            <div className="outline-inner" key={group._id}>
                 <Form.Check
                     key={group._id}
                     type="checkbox"

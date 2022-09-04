@@ -40,6 +40,11 @@ class EventDataService {
         axios.defaults.withCredentials = true;
         return axios.get(`http://localhost:3100/event/${eventId}`)
     }  
+
+    static GetUserGroupEvents() {
+        axios.defaults.withCredentials = true;
+        return axios.get('http://localhost:3100/event/userGroupEvents')
+    }
 }
 
 export default EventDataService;

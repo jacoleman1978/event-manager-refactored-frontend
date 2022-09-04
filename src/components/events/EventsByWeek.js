@@ -9,12 +9,14 @@ import updateCheckedUsers from "../../helpers/updateCheckedUsers";
 import getDateRange from "../../helpers/getDateRange";
 import getDateOffsetBy from "./helpers/getDateOffsetBy";
 import getSortedEventsByUser from "../../helpers/getSortedEventsByUser";
+import filterGroupEventsByWeek from "./helpers/filterGroupEventsByWeek";
 import filterUserEventsByWeek from "./helpers/filterUserEventsByWeek";
 
 // Called from Events.js
 const EventsByWeek = ({viewType, currentUser}) => {
     let [initialLoadComplete, setInitialLoadComplete] = useState(false);
     let [eventsByUser, setEventsByUser] = useState([]);
+    let [eventsByGroup, setEventsByGroup] = useState([]);
     let [weeklyDisplay, setWeeklyDisplay] = useState(null);
     let [checkboxAction, setCheckboxAction] = useState({addId: "", removeId: ""});
     let [membersToDisplay, setMembersToDisplay] = useState([]);
@@ -26,22 +28,45 @@ const EventsByWeek = ({viewType, currentUser}) => {
 
     // On intial loading of the page, event data is retrieved, sorted and filtered for display
     useEffect(() => {
-        EventDataService.GetEvents().then((res) => {
-            let events = res.data.events;
+        // EventDataService.GetEvents().then((res) => {
+        //     let events = res.data.events;
 
-            // Takes the user's events and all the group members of that user and returns an object with userId keys
-            let eventsSortedByUser = getSortedEventsByUser(dateRange, events, currentUser);
 
-            // Takes the events sorted by user and filters to only include events in the date range
-            let userEventsFilteredByWeek = filterUserEventsByWeek(eventsSortedByUser, dateRange, currentUser);
+        //     // Takes the user's events and all the group members of that user and returns an object with userId keys
+        //     let eventsSortedByUser = getSortedEventsByUser(dateRange, events, currentUser);
 
+        //     // Takes the events sorted by user and filters to only include events in the date range
+        //     let userEventsFilteredByWeek = filterUserEventsByWeek(eventsSortedByUser, dateRange, currentUser);
+
+        //     // Displays only the events for the current week for the logged in user.
+        //     setWeeklyDisplay([<Week key={currentUser.userId} events={userEventsFilteredByWeek[currentUser.userId]} />]);
+
+        //     // Sorts through group members and generates a checkbox list of other users sharing common tasks during the date range
+        //     setCheckboxDisplay(<UsersWithCommonEvents events={userEventsFilteredByWeek} setCheckboxAction={setCheckboxAction} dateRange={dateRange} />)
+
+        //     setEventsByUser(eventsSortedByUser);
+        // })
+
+        EventDataService.GetUserGroupEvents().then((res) => {
+            let userEvents = {}
+            userEvents[currentUser.userId] = res.data.events[currentUser.userId]
+
+            let userEventsByWeek = filterUserEventsByWeek(userEvents, dateRange, currentUser);
+            
             // Displays only the events for the current week for the logged in user.
-            setWeeklyDisplay([<Week key={currentUser.userId} events={userEventsFilteredByWeek[currentUser.userId]} />]);
+            let rowsToDisplay = [<Week key={currentUser.userId} events={userEventsByWeek[currentUser.userId]} />];
 
-            // Sorts through group members and generates a checkbox list of other users sharing common tasks during the date range
-            setCheckboxDisplay(<UsersWithCommonEvents events={userEventsFilteredByWeek} setCheckboxAction={setCheckboxAction} dateRange={dateRange} />)
+            setEventsByUser(userEvents);
 
-            setEventsByUser(eventsSortedByUser);
+            let groupEventsByWeek = filterGroupEventsByWeek(res.data.events.groups, dateRange);
+
+            for (let group in groupEventsByWeek) {
+                rowsToDisplay = [...rowsToDisplay, <Week key={group} events={groupEventsByWeek[group]} />]
+            }
+
+            setWeeklyDisplay(rowsToDisplay);
+
+            setEventsByGroup(groupEventsByWeek);        
         })
 
         // List of userIds that will have their events displayed for the week
@@ -57,7 +82,13 @@ const EventsByWeek = ({viewType, currentUser}) => {
             
             let userEventsFilteredByWeek = filterUserEventsByWeek(eventsByUser, dateRange, currentUser);
 
-            setWeeklyDisplay([<Week key={currentUser.userId} events={userEventsFilteredByWeek[currentUser.userId]} />]);
+            let rowsToDisplay = [<Week key={currentUser.userId} events={userEventsFilteredByWeek[currentUser.userId]} />];
+
+            for (let group in eventsByGroup) {
+                rowsToDisplay = [...rowsToDisplay, <Week key={group} events={eventsByGroup[group]} />]
+            }
+
+            setWeeklyDisplay(rowsToDisplay);
 
             setCheckboxDisplay(<UsersWithCommonEvents events={userEventsFilteredByWeek} setCheckboxAction={setCheckboxAction} dateRange={dateRange} />)
         }
