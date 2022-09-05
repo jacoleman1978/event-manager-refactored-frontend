@@ -3,7 +3,7 @@ import React from "react";
 // Called from EventsByWeek.js
 const WeekHeader = ({offsetBy}) => {
     // Define titles of day headers
-    let dayHeaders = ["People"];
+    let dayHeaders = [];
     let date = new Date();
     let day = date.getDate();
 
@@ -23,6 +23,7 @@ const WeekHeader = ({offsetBy}) => {
 
     return (
         <div className="week-headers">
+            <div></div>
             {weekHeaders}
         </div>
     )

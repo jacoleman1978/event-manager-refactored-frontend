@@ -18,11 +18,7 @@ const WeekGroup = ({events}) => {
             )
         });
     } else {
-        eventsList = [
-            <li key={0}>
-                {"No tasks found"}
-            </li>
-        ];
+        eventsList = [];
     }
 
     // headerStyle was passed in as prop from EventList and determines the background color of each header.

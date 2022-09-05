@@ -23,7 +23,7 @@ const MembersList = ({editorIds, viewerIds, setPermissionChange, setCheckboxActi
             <ul className="flex-col-center-left-no-gap small-gap">
                 {groupEditorsList.length > 0 ? groupEditorsList : ""} 
                 {groupViewersList.length > 0 ? groupViewersList : ""} 
-                {groupEditorsList.length + groupViewersList.length === 0 ? <div className="small-font list-items small-padding">None</div> : ""}
+                {groupEditorsList.length + groupViewersList.length === 0 ? <div className="small-font small-padding">None</div> : ""}
             </ul>
         </Form.Group>
     )

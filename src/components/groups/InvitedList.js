@@ -33,7 +33,7 @@ const InvitedList = ({groupId, setCheckboxAction}) => {
         <Form.Group >
             <Form.Label className="flex-left-bold">People Invited:</Form.Label>
             <ul className="flex-col-center-left-no-gap small-gap">
-                {invitedUsers.length > 0 ? invitedUsers : "None"}
+                {invitedUsers.length > 0 ? invitedUsers : <div className="small-font small-padding">None</div>}
             </ul>
         </Form.Group>
     )
