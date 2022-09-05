@@ -28,11 +28,21 @@ strong {
   margin-right: 0.03rem;
 }
 
+.form-check-input {
+  margin-top: 0rem;
+}
+
 .flex-centered {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+.flex-centered-no-gap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .top-bottom-margins {
@@ -117,6 +127,15 @@ strong {
 
 .left-margin {
   margin-left: 1rem;
+}
+
+.auto-margin-left {
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
+.auto-margin-right {
+  margin-right: auto;
 }
 
 .bottom-margin {
@@ -305,8 +324,24 @@ strong {
   padding: 0.5rem 0.5rem 0rem 0.5rem;
 }
 
+.med-padding-right {
+  padding-right: 0.5rem;
+}
+
+.small-padding {
+  padding: 0.25rem;
+}
+
+.xsmall-padding {
+  padding: 0.1rem;
+}
+
 .remove-bullet-pt {
   list-style-type: none;
+}
+
+.small-font {
+  font-size: small;
 }
 
 .outline-inner {
@@ -329,6 +364,11 @@ strong {
 
 .small-top-margin {
   margin-top: 0.25rem;
+}
+
+.xsmall-top-bottom-margin {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
 }
 
 .new-doc-container {
@@ -450,3 +490,4 @@ strong {
   justify-content: space-around;
   margin: 1rem;
 }
+

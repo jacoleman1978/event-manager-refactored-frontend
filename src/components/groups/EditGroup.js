@@ -8,6 +8,7 @@ import updateGroup from "./helpers/updateGroup";
 import updateCheckedUsers from "../../helpers/updateCheckedUsers";
 import updateMemberChange from "./helpers/updateMemberChange";
 
+// Called from OwnedGroup.js
 const EditGroup = ({group}) => {
     let [formGroupName, setGroupName] = useState(group.name);
     let [changedPermissionList, setPermissionList] = useState([]);
@@ -34,9 +35,9 @@ const EditGroup = ({group}) => {
     }
 
     return (
-        <div className="group-container">
-            <div className="flex-center-wrap">
-                <Form onSubmit={(e) => handleSubmit(e)} className="border">
+        <div className="week-wrapper">
+            <div className="group-container-no-set-width">
+                <Form onSubmit={(e) => handleSubmit(e)} className="week-wrapper">
 
                     <GroupNameInput groupName={formGroupName} setGroupName={setGroupName} />
 

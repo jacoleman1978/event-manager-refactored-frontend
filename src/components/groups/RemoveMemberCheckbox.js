@@ -6,6 +6,7 @@ import handleCheckboxChange from "../../helpers/handleCheckboxChange";
 const RemoveMemberCheckbox = ({userId, setCheckboxAction}) => {
     return (
         <Form.Check 
+            className="flex-centered-no-gap remove-margins xsmall-gap"
             type="checkbox"
             id={`${userId}-Remove`}
             label={`Remove`}

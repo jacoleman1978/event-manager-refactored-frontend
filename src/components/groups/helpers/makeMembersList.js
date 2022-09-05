@@ -14,11 +14,14 @@ const makeMembersList = (members, type, setPermissionChange, setCheckboxAction) 
 
         return (
             <li key={`${member.userName}`} className="list-items">
-                {`${member.firstName} ${member.lastName}`}
+                {`${member.firstName} ${member.lastName}:`}
 
-                <PermissionRadios type={type} userId={userId} setPermissionChange={setPermissionChange} />
+                <div className="flex-centered small-gap auto-margin-left">
+                    <PermissionRadios type={type} userId={userId} setPermissionChange={setPermissionChange} />
 
-                <RemoveMemberCheckbox userId={userId} setCheckboxAction={setCheckboxAction} />
+                    <RemoveMemberCheckbox userId={userId} setCheckboxAction={setCheckboxAction} />
+                </div>
+
             </li>
         )
     })

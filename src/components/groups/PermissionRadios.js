@@ -23,6 +23,7 @@ const PermissionRadios = ({type, userId, setPermissionChange}) => {
     return (
         <>
             <Form.Check 
+                className="flex-centered-no-gap remove-margins xsmall-gap"
                 defaultChecked={type === 'Editor'}
                 type="radio"
                 id={`${userId}-Editor`}
@@ -31,6 +32,7 @@ const PermissionRadios = ({type, userId, setPermissionChange}) => {
                 onChange={e => setPermissionChange(handleRadio(e))}
             />
             <Form.Check 
+                className="flex-centered-no-gap remove-margins xsmall-gap"
                 defaultChecked={type === 'Viewer'}
                 type="radio"
                 id={`${userId}-Viewer`}

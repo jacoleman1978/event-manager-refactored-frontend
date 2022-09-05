@@ -43,12 +43,12 @@ const Groups = () => {
     return (
         <div>
             <p className="title">Group Invitations</p>
-            <div className="flex-center-wrap-no-gap outline">
+            <div className="flex-center-wrap-no-gap outline-row small-top-margin" >
                 <GroupInvitations groupInvitations={groupInvitations} />
             </div>
 
             <p className="title">Create a New Group</p>
-            <div className="flex-centered outline">
+            <div className="flex-centered outline small-top-margin">
                 <NewGroupForm />
             </div>
             
@@ -56,6 +56,7 @@ const Groups = () => {
                 <p className="title">Owned Groups</p>
                 <div className="flex-center-wrap">
                     <Form.Check 
+                        className="flex-centered-no-gap xsmall-gap"
                         type="switch"
                         id="edit-group"
                         label="Edit Groups"
@@ -65,13 +66,13 @@ const Groups = () => {
                 </div>
             </div>
 
-            <div className="flex-center-wrap-no-gap outline-row">
+            <div className="flex-center-wrap-no-gap outline-row small-top-margin">
                 {ownedGroups}
             </div>
             
             <p className="title">Group Membership</p>
-            <div className="flex-center-wrap-no-gap outline-row">
-                {membershipList.length > 0 ? membershipList : <div className="outline-inner">None</div>}
+            <div className="flex-center-wrap-no-gap outline-row small-top-margin">
+                {membershipList.length > 0 ? membershipList : <div className="outline-inner small-font">None</div>}
             </div>
 
         </div> 

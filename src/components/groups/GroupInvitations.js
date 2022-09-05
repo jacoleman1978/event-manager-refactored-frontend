@@ -26,8 +26,8 @@ const GroupInvitations = ({groupInvitations}) => {
     });
 
     return (
-        <div className="group-container-no-set-width small-gap">
-            {invitationList.length > 0 ? invitationList : "None"}
+        <div className="group-container-no-set-width small-gap outline-inner">
+            {invitationList.length > 0 ? invitationList : <div className="small-font">None</div>}
         </div>
     )
 }

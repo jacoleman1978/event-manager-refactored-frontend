@@ -15,9 +15,10 @@ const displaySearchResults = (searchResults, groupId) => {
         }
 
         return (
-            <div key={`${user._id}`} className="flex-left-center">
+            <div key={`${user._id}`} className="list-items small-gap">
                 {`${user.firstName} ${user.lastName}`}
                 <Button 
+                    className="xsmall-padding xsmall-top-bottom-margin"
                     size="sm"
                     variant="primary" 
                     type="button"

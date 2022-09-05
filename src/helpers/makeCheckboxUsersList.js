@@ -10,10 +10,11 @@ import handleCheckboxChange from "./handleCheckboxChange";
 const makeCheckboxUsersList = (formattedUsersList, setCheckboxAction, label="") => {
     const checkboxUsersList = formattedUsersList.map((user) => {
         return (
-            <li key={`${user.userId}`} className="list-items week-btn-width">
-                {label !== "" ? user.fullName : ""}
+            <li key={`${user.userId}`} className="list-items med-padding-right">
+                
+                {label !== "" ? <div className="auto-margin-right">{user.fullName}</div> : ""}
                 <Form.Check 
-                    className="flex-centered"
+                    className="flex-centered-no-gap xsmall-gap"
                     type="checkbox"
                     id={user.userId}
                     label={label}

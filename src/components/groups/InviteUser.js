@@ -48,7 +48,7 @@ const InviteUser = ({group}) => {
     }
 
     return (
-        <Form className="border">
+        <Form className="week-wrapper">
             
             <Form.Group controlId="formSearchInvite" className="flex-col-center-left">
                 <TextInputWrapper label={"First Name"} defaultValue={""} setStateValue={setFirstName} />
