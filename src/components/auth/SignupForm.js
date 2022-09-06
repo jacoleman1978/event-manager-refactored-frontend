@@ -73,36 +73,33 @@ const SignupForm = () => {
             >
                 Back to Login
             </Button>
+            <div className="flex-centered">
+                <Form onSubmit={handleSubmit} className="tan-container-centered">
 
-            <Form onSubmit={handleSubmit}>
-                <Row className="mb-3">
-                    <Form.Group as={Col} controlId="formFirstName">
-                        <Form.Label>First Name</Form.Label>
+                    <div className="flex-left-center-no-gap">
+                        <Form.Group className="outline-centered">
+                            <Form.Label className="flex-left-bold text-nowrap">First Name:</Form.Label>
+                            <Form.Control 
+                                type="text"
+                                onChange={(e) => setFirstName(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="outline-centered">
+                            <Form.Label className="flex-left-bold text-nowrap">Last Name:</Form.Label>
+                            <Form.Control 
+                                type="text"
+                                onChange={(e) => setLastName(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </div>
+
+                    <Form.Group className="outline-centered">
+                        <Form.Label className="flex-left-bold">Username:</Form.Label>
                         <Form.Control 
                             type="text"
-                            placeholder="Enter First Name"
-                            onChange={(e) => setFirstName(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="formLastName">
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control 
-                            type="text"
-                            placeholder="Enter Last Name"
-                            onChange={(e) => setLastName(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
-                </Row>
-
-                <Row className="mb-3">
-                    <Form.Group as={Col} controlId="formUserName">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control 
-                            type="text"
-                            placeholder="Enter Username"
                             onChange={(e) => setUserName(e.target.value)}
                             required
                         />
@@ -110,38 +107,37 @@ const SignupForm = () => {
                             {userNameErrorFlag ? userNameErrorMessage : ""}
                         </Form.Text>
                     </Form.Group>
-                </Row>
 
-                <Row className="mb-3">
-                    <Form.Group as={Col} controlId="formPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control 
-                            type="password"
-                            placeholder="Enter Password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
+                    <div className="flex-left-center-no-gap">
+                        <Form.Group className="outline-centered">
+                            <Form.Label className="flex-left-bold">Password:</Form.Label>
+                            <Form.Control 
+                                type="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
 
-                    <Form.Group as={Col} controlId="formVerifyPassword">
-                        <Form.Label>Verify Password</Form.Label>
-                        <Form.Control 
-                            type="password"
-                            placeholder="Verify Password"
-                            onChange={(e) => setVerifyPassword(e.target.value)}
-                            required
-                        />
-                        <Form.Text>
-                            {passwordErrorFlag ? passwordMismatchErrorMessage : ""}
-                        </Form.Text>
-                    </Form.Group>
-                </Row>
+                        <Form.Group className="outline-centered">
+                            <Form.Label className="flex-left-bold text-nowrap">Verify Password:</Form.Label>
+                            <Form.Control 
+                                type="password"
+                                onChange={(e) => setVerifyPassword(e.target.value)}
+                                required
+                            />
+                            <Form.Text>
+                                {passwordErrorFlag ? passwordMismatchErrorMessage : ""}
+                            </Form.Text>
+                        </Form.Group>
+                    </div>
 
-                <Button variant="primary" type="submit">
-                    Create Account
-                </Button>
-
-            </Form>
+                    <div className="flex-centered">
+                        <Button variant="primary" type="submit">
+                            Create Account
+                        </Button>
+                    </div>
+                </Form>
+            </div>
         </div>
     )
 }

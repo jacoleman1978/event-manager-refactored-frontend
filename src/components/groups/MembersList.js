@@ -15,7 +15,7 @@ const MembersList = ({editorIds, viewerIds, setPermissionChange, setCheckboxActi
         if (groupViewersList.length === 0) {
             setViewersList(makeMembersList(viewerIds, 'Viewer', setPermissionChange, setCheckboxAction));
         }
-    }, [])
+    }, [editorIds, viewerIds])
 
     return (
         <Form.Group>

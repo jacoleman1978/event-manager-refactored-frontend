@@ -238,6 +238,18 @@ strong {
   border-radius: 0.5rem;
 }
 
+.tan-container-centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: tan;
+  margin: 0.5rem;
+  padding: 0.35rem;
+  border: solid black 1px;
+  border-radius: 0.5rem;
+}
+
 .week-day-header {
   display: flex;
   justify-content: center;
@@ -352,6 +364,17 @@ strong {
   margin: 0.25rem;
   padding: 0.5rem;
   align-self: flex-start;
+}
+
+.outline-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid black 1px;
+  border-radius: 0.5rem;
+  background-color: antiquewhite;
+  margin: 0.25rem;
+  padding: 0.5rem;
 }
 
 .remove-bottom-margin {
@@ -490,4 +513,3 @@ strong {
   justify-content: space-around;
   margin: 1rem;
 }
-

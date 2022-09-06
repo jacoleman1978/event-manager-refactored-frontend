@@ -55,42 +55,40 @@ const LoginForm = () => {
     }
     
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formUserName">
-                <div>
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter username"
-                        onChange={(e) => setUserName(e.target.value)}
-                        required
-                    />
-                </div>
-            </Form.Group>
+        <Form onSubmit={handleSubmit} className="flex-centered">
+            <div className="tan-container-centered">
+                <Form.Group className="outline-centered" >
+                        <Form.Label className="flex-left-bold remove-bottom-margin">Username:</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter username"
+                            onChange={(e) => setUserName(e.target.value)}
+                            required
+                        />
+                </Form.Group>
 
-            <Form.Group>
-                <div>
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control 
-                        type="password"
-                        placeholder="Password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-            </Form.Group>
+                <Form.Group className="outline-centered">
+                        <Form.Label className="flex-left-bold remove-bottom-margin">Password:</Form.Label>
+                        <Form.Control 
+                            type="password"
+                            placeholder="Password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                </Form.Group>
 
-            <div>
-                <Button variant="primary" type="submit">Login</Button>
-                <Button 
-                    variant="secondary" 
-                    type="button"
-                    onClick={handleCreateAccount}
-                >
-                    Create Account
-                </Button>
+                <div className="flex-centered small-gap">
+                    <Button variant="primary" type="submit">Login</Button>
+                    <Button 
+                        variant="secondary" 
+                        type="button"
+                        onClick={handleCreateAccount}
+                    >
+                        Create Account
+                    </Button>
+                </div>
+                {errorFlag ? displayError() : ""}
             </div>
-            {errorFlag ? displayError() : ""}
         </Form>
     )
 }

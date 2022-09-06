@@ -5,7 +5,7 @@ import makeCheckboxUsersList from "../../helpers/makeCheckboxUsersList";
 import getFullUserName from "./helpers/getFullUserName";
 
 // Called from EditGroup.js
-const InvitedList = ({groupId, setCheckboxAction}) => {
+const InvitedList = ({groupId, setCheckboxAction, updatedDataFlag}) => {
     let [invitedUsers, setInvitedUsers] = useState([]);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const InvitedList = ({groupId, setCheckboxAction}) => {
                 setInvitedUsers(makeCheckboxUsersList(tempInvitedUsersList, setCheckboxAction, "Remove")); 
             } 
         )
-    }, [])
+    }, [updatedDataFlag])
     return (
         <Form.Group >
             <Form.Label className="flex-left-bold">People Invited:</Form.Label>
