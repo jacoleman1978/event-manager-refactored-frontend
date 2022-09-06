@@ -2,31 +2,23 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Form, Button } from "react-bootstrap";
 import UserDataService from "../../services/userDataService";
 import TextInputWrapper from "../form/TextInputWrapper";
+import SearchResults from "./SearchResults";
 import makeAllGroupMembersArray from "./helpers/makeAllGroupMembersArray";
 import displaySearchResults from "./helpers/displaySearchResults";
 
 // Called from EditGroup.js
-const InviteUser = ({group}) => {
+const UserSearch = ({group, setHasInvitedMember}) => {
     let [resultsFlag, setResultsFlag] = useState(false);
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
     let [searchResults, setSearchResults] = useState([]);
-    let [formattedResults, setFormattedResults] = useState([]);
 
     let users = useMemo(() => makeAllGroupMembersArray(group), [group]);
-
-    useEffect(() => {
-        if (resultsFlag === true) {
-            setFormattedResults(displaySearchResults(searchResults, group._id));
-        }
-
-    }, [resultsFlag])
 
     const handleSearch = (e) => {
         e.preventDefault();
 
         setSearchResults([]);
-        setFormattedResults([]);
         setResultsFlag(false);
 
         let data = {
@@ -63,7 +55,7 @@ const InviteUser = ({group}) => {
                     Search
                 </Button>
 
-                {resultsFlag === true ? formattedResults : ""}
+                {resultsFlag === true ? <SearchResults searchResults={searchResults} groupId={group._id} setHasInvitedMember={setHasInvitedMember} /> : "None"}
 
             </Form.Group>
         </Form>
@@ -71,4 +63,4 @@ const InviteUser = ({group}) => {
     )
 }
 
-export default InviteUser;
+export default UserSearch;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
-import InviteUser from "./InviteUser";
+import UserSearch from "./UserSearch";
 import GroupNameInput from "./GroupNameInput";
 import MembersList from "./MembersList";
 import InvitedList from "./InvitedList";
@@ -20,6 +20,7 @@ const EditGroup = ({groupId}) => {
     let [permissionChange, setPermissionChange] = useState({addId: [], removeId: []});
     let [editableFieldsDisplay, setEditableFieldsDisplay] = useState([]);
     let [updatedDataFlag, setUpdatedDataFlag] = useState(true);
+    let [hasInvitedMember, setHasInvitedMember] = useState(false);
 
     useEffect(() => {
         getData();
@@ -47,6 +48,7 @@ const EditGroup = ({groupId}) => {
         }
 
     }, [groupData])
+    
 
     const getData = () => {
         GroupDataService.GetGroupById(groupId).then((res) => {
@@ -65,7 +67,12 @@ const EditGroup = ({groupId}) => {
 
     if (wasDataSaved) {
         setWasDataSaved(false);
-        getData()
+        getData();
+    }
+
+    if (hasInvitedMember) {
+        setHasInvitedMember(false);
+        getData();
     }
 
     const handleSubmit = (e) => {
@@ -90,7 +97,7 @@ const EditGroup = ({groupId}) => {
 
                 </Form>
                 
-                <InviteUser group={groupData} />
+                <UserSearch group={groupData} setHasInvitedMember={setHasInvitedMember} />
             </div>
         </div>
     )
