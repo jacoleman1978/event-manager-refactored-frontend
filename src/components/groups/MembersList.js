@@ -3,19 +3,17 @@ import { Form } from "react-bootstrap";
 import makeMembersList from "./helpers/makeMembersList";
 
 // Called from EditGroup.js
-const MembersList = ({editorIds, viewerIds, setPermissionChange, setCheckboxAction}) => {
+const MembersList = ({editorIds, viewerIds, setPermissionChange, setCheckboxAction, updatedDataFlag}) => {
     let [groupEditorsList, setEditorsList] = useState([]);
     let [groupViewersList, setViewersList] = useState([]);
 
     useEffect(() => {
-        if (groupEditorsList.length === 0) {
-            setEditorsList(makeMembersList(editorIds, 'Editor', setPermissionChange, setCheckboxAction));
-        }
 
-        if (groupViewersList.length === 0) {
+            setEditorsList(makeMembersList(editorIds, 'Editor', setPermissionChange, setCheckboxAction));
+
             setViewersList(makeMembersList(viewerIds, 'Viewer', setPermissionChange, setCheckboxAction));
-        }
-    }, [editorIds, viewerIds])
+
+    }, [updatedDataFlag])
 
     return (
         <Form.Group>

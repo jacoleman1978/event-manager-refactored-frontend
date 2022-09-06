@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import UserDataService from '../../services/userDataService';
 import getDefaultViewPath from '../../helpers/getDefaultViewPath';
 

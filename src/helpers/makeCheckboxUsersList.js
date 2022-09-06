@@ -12,7 +12,7 @@ const makeCheckboxUsersList = (formattedUsersList, setCheckboxAction, label="") 
         return (
             <li key={`${user.userId}`} className="list-items med-padding-right">
                 
-                {label !== "" ? <div className="auto-margin-right">{user.fullName}</div> : ""}
+                {label !== "" ? <div className="auto-margin-right">{user.fullName}:</div> : ""}
                 <Form.Check 
                     className="flex-centered-no-gap xsmall-gap"
                     type="checkbox"

@@ -3,6 +3,10 @@
 -Returns an array of userIds associated with the group
 */
 const makeAllGroupMembersArray = (group) => {
+    if (group === null) {
+        return []
+    }
+    
     let users = [group.ownerId._id];
 
     for (let editorDoc of group.editorIds) {

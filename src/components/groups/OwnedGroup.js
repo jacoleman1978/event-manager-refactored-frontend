@@ -8,8 +8,8 @@ const OwnedGroup = ({group, editFlag}) => {
     return (
         <>
             {editFlag === true ? 
-                <EditGroup 
-                    group={group} 
+                <EditGroup
+                    groupId={group._id} 
                 /> : 
                 <GroupMembership 
                     group={group} 
