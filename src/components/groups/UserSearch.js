@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Form, Button } from "react-bootstrap";
 import UserDataService from "../../services/userDataService";
 import TextInputWrapper from "../form/TextInputWrapper";
 import SearchResults from "./SearchResults";
 import makeAllGroupMembersArray from "./helpers/makeAllGroupMembersArray";
-import displaySearchResults from "./helpers/displaySearchResults";
 
 // Called from EditGroup.js
 const UserSearch = ({group, setHasInvitedMember}) => {
@@ -55,7 +54,7 @@ const UserSearch = ({group, setHasInvitedMember}) => {
                     Search
                 </Button>
 
-                {resultsFlag === true ? <SearchResults searchResults={searchResults} groupId={group._id} setHasInvitedMember={setHasInvitedMember} /> : "None"}
+                {resultsFlag === true ? <SearchResults searchResults={searchResults} groupId={group._id} setHasInvitedMember={setHasInvitedMember} /> : ""}
 
             </Form.Group>
         </Form>

@@ -3,9 +3,12 @@ import { Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
 
 // Called from SearchResults.js
-const UserInvite = ({user, data, setHasInvitedMember}) => {
+const UserInvite = ({user, data, setHasInvitedMember, setInvitedUserId}) => {
     const handleUserInvite = () => {
-        GroupDataService.InviteGroupMember(data).then(setHasInvitedMember(true))
+        GroupDataService.InviteGroupMember(data).then(() => {
+            setHasInvitedMember(true);
+            setInvitedUserId(user._id);
+        })
     }
 
     return (
