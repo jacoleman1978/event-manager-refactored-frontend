@@ -31,9 +31,9 @@ class GroupDataService {
         return axios.put(`http://localhost:3100/group/name`, data)
     }
 
-    static DeleteGroup(data, groupId) {
+    static DeleteGroup(groupId) {
         axios.defaults.withCredentials = true;
-        return axios.delete(`http://localhost:3100/group/${groupId}`, data)
+        return axios.delete(`http://localhost:3100/group/${groupId}`)
     }
 
     static GetGroupById(groupId) {

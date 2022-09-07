@@ -279,6 +279,18 @@ strong {
   border-radius: 0.5rem;
 }
 
+.delete-warning-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: lightcoral;
+  margin: 0.5rem;
+  padding: 0.35rem;
+  border: solid black 1px;
+  border-radius: 0.5rem;
+}
+
 .week-day-header {
   display: flex;
   justify-content: center;

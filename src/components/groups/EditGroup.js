@@ -5,6 +5,7 @@ import UserSearch from "./UserSearch";
 import GroupNameInput from "./GroupNameInput";
 import MembersList from "./MembersList";
 import InvitedList from "./InvitedList";
+import DeleteGroup from "./DeleteGroup";
 import updateGroup from "./helpers/updateGroup";
 import updateCheckedUsers from "../../helpers/updateCheckedUsers";
 import updateMemberChange from "./helpers/updateMemberChange";
@@ -98,6 +99,8 @@ const EditGroup = ({groupId}) => {
                 </Form>
                 
                 <UserSearch group={groupData} setHasInvitedMember={setHasInvitedMember} />
+
+                <DeleteGroup groupId={groupId} />
             </div>
         </div>
     )
