@@ -49,7 +49,7 @@ const EventSettings = (props) => {
         SettingsDataService.UpdateSettings(data).then(res => setSettings(res.data.settings));
     }
     return (
-        <div className="group-container">
+        <div className="group-container-no-set-width">
             <Form onSubmit={handleSubmit}>
 
                 <DefaultAllDayRadio setAllDay={setAllDay} formIsAllDay={formIsAllDay} />

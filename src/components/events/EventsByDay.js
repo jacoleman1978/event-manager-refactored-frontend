@@ -18,7 +18,7 @@ const EventsByDay = ({viewType}) => {
     date.setDate(day + offsetBy);
     date.toLocaleDateString('en-us', { weekday:"long", month:"numeric", day:"numeric"});
 
-    let headerStyle = {backgroundColor: "red", borderRadius: "0.5rem"};
+    let headerStyle = {backgroundColor: "lightcoral", borderRadius: "0.5rem"};
 
     return (
         <>

@@ -4,8 +4,8 @@ import { Form } from "react-bootstrap";
 // Called from EventSettings.js
 const DefaultEndDateSelector = ({setEndDate, formEndDate}) => {
     return (
-        <Form.Group className="flex-left-center" controlId="formEndDate">
-            <Form.Label>End Date: </Form.Label>
+        <Form.Group className="flex-between-center" controlId="formEndDate">
+            <Form.Label className="flex-left-bold">End Date: </Form.Label>
             <Form.Select 
                 className="dropdown-width" 
                 aria-label="Select a default end date" 

@@ -6,7 +6,7 @@ const Notes = (props) => {
 
     return (
         <Form.Group controlId="formNotes" className="flex-left-center-wrap small-gap">
-            <Form.Label className="remove-bottom-margin">Notes: </Form.Label>
+            <Form.Label className="flex-left-bold">Notes: </Form.Label>
             <Form.Control 
                 as="textarea" 
                 rows={5} 

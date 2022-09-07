@@ -4,8 +4,8 @@ import { Form } from "react-bootstrap";
 // Called from EventSettings.js
 const DefaultEndTimeSelector = ({setEndTime, formEndTime}) => {
     return (
-        <Form.Group className="flex-left-center" controlId="formEndTime">
-            <Form.Label>End Time: </Form.Label>
+        <Form.Group className="flex-between-center" controlId="formEndTime">
+            <Form.Label className="flex-left-bold">End Time: </Form.Label>
             <Form.Select 
                 className="dropdown-width" 
                 aria-label="Select a default end time" 

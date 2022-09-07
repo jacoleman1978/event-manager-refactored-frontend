@@ -16,22 +16,24 @@ const Settings = ({settings, setSettings}) => {
     }, [currentUser])
 
     return (
-        <div className="flex-center-wrap">
-            <div>
-                <p className="title">View Defaults:</p>
-                <ViewSettings settings={settings} setSettings={setSettings}/>
+        <div className="flex-centered">
+            <div className="tan-container-row-wrap">
+                <div>
+                    <p className="title">View Defaults:</p>
+                    <ViewSettings settings={settings} setSettings={setSettings}/>
+                </div>
+                
+                <div>
+                    <p className="title">Event and Task Defaults:</p>
+                    <EventSettings settings={settings} setSettings={setSettings}/>
+                </div>
+                
+                <div>
+                    <p className="title">Change Password:</p>
+                    <ChangePassword />
+                </div>
+                
             </div>
-            
-            <div>
-                <p className="title">Event and Task Defaults:</p>
-                <EventSettings settings={settings} setSettings={setSettings}/>
-            </div>
-            
-            <div>
-                <p className="title">Change Password:</p>
-                <ChangePassword />
-            </div>
-            
         </div>
     )
 }

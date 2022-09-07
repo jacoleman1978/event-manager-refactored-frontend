@@ -4,8 +4,8 @@ import { Form } from "react-bootstrap";
 // Called from EventSettings.js
 const DefaultStartDateSelector = ({setStartDate, formStartDate}) => {
     return (
-        <Form.Group className="flex-left-center" controlId="formStartDate">
-            <Form.Label>Start Date: </Form.Label>
+        <Form.Group className="flex-between-center" controlId="formStartDate">
+            <Form.Label className="flex-left-bold">Start Date: </Form.Label>
             <Form.Select 
                 className="dropdown-width" 
                 aria-label="Select a default start date" 

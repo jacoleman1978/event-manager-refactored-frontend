@@ -21,7 +21,7 @@ const Week = ({events}) => {
         <>
             {events !== undefined ? 
                 <div className="week-row">
-                    <div className="week-day-left-center">{events.fullName}</div>
+                    <div className="flex-left-center-bold">{events.fullName}</div>
                     {weekEvents}
                 </div> : ""}
         </>

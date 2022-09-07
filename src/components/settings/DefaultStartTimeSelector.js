@@ -4,8 +4,8 @@ import { Form } from "react-bootstrap";
 // Called from EventSettings.js
 const DefaultStartTimeSelector = ({setStartTime, formStartTime}) => {
     return (
-        <Form.Group className="flex-left-center" controlId="formStartTime">
-            <Form.Label>Start Time: </Form.Label>
+        <Form.Group className="flex-between-center" controlId="formStartTime">
+            <Form.Label className="flex-left-bold">Start Time: </Form.Label>
             <Form.Select 
                 className="dropdown-width" 
                 aria-label="Select a default start time" 

@@ -33,7 +33,7 @@ const ChangePassword = () => {
     const passwordMismatchErrorMessage = "Passwords Do Not Match";
 
     return (
-        <div className="group-container">
+        <div className="group-container-no-set-width">
             <Form onSubmit={handleSubmit} >
                 <PasswordInput label={"Current"} setPassword={setCurrentPwd} />
 

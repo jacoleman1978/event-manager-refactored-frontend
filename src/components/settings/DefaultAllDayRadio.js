@@ -9,7 +9,7 @@ const DefaultAllDayRadio = ({setAllDay, formIsAllDay}) => {
             controlId="formIsAllDay"
             
         >
-            <Form.Label>Default to all day: </Form.Label>
+            <Form.Label className="flex-left-bold">Default to all day: </Form.Label>
             <Form.Check 
                 inline
                 label="Yes"

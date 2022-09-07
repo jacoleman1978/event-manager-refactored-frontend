@@ -5,7 +5,7 @@ import { Form } from "react-bootstrap";
 const EndDate = ({formEndDate, setEndDate, label}) => {
     return (
         <div className="flex-left-center-no-gap outline-inner">
-            <Form.Label className="remove-bottom-margin">{label}</Form.Label>
+            <Form.Label className="flex-left-bold">{label}</Form.Label>
             <Form.Control 
                 type="date" 
                 required 

@@ -23,6 +23,7 @@ const Groups = (props) => {
         return (
             <div className="outline-inner" key={group._id}>
                 <Form.Check
+                    className="small-font flex-left-center"
                     key={group._id}
                     type="checkbox"
                     label={group.name}
@@ -38,7 +39,7 @@ const Groups = (props) => {
 
     return (
         <Form.Group controlId="formTask" >
-            <Form.Label className="remove-bottom-margin">{label}</Form.Label>
+            <Form.Label className="flex-left-bold">{label}</Form.Label>
             <div className="checkbox-list">
                 {groupList}
             </div>

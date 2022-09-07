@@ -4,8 +4,8 @@ import { Form } from "react-bootstrap";
 // Called from ViewSettings.js
 const DefaultLoginSelector = ({setLoginView, formLoginView}) => {
     return (
-        <Form.Group className="flex-left-center" controlId="formLoginView">
-            <Form.Label>Default Login: </Form.Label>
+        <Form.Group className="flex-between-center" controlId="formLoginView">
+            <Form.Label className="flex-left-bold">Default Login: </Form.Label>
             <Form.Select 
                 className="dropdown-width" 
                 aria-label="Select a default login view" 

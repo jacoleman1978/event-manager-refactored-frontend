@@ -36,7 +36,7 @@ const ViewSettings = ({settings, setSettings}) => {
         SettingsDataService.UpdateSettings(data).then(res => setSettings(res.data.settings));
     }
     return (
-        <div className="group-container">
+        <div className="group-container-no-set-width">
             <Form onSubmit={handleSubmit}>
                 <DefaultEventsSelector setEventsView={setEventsView} formEventsView={formEventsView} />
 

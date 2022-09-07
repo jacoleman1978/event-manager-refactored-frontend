@@ -4,8 +4,8 @@ import { Form } from "react-bootstrap"
 // Called from ViewSettings.js
 const DefaultTasksSelector = ({setTasksView, formTasksView}) => {
     return (
-        <Form.Group className="flex-left-center" controlId="formTasksView">
-            <Form.Label>Default Tasks: </Form.Label>
+        <Form.Group className="flex-between-center" controlId="formTasksView">
+            <Form.Label className="flex-left-bold">Default Tasks: </Form.Label>
             <Form.Select 
                 className="dropdown-width" 
                 aria-label="Select a default task view" 

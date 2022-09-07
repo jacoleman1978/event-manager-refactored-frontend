@@ -4,8 +4,8 @@ import { Form } from "react-bootstrap";
 // Called from EventSettings.js
 const DefaultTaskPriority = ({setPriority, formTaskPriority}) => {
     return (
-        <Form.Group className="flex-left-center" controlId="formTaskPriority">
-            <Form.Label>Task Priority: </Form.Label>
+        <Form.Group className="flex-between-center" controlId="formTaskPriority">
+            <Form.Label className="flex-left-bold">Task Priority: </Form.Label>
             <Form.Select 
                 className="dropdown-width" 
                 aria-label="Select a default task priority" 

@@ -6,6 +6,7 @@ const AllDaySwitch = ({formAllDay, setAllDay}) => {
     return (
         <div className="flex-left-center-wrap">
             <Form.Check 
+                className="flex-centered small-right-left-margins small-font"
                 type="switch"
                 id="is-all-day"
                 label="All Day"
