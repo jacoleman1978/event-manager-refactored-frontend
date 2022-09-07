@@ -3,8 +3,15 @@ import { Form, Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
 import TextInputWrapper from "../form/TextInputWrapper";
 
-const NewGroupForm = () => {
+const NewGroupForm = ({setCreateFlag}) => {
     let [groupName, setGroupName] = useState("");
+
+    const onCreateGroupClick = () => {
+        GroupDataService.NewGroup({groupName: groupName}).then(() => {
+            setCreateFlag(true);
+            setGroupName("");
+        })
+    }
 
     return (
         <div>
@@ -15,7 +22,7 @@ const NewGroupForm = () => {
                         size="sm"
                         variant="success" 
                         type="button"
-                        onClick={() => GroupDataService.NewGroup({groupName: groupName})}
+                        onClick={onCreateGroupClick}
                     >
                         Create Group
                     </Button>

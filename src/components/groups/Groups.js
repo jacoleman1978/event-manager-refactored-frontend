@@ -15,23 +15,36 @@ const Groups = () => {
     let [groupMemberships, setGroupMemberships] = useState([]);
     let [groupInvitations, setGroupInvitations] = useState([]);
     let [editFlag, setEditFlag] = useState(false);
+    let [deleteFlag, setDeleteFlag] = useState(false);
+    let [createFlag, setCreateFlag] = useState(false);
     
     useEffect(() => {
         if (currentUser !== null) {
-            GroupDataService.GetOwnedGroups().then(res => setOwnedGroup(res.data.ownedGroups));
+            getOwnedGroups();
 
             GroupDataService.GetGroupMemberships().then(res => setGroupMemberships(res.data.groupMemberships));
 
             GroupDataService.GetGroupInvitations().then(res => setGroupInvitations(res.data.groupInvitations));
         }
-    }, [currentUser])
+        console.log(editFlag)
+    }, [currentUser, editFlag])
 
-    // Generate a display list of groups owned by the user
-    let ownedGroups = ownedGroup.map((group, i) => {
-        return (
-            <OwnedGroup group={group} editFlag={editFlag} key={`owned-${i}`}/>
-        )
-    });
+    const getOwnedGroups = () => {
+        GroupDataService.GetOwnedGroups().then((res) => {
+            let ownedGroups = res.data.ownedGroups.map((group, i) => {
+                return (
+                    <OwnedGroup group={group} editFlag={editFlag} deleteFlag={deleteFlag} setDeleteFlag={setDeleteFlag} key={`owned-${i}`}/>
+                )
+                })
+            setOwnedGroup(ownedGroups)
+        });
+    }
+
+    if (deleteFlag || createFlag) {
+        setCreateFlag(false);
+        setDeleteFlag(false);
+        getOwnedGroups();
+    }
 
     // Generate a display list of groups that the user is a member of, but does not own
     let membershipList = groupMemberships.map((group, i) => {
@@ -49,7 +62,7 @@ const Groups = () => {
 
             <p className="title">Create a New Group</p>
             <div className="flex-centered outline small-top-margin">
-                <NewGroupForm />
+                <NewGroupForm setCreateFlag={setCreateFlag} />
             </div>
             
             <div className="flex-centered">
@@ -60,14 +73,13 @@ const Groups = () => {
                         type="switch"
                         id="edit-group"
                         label="Edit Groups"
-                        checked={editFlag}
                         onChange={() => setEditFlag(!editFlag)}
                     />
                 </div>
             </div>
 
             <div className="flex-center-wrap-no-gap outline-row small-top-margin">
-                {ownedGroups}
+                {ownedGroup}
             </div>
             
             <p className="title">Group Membership</p>

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
 
-const DeleteGroup = ({groupId}) => {
+// Called from EditGroup.js
+const DeleteGroup = ({groupId, deleteFlag, setDeleteFlag}) => {
     let [shouldWarn, setShouldWarn] = useState(false);
 
     const onDeleteClick = () => {
@@ -10,7 +11,7 @@ const DeleteGroup = ({groupId}) => {
     }
 
     const onConfirmDeletionClick = () => {
-        GroupDataService.DeleteGroup(groupId)
+        GroupDataService.DeleteGroup(groupId).then(setDeleteFlag(true))
     }
 
     return (

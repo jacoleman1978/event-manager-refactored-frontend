@@ -11,7 +11,7 @@ import updateCheckedUsers from "../../helpers/updateCheckedUsers";
 import updateMemberChange from "./helpers/updateMemberChange";
 
 // Called from OwnedGroup.js
-const EditGroup = ({groupId}) => {
+const EditGroup = ({groupId, deleteFlag, setDeleteFlag}) => {
     let [groupData, setGroupData] = useState(null);
     let [formGroupName, setGroupName] = useState("");
     let [wasDataSaved, setWasDataSaved] = useState(false);
@@ -100,7 +100,7 @@ const EditGroup = ({groupId}) => {
                 
                 <UserSearch group={groupData} setHasInvitedMember={setHasInvitedMember} />
 
-                <DeleteGroup groupId={groupId} />
+                <DeleteGroup groupId={groupId} deleteFlag={deleteFlag} setDeleteFlag={setDeleteFlag} />
             </div>
         </div>
     )
