@@ -5,7 +5,6 @@ import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
 import getDefaultDate from "../../helpers/getDefaultDate";
 import getDefaultTime from "../../helpers/getDefaultTime";
-import getDefaultViewPath from "../../helpers/getDefaultViewPath";
 import Title from "../form/Title";
 import AllDaySwitch from "../form/AllDaySwitch";
 import DateRange from "../form/DateRange";
@@ -27,11 +26,13 @@ const EventForm = ({settings, isEdit}) => {
     let [formEndTime, setEndTime] = useState("");
     let [formGroups, setGroups] = useState([]);
     let [formNotes, setNotes] = useState("");
+    let [originalGroupIds, setOriginalGroupIds] = useState([]);
     let [groupEditList, setGroupEditList] = useState([]);
 
     // Uses the DataService to port the data to database when form submitted
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
         let data = {
             title: formTitle,
             task: {
@@ -55,15 +56,23 @@ const EventForm = ({settings, isEdit}) => {
         if (isEdit) {
             EventDataService.UpdateEvent(data, eventId);
 
-            let navPath = await getDefaultViewPath()
+            for (let groupId of formGroups) {
+                if (originalGroupIds.indexOf(groupId) === -1) {
+                    EventDataService.AddGroupToEvent({groupIdToAdd: groupId}, eventId);
+                }
+            }
+
+            for (let groupId of originalGroupIds) {
+                if (formGroups.indexOf(groupId) === -1) {
+                    EventDataService.RemoveGroupFromEvent({groupIdToRemove: groupId}, eventId);
+                }
+            }
             
-            navigate(navPath);
+            navigate(-1);
         } else {
             EventDataService.AddEvent(data);
             
-            let navPath = await getDefaultViewPath();
-            
-            //navigate(navPath);
+            navigate(-1);
         }
     }
 
@@ -82,6 +91,7 @@ const EventForm = ({settings, isEdit}) => {
                     setEndTime(event.allDay.endTime);
                     setNotes(event.notes);
                     setGroups(event.groupIds);
+                    setOriginalGroupIds(event.groupIds);
                 })
             } else {
                 setAllDay(settings.allDay.isIt);
