@@ -13,6 +13,7 @@ const Groups = () => {
 
     let [groups, setGroups] = useState([]);
     let [ownedGroupDisplay, setOwnedGroupDisplay] = useState([]);
+    let [newGroupDisplay, setNewGroupDisplay] = useState([]);
     let [groupMemberships, setGroupMemberships] = useState([]);
     let [groupInvitations, setGroupInvitations] = useState([]);
     let [editFlag, setEditFlag] = useState(false);
@@ -25,6 +26,8 @@ const Groups = () => {
             GroupDataService.GetGroupMemberships().then(res => setGroupMemberships(res.data.groupMemberships));
 
             GroupDataService.GetGroupInvitations().then(res => setGroupInvitations(res.data.groupInvitations));
+
+            setNewGroupDisplay([<NewGroupForm key={"new group"} setCreateFlag={setCreateFlag} />])
         }
     }, [currentUser, editFlag])
 
@@ -54,6 +57,7 @@ const Groups = () => {
     if (createFlag) {
         setCreateFlag(false);
         getOwnedGroupDisplay();
+        setNewGroupDisplay([<NewGroupForm key={"new group reset"} setCreateFlag={setCreateFlag} />])
     }
 
     // Generate a display list of groups that the user is a member of, but does not own
@@ -72,7 +76,7 @@ const Groups = () => {
 
             <p className="title">Create a New Group</p>
             <div className="flex-centered outline small-top-margin">
-                <NewGroupForm setCreateFlag={setCreateFlag} />
+                {newGroupDisplay}
             </div>
             
             <div className="flex-centered">

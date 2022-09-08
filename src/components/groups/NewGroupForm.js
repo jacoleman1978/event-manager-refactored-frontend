@@ -3,13 +3,13 @@ import { Form, Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
 import TextInputWrapper from "../form/TextInputWrapper";
 
+// Called from Groups.js
 const NewGroupForm = ({setCreateFlag}) => {
     let [groupName, setGroupName] = useState("");
 
     const onCreateGroupClick = () => {
         GroupDataService.NewGroup({groupName: groupName}).then(() => {
             setCreateFlag(true);
-            setGroupName("");
         })
     }
 
