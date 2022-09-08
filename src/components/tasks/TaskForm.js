@@ -5,7 +5,6 @@ import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
 import getDefaultDate from "../../helpers/getDefaultDate";
 import getDefaultTime from "../../helpers/getDefaultTime";
-import getDefaultViewPath from "../../helpers/getDefaultViewPath";
 import Title from "../form/Title";
 import Priority from "../form/Priority";
 import AllDaySwitch from "../form/AllDaySwitch";
@@ -57,16 +56,12 @@ const TaskForm = ({settings, isEdit}) => {
 
         if (isEdit) {
             EventDataService.UpdateEvent(data, eventId);
-
-            let navPath = await getDefaultViewPath()
             
-            navigate(navPath);
+            navigate(-1);
         } else {
             EventDataService.AddEvent(data);
             
-            let navPath = await getDefaultViewPath();
-            
-            navigate(navPath);
+            navigate(-1);
         }
     }
 
