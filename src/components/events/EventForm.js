@@ -63,7 +63,7 @@ const EventForm = ({settings, isEdit}) => {
             
             let navPath = await getDefaultViewPath();
             
-            navigate(navPath);
+            //navigate(navPath);
         }
     }
 

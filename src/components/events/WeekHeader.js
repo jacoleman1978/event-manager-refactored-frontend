@@ -15,9 +15,9 @@ const WeekHeader = ({offsetBy}) => {
     }
 
     // Displays the formatted date strings in the header of the week table
-    let weekHeaders = dayHeaders.map(header => {
+    let weekHeaders = dayHeaders.map((header, i) => {
         return (
-            <div key={header} className="week-day-header">{header}</div>
+            <div key={i} className="week-day-header">{header}</div>
         )
     })
 

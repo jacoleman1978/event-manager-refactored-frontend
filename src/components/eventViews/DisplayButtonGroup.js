@@ -14,7 +14,7 @@ const DisplayButtonGroup = ({event, type}) => {
     }
 
     const editEvent = () => {
-        navigate(`/${type}s/edit/${event._id}`);
+        navigate(`/${type}s/edit/${event._id}/`);
     }
 
     const deleteEvent = (e) => {
@@ -24,12 +24,13 @@ const DisplayButtonGroup = ({event, type}) => {
 
     return (
         <div className={"flex-center-wrap"} key={`${event._id}-buttons`}>
-            <Button
-                variant="success"
-                onClick={completeEvent}
-            >
-                <i className="fa-regular fa-circle-check"></i>
-            </Button>
+            {type === 'task' ? <Button
+                    variant="success"
+                    onClick={completeEvent}
+                >
+                    <i className="fa-regular fa-circle-check"></i>
+                </Button> : ""
+            }
 
             <Button
                 variant="warning"

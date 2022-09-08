@@ -13,8 +13,8 @@ const Events = ({viewType, settings}) => {
     useEffect(() => {
         if (currentUser !== null) {
             setDisplayView(selectView(currentUser));
-        }
-    }, [currentUser])
+        } 
+    }, [currentUser, viewType])
 
     const selectView = (currentUser) => {
         if (viewType === 'week') {
