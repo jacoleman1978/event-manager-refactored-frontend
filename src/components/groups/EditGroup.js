@@ -11,7 +11,7 @@ import updateCheckedUsers from "../../helpers/updateCheckedUsers";
 import updateMemberChange from "./helpers/updateMemberChange";
 
 // Called from OwnedGroup.js
-const EditGroup = ({groupId, deleteFlag, setDeleteFlag}) => {
+const EditGroup = ({groupId, setGroups}) => {
     let [groupData, setGroupData] = useState(null);
     let [formGroupName, setGroupName] = useState("");
     let [wasDataSaved, setWasDataSaved] = useState(false);
@@ -25,7 +25,7 @@ const EditGroup = ({groupId, deleteFlag, setDeleteFlag}) => {
 
     useEffect(() => {
         getData();
-    }, [])
+    }, [groupId])
 
     useEffect(() => {
         if (checkboxAction.addId !== "" || checkboxAction.removeId !== "") {
@@ -49,7 +49,6 @@ const EditGroup = ({groupId, deleteFlag, setDeleteFlag}) => {
         }
 
     }, [groupData])
-    
 
     const getData = () => {
         GroupDataService.GetGroupById(groupId).then((res) => {
@@ -100,7 +99,7 @@ const EditGroup = ({groupId, deleteFlag, setDeleteFlag}) => {
                 
                 <UserSearch group={groupData} setHasInvitedMember={setHasInvitedMember} />
 
-                <DeleteGroup groupId={groupId} deleteFlag={deleteFlag} setDeleteFlag={setDeleteFlag} />
+                <DeleteGroup groupId={groupId} setGroups={setGroups} />
             </div>
         </div>
     )

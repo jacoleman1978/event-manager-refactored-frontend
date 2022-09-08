@@ -11,39 +11,49 @@ import NewGroupForm from "./NewGroupForm";
 const Groups = () => {
     const { currentUser } = useContext(CurrentUser);
 
-    let [ownedGroup, setOwnedGroup] = useState([]);
+    let [groups, setGroups] = useState([]);
+    let [ownedGroupDisplay, setOwnedGroupDisplay] = useState([]);
     let [groupMemberships, setGroupMemberships] = useState([]);
     let [groupInvitations, setGroupInvitations] = useState([]);
     let [editFlag, setEditFlag] = useState(false);
-    let [deleteFlag, setDeleteFlag] = useState(false);
     let [createFlag, setCreateFlag] = useState(false);
     
     useEffect(() => {
         if (currentUser !== null) {
-            getOwnedGroups();
+            getOwnedGroupDisplay();
 
             GroupDataService.GetGroupMemberships().then(res => setGroupMemberships(res.data.groupMemberships));
 
             GroupDataService.GetGroupInvitations().then(res => setGroupInvitations(res.data.groupInvitations));
         }
-        console.log(editFlag)
     }, [currentUser, editFlag])
 
-    const getOwnedGroups = () => {
+    useEffect(() => {
+        if (groups.length > 0) {
+            let ownedGroups = groups.map((group, i) => {
+                return (
+                    <OwnedGroup group={group} editFlag={editFlag} setGroups={setGroups} key={`owned-${i}`}/>
+                )
+            })
+            setOwnedGroupDisplay(ownedGroups);
+            setGroups([]);
+        }
+    }, [groups])
+
+    const getOwnedGroupDisplay = () => {
         GroupDataService.GetOwnedGroups().then((res) => {
             let ownedGroups = res.data.ownedGroups.map((group, i) => {
                 return (
-                    <OwnedGroup group={group} editFlag={editFlag} deleteFlag={deleteFlag} setDeleteFlag={setDeleteFlag} key={`owned-${i}`}/>
+                    <OwnedGroup group={group} editFlag={editFlag} setGroups={setGroups} key={`owned-${i}`}/>
                 )
-                })
-            setOwnedGroup(ownedGroups)
+            })
+            setOwnedGroupDisplay(ownedGroups);
         });
     }
 
-    if (deleteFlag || createFlag) {
+    if (createFlag) {
         setCreateFlag(false);
-        setDeleteFlag(false);
-        getOwnedGroups();
+        getOwnedGroupDisplay();
     }
 
     // Generate a display list of groups that the user is a member of, but does not own
@@ -79,7 +89,7 @@ const Groups = () => {
             </div>
 
             <div className="flex-center-wrap-no-gap outline-row small-top-margin">
-                {ownedGroup}
+                {ownedGroupDisplay}
             </div>
             
             <p className="title">Group Membership</p>

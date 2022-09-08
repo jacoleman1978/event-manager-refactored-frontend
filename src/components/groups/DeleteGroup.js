@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
 
 // Called from EditGroup.js
-const DeleteGroup = ({groupId, deleteFlag, setDeleteFlag}) => {
+const DeleteGroup = ({groupId, setGroups}) => {
     let [shouldWarn, setShouldWarn] = useState(false);
+
+    useEffect(() => {
+        setShouldWarn(false);
+    }, [groupId])
 
     const onDeleteClick = () => {
         setShouldWarn(!shouldWarn);
     }
 
     const onConfirmDeletionClick = () => {
-        GroupDataService.DeleteGroup(groupId).then(setDeleteFlag(true))
+        GroupDataService.DeleteGroup(groupId).then(() => {
+            GroupDataService.GetOwnedGroups().then((res) => {
+                setGroups(res.data.ownedGroups);
+            })
+        })
     }
 
     return (
