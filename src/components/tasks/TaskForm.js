@@ -13,7 +13,7 @@ import TimeRange from "../form/TimeRange";
 import Groups from "../form/Groups";
 import Notes from "../form/Notes";
 
-const TaskForm = ({settings, isEdit}) => {
+const TaskForm = ({settings, isEdit, restoreTask}) => {
     const { eventId } = useParams();
 
     const navigate = useNavigate();
@@ -29,6 +29,16 @@ const TaskForm = ({settings, isEdit}) => {
     let [formGroups, setGroups] = useState([]);
     let [formNotes, setNotes] = useState("");
     let [groupEditList, setGroupEditList] = useState([]);
+
+    const getButtonLabel = () => {
+        if (restoreTask) {
+            return "Save Edits and Restore Task"
+        } else if (isEdit) {
+            return "Save Edits"
+        } else if (isEdit === false) {
+            return "Create New Task"
+        }  
+    }
 
     // Uses the DataService to port the data to database when form submitted
     const handleSubmit = async (e) => {
@@ -125,7 +135,7 @@ const TaskForm = ({settings, isEdit}) => {
                 
 
                 <Button variant="primary" type="submit" className="align-self bottom-margin">
-                    {isEdit ? "Save Edits" : "Create New Task"}
+                    {getButtonLabel()}
                 </Button>
             </Form>
         </div>

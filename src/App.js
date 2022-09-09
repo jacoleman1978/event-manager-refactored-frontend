@@ -25,6 +25,8 @@ function App() {
               element={ <DisplayContainer isTask={true} isEvent={false} viewType={'new'}/>} />
             <Route path='/tasks/edit/:eventId' 
               element={ <DisplayContainer isTask={true} isEvent={false} viewType={'edit'}/>} />
+            <Route path='/tasks/edit/:eventId/restore' 
+              element={ <DisplayContainer isTask={true} isEvent={false} viewType={'restore'}/>} />
             <Route path='/events/week/:week' 
               element={ <DisplayContainer isTask={false} isEvent={true} viewType={'week'}/>} />
             <Route path='/events/day/:day' 

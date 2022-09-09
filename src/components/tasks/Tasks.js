@@ -21,9 +21,11 @@ const Tasks = ({viewType, settings}) => {
         } else if (viewType === 'duedate') {
             return <TasksByDueDate settings={settings} tasks={tasks}/>
         } else if (viewType === 'new') {
-            return <TaskForm settings={settings} isEdit={false}/>
+            return <TaskForm settings={settings} isEdit={false} restoreTask={false} />
         } else if (viewType === 'edit') {
-            return <TaskForm settings={settings} isEdit={true}/>
+            return <TaskForm settings={settings} isEdit={true} restoreTask={false} />
+        } else if (viewType === 'restore') {
+            return <TaskForm settings={settings} isEdit={true} restoreTask={true} />
         }
     }
 

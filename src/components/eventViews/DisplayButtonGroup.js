@@ -7,10 +7,10 @@ import EventDataService from "../../services/eventDataService";
 const DisplayButtonGroup = ({event, type}) => {
     const navigate = useNavigate();
 
-    // TODO: Archive the event
     const completeEvent = (e) => {
         e.preventDefault();
         EventDataService.CompleteTask(event._id);
+        navigate(0);
     }
 
     const editEvent = () => {
@@ -24,7 +24,8 @@ const DisplayButtonGroup = ({event, type}) => {
 
     return (
         <div className={"flex-center-wrap"} key={`${event._id}-buttons`}>
-            {type === 'task' ? <Button
+            {type === 'task' ? 
+                <Button
                     variant="success"
                     onClick={completeEvent}
                 >
