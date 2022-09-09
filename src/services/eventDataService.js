@@ -45,6 +45,16 @@ class EventDataService {
         axios.defaults.withCredentials = true;
         return axios.get('http://localhost:3100/event/userGroupEvents')
     }
+
+    static GetCompletedTasks() {
+        axios.defaults.withCredentials = true;
+        return axios.get('http://localhost:3100/event/tasks/completed')
+    }
+
+    static CompleteTask(eventId) {
+        axios.defaults.withCredentials = true;
+        return axios.put(`http://localhost:3100/event/${eventId}/complete`)
+    }
 }
 
 export default EventDataService;

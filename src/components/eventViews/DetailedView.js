@@ -79,7 +79,7 @@ const DetailedView = ({event, type, isWeek}) => {
         <div className="flex-left-center-wrap" key={`${event._id}-detailed`} style={isWeek ? {width: "13rem"} : {}}>
             <Card key={event._id} className="card-style" >
                 <Card.Title className="title">{event.title}</Card.Title>
-                    <hr />
+                <hr />
                 <div className="sm-bottom-padding">
                     <div className="card-container">
                         <div>

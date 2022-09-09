@@ -10,7 +10,7 @@ const DisplayButtonGroup = ({event, type}) => {
     // TODO: Archive the event
     const completeEvent = (e) => {
         e.preventDefault();
-        EventDataService.DeleteEvent(event._id);
+        EventDataService.CompleteTask(event._id);
     }
 
     const editEvent = () => {

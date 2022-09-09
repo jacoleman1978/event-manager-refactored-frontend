@@ -37,7 +37,8 @@ const TaskForm = ({settings, isEdit}) => {
             title: formTitle,
             task: {
                 isIt: true,
-                priority: formPriority
+                priority: formPriority,
+                taskCompleted: false
             },
             allDay: {
                 isIt: formAllDay,

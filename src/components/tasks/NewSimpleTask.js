@@ -20,7 +20,8 @@ const NewSimpleTask = ({settings}) => {
             title: formTitle, 
             task: {
                 isIt: true,
-                priority: formPriority
+                priority: formPriority,
+                taskCompleted: false
             },
             allDay: {
                 isIt: true,

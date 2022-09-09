@@ -1,13 +1,23 @@
 import React from "react";
 
 // Called from TaskRow.js
-const SimpleView = ({event}) => {
-    return (
-        <>
-            <div key={`${event._id}-simple`}  >
-                {event.title}
+const SimpleView = ({event, isCompletedTask}) => {
+    const completedTaskDisplay = () => {
+        let date = new Date(event.task.dateCompleted);
+        let formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+
+        return (
+            <div key={event._id} className="flex-left-center">
+                <div className="med-padding-right"><strong>Completed Date:</strong> {formattedDate}</div>
+                <div><strong>Task Title:</strong>{event.title}</div>
             </div>
-        </>
+        )
+    }
+
+    return (
+        <div key={`${event._id}-simple`}  >
+            {isCompletedTask ? completedTaskDisplay() : event.title}
+        </div>
     )
 }
 
