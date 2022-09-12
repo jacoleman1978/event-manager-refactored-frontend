@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-// Called by /events/EventForm.js
+// Called by /events/EventForm.js, /tasks/NewSimpleTask.js, /tasks/TaskForm.js
 const Notes = ({formNotes, setNotes}) => {
     // Displays and maintains state for notes
     return (

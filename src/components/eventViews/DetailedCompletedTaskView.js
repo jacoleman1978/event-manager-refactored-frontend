@@ -3,6 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import CardTitleWithValue from "../cards/CardTitleWithValue";
 
+// Called by /tasks/CompletedTaskRow.js
 const DetailedCompletedTaskView = ({task}) => {
     const navigate = useNavigate();
 

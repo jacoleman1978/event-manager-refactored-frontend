@@ -1,7 +1,7 @@
 import React from "react";
 import {Form} from "react-bootstrap";
 
-// Called by events/EventForm.js
+// Called by events/EventForm.js, tasks/NewSimpleTask.js, /tasks/TaskForm.js
 const Title = ({formTitle, setTitle, label}) => {
     // Displays and maintains state for an event/task title
     return (

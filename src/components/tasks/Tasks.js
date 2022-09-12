@@ -8,6 +8,7 @@ import TaskForm from "./TaskForm";
 const Tasks = ({viewType, settings}) => {
     let [tasks, setTasks] = useState([]);
 
+    // Retrieve all of the tasks for the the user and set them to state
     useEffect(() => {
         EventDataService.GetTasks().then((res) => {
             setTasks(res.data.tasks);

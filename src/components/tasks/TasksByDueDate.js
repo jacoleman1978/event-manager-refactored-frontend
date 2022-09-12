@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import TaskGroup from "./TaskGroup";
 import NewSimpleTask from "./NewSimpleTask";
-import sortTasksByDueDate from "./helpers/sortTasksByDueDate";
 import CompletedTasks from "./CompletedTasks";
+import sortTasksByDueDate from "./helpers/sortTasksByDueDate";
 
 // Called by Tasks.js
 const TasksByDueDate = ({settings, tasks}) => {

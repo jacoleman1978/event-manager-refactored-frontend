@@ -2,7 +2,7 @@ import React from "react";
 import StartDate from "./StartDate";
 import EndDate from "./EndDate";
 
-// Called by /events/EventForm.js
+// Called by /events/EventForm.js, /tasks/TaskForm.js
 const DateRange = ({formStartDate, setStartDate, formEndDate, setEndDate, formAllDay}) => {
     // Displays and maintains state for the start and end dates
     return (

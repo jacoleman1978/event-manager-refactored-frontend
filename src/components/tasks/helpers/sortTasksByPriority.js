@@ -1,3 +1,4 @@
+// Called by TasksByPriority.js
 /*
 -tasks is an array of task objects
 -Returns an object with properties of the priorities: critical, high, medium, low

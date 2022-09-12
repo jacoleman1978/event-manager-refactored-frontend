@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-// Called by /events/EventForm.js
+// Called by /events/EventForm.js, /tasks/TaskForm.js
 const AllDaySwitch = ({formAllDay, setAllDay}) => {
     // 'All Day' state switch
     return (

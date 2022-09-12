@@ -1,5 +1,5 @@
 import zeroBeforeSingleDigitInt from "./zeroBeforeSingleDigitInt";
-// Called by /events/EventForm.js
+// Called by /events/EventForm.js, /tasks/TaskForm.js
 // Used to convert time defaults in settings to format usable by time input fields.
 // Input is "+15 Minutes", "+30 Minutes", "+45 Minutes", "+1 Hour", "+2 Hours", "+3 Hours", "+4 Hours", "+5 Hours", "+6 Hours"
 // Time will be returned as a string 'HH:MM'.

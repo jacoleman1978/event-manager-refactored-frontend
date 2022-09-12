@@ -1,6 +1,6 @@
 import getDefaultDate from "./getDefaultDate";
 
-// Called from /helpers/getSortedEventsByWeek.js, /helpers/isEventWithinDateRange.js
+// Called from /helpers/getSortedEventsByWeek.js, /helpers/isEventWithinDateRange.js, /tasks/helpers/sorTasksByDueDate.js
 const getDayDifference = (date) => {
     // Need a date object in the format of 'YYYY-MM-DD'.
     const todayDate = getDefaultDate("Now");

@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-// Called from /eventViews/DetailedView.js, /form/DateRange.js
+// Called from /eventViews/DetailedView.js, /form/DateRange.js, /tasks/NewSimpleTask.js
 const EndDate = ({formEndDate, setEndDate, label}) => {
     // Displays and maintains state for the end date
     return (

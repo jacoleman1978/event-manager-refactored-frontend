@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import EventDataService from "../../services/eventDataService";
 import CompletedTaskRow from "./CompletedTaskRow";
 
+// Called by TasksByDueDate.js, TasksByPriority.js
+// Displays a list of the user's tasks that are marked complete
 const CompletedTasks = () => {
     let [completedTasksDisplay, setCompletedTasksDisplay] = useState([]);
 

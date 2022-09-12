@@ -1,6 +1,6 @@
 import React from "react";
 
-// Called from TaskRow.js
+// Called from /tasks/TaskRow.js, /tasks/CompletedTaskRow.js
 // For completed tasks, displays completed date and task title
 // For uncompleted tasks, displays just the event title
 const SimpleView = ({event, isCompletedTask}) => {

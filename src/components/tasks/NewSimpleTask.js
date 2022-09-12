@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import {Form, Button} from 'react-bootstrap';
 import EventDataService from "../../services/eventDataService";
-import getDefaultDate from "../../helpers/getDefaultDate";
 import Title from "../form/Title";
 import Priority from "../form/Priority";
 import EndDate from "../form/EndDate";
 import Notes from "../form/Notes";
+import getDefaultDate from "../../helpers/getDefaultDate";
 
 // Called from TasksByPriority.js and TasksByDueDate.js
+// Creates a new task with only minimal fields inputted by user
 const NewSimpleTask = ({settings}) => {
     let [formTitle, setTitle] = useState("");
     let [formPriority, setPriority] = useState(settings.task.priority);

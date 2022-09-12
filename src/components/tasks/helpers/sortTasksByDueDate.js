@@ -1,5 +1,6 @@
 import getDayDifference from "../../../helpers/getDayDifference"
 
+// Called by TasksByDueDate.js
 /*
 -tasks is an array of task objects
 -Returns an object with properties of the due dates: past, today, tomorrow, week, future

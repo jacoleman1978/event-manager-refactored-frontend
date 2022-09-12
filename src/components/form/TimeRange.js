@@ -2,7 +2,7 @@ import React from "react";
 import StartTime from "./StartTime";
 import EndTime from "./EndTime";
 
-// Called by /events/EventForm.js
+// Called by /events/EventForm.js, /tasks/TaskForm.js
 const TimeRange = ({formStartTime, setStartTime, formEndTime, setEndTime}) => {
     // Displays and maintains state for start time and end time
     return (

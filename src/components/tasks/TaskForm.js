@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
-import getDefaultDate from "../../helpers/getDefaultDate";
-import getDefaultTime from "../../helpers/getDefaultTime";
 import Title from "../form/Title";
 import Priority from "../form/Priority";
 import AllDaySwitch from "../form/AllDaySwitch";
@@ -12,13 +10,15 @@ import DateRange from "../form/DateRange";
 import TimeRange from "../form/TimeRange";
 import Groups from "../form/Groups";
 import Notes from "../form/Notes";
+import getDefaultDate from "../../helpers/getDefaultDate";
+import getDefaultTime from "../../helpers/getDefaultTime";
 
+// Called by Tasks.js
 const TaskForm = ({settings, isEdit, restoreTask}) => {
     const { eventId } = useParams();
 
     const navigate = useNavigate();
 
-    // Use state to keep track of info entered into the form
     let [formTitle, setTitle] = useState("");
     let [formPriority, setPriority] = useState("");
     let [formAllDay, setAllDay] = useState(true);
@@ -30,6 +30,7 @@ const TaskForm = ({settings, isEdit, restoreTask}) => {
     let [formNotes, setNotes] = useState("");
     let [groupEditList, setGroupEditList] = useState([]);
 
+    // Conditionally set the button label depending on passed in values
     const getButtonLabel = () => {
         if (restoreTask) {
             return "Save Edits and Restore Task"
@@ -76,10 +77,12 @@ const TaskForm = ({settings, isEdit, restoreTask}) => {
         }
     }
 
+    // Get and maintain state on groups that can edit the task
     useEffect(() => {
         GroupDataService.GetGroupsCanEdit().then(res => {
             setGroupEditList(res.data.groupsCanEdit)
 
+            // If the task is being edited use the event document to set values for the form's fields
             if (isEdit) {
                 EventDataService.GetEventById(eventId).then(res => {
                     let task = res.data.eventDoc
@@ -94,6 +97,7 @@ const TaskForm = ({settings, isEdit, restoreTask}) => {
                     setGroups(task.groupIds);
                 })
             } else {
+                // If it is a new task, use settings to default values into selected form fields
                 setPriority(settings.task.priority);
                 setAllDay(settings.allDay.isIt);
                 setStartDate(getDefaultDate(settings.allDay.startDate));
