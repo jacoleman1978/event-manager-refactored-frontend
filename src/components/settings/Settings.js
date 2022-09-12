@@ -1,14 +1,16 @@
 import React, { useEffect, useContext } from "react";
+import { CurrentUser } from "../../contexts/currentUser";
+import SettingsDataService from "../../services/settingsDataService";
 import ViewSettings from "./ViewSettings";
 import EventSettings from "./EventSettings";
 import ChangePassword from "./ChangePassword";
-import { CurrentUser } from "../../contexts/currentUser";
-import SettingsDataService from "../../services/settingsDataService";
 
 // Called from DisplayContainer.js
+// A wrapper for the different components of settings
 const Settings = ({settings, setSettings}) => {
     const { currentUser } = useContext(CurrentUser);
 
+    // Retrieve the user's settings document
     useEffect(() => {
         if (settings === null) {    
             SettingsDataService.GetSettings().then(res => {setSettings(res.data.settings)});

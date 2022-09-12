@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 // Called from EventSettings.js
+// Displays and maintains state using a switch to represent the allDay setting value
 const DefaultAllDayRadio = ({setAllDay, formIsAllDay}) => {
     return (
         <Form.Group 

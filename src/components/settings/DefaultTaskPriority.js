@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 // Called from EventSettings.js
+// Displays and maintains state using a dropdown list for default task priority
 const DefaultTaskPriority = ({setPriority, formTaskPriority}) => {
     return (
         <Form.Group className="flex-between-center" controlId="formTaskPriority">

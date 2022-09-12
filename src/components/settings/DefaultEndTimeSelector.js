@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 // Called from EventSettings.js
+// Displays and maintains state using a dropdown list for end time offset
 const DefaultEndTimeSelector = ({setEndTime, formEndTime}) => {
     return (
         <Form.Group className="flex-between-center" controlId="formEndTime">

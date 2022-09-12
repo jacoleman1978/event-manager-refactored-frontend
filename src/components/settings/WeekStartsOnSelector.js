@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-// Functionality not implemented yet...would be called from ViewSettings.js
+// Unused
 const WeekStartsOnSelector = ({setStartWeek, formStartWeek}) => {
     return (
         <Form.Group className="flex-left-center" controlId="formStartWeek">

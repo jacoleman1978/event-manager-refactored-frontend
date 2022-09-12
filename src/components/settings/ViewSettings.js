@@ -6,12 +6,14 @@ import DefaultTasksSelector from "./DefaultTasksSelector";
 import DefaultLoginSelector from "./DefaultLoginSelector";
 
 // Called from Settings.js
+// A wrapper for view settings
 const ViewSettings = ({settings, setSettings}) => {
     let [formEventsView, setEventsView] = useState("");
     let [formTasksView, setTasksView] = useState("");
     let [formLoginView, setLoginView] = useState("");
     let [formStartWeek, setStartWeek] = useState("")
 
+    // Set the settings state after settings have loaded
     useEffect(() => {
         if (settings !== "undefined" && settings !== null) {
             setEventsView(settings.views.events);

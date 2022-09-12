@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 // Called from ViewSettings.js
+// Displays and maintains state using a dropdown list for the default view to use after logging in
 const DefaultLoginSelector = ({setLoginView, formLoginView}) => {
     return (
         <Form.Group className="flex-between-center" controlId="formLoginView">

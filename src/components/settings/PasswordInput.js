@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 // Called from ChangePassword.js
+// A wrapper for a password input field, using a passed in label and maintaining state
 const PasswordInput = ({label, setPassword}) => {
     return (
         <Form.Group controlId={label} className="flex-col-center-left">

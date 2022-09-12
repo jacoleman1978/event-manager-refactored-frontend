@@ -8,10 +8,9 @@ import DefaultStartTimeSelector from "./DefaultStartTimeSelector";
 import DefaultEndTimeSelector from "./DefaultEndTimeSelector";
 import DefaultTaskPriority from "./DefaultTaskPriority";
 
-const EventSettings = (props) => {
-    const { settings, setSettings } = props;
-
-    // Use state to keep track of info entered into the form
+// Called from Settings.js
+// Display container for event settings, maintaining event settings state
+const EventSettings = ({ settings, setSettings }) => {
     let [formIsAllDay, setAllDay] = useState(false);
     let [formStartDate, setStartDate] = useState("");
     let [formEndDate, setEndDate] = useState("");
@@ -19,6 +18,7 @@ const EventSettings = (props) => {
     let [formEndTime, setEndTime] = useState("");
     let [formTaskPriority, setPriority] = useState("");
 
+    // Set settings state once the settings document has been loaded
     useEffect(() => {
         if (settings !== "undefined" && settings !== null) {
             setAllDay(settings.allDay.isIt);

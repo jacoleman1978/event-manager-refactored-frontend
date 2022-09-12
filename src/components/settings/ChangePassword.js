@@ -3,8 +3,8 @@ import { Form, Button } from "react-bootstrap";
 import UserDataService from "../../services/userDataService";
 import PasswordInput from "./PasswordInput";
 
+// Called by Settings.js
 const ChangePassword = () => {
-    // Use state to keep track of info entered into the form
     let [formCurrentPwd, setCurrentPwd] = useState("");
     let [formNewPwd, setNewPwd] = useState("");
     let [formVerifyNewPwd, setVerifyNewPwd] = useState("");

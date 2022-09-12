@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap"
 
 // Called from ViewSettings.js
+// Displays and maintains state using a dropdown list for default tasks view
 const DefaultTasksSelector = ({setTasksView, formTasksView}) => {
     return (
         <Form.Group className="flex-between-center" controlId="formTasksView">
