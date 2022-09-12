@@ -1,6 +1,8 @@
 import React from "react";
 import UsersList from "./UsersList";
 
+// Called by Groups.js
+// Displays a simple version of the title and members of a group, including invitees
 const GroupMembership = ({group}) => {
     return (
         <div className="group-container-no-set-width">

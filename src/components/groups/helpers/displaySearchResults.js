@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap"
 import GroupDataService from "../../../services/groupDataService"
 
+// Unused
 /*
 -searchResults is an array of user objects from the database returned from a query
 -groupId is the _id of the group document

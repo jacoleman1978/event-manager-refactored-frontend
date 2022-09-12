@@ -1,3 +1,4 @@
+// Called by /groups/EditGroup.js
 /*
 -Used to return a list of userIds of members to remove from the group.
 -Adds users list, if their checkboxAction.addId contains a userId.

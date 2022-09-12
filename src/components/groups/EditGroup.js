@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
 import UserSearch from "./UserSearch";
-import GroupNameInput from "./GroupNameInput";
 import MembersList from "./MembersList";
 import InvitedList from "./InvitedList";
 import DeleteGroup from "./DeleteGroup";
+import TextInputWrapper from "../form/TextInputWrapper";
 import updateGroup from "./helpers/updateGroup";
 import updateCheckedUsers from "../../helpers/updateCheckedUsers";
 import updateMemberChange from "./helpers/updateMemberChange";
@@ -23,26 +23,30 @@ const EditGroup = ({groupId, setGroups}) => {
     let [updatedDataFlag, setUpdatedDataFlag] = useState(true);
     let [hasInvitedMember, setHasInvitedMember] = useState(false);
 
+    // Get the group's document and set the displays
     useEffect(() => {
         getData();
     }, [groupId])
 
+    // Maintain the current list of checked boxes for users to remove
     useEffect(() => {
         if (checkboxAction.addId !== "" || checkboxAction.removeId !== "") {
             setUsersToRemove(updateCheckedUsers(checkboxAction, usersToRemoveList));
         }
     }, [checkboxAction])
 
+    // Maintain the current list of users who have had their permissions changed
     useEffect(() => {
         if (permissionChange.addId.length > 0 || permissionChange.removeId.length > 0) {
             setPermissionList(updateMemberChange(permissionChange, changedPermissionList));
         }
     }, [permissionChange])
 
+    // Whenever the groupData has changed, display the updated information
     useEffect(() => {
         if (groupData !== null) {
             setEditableFieldsDisplay([
-                <GroupNameInput key={0} groupName={groupData.name} setGroupName={setGroupName} />,
+                <TextInputWrapper key={0} label={"Group Name"} defaultValue={groupData.name} setStateValue={setGroupName} />,
                 <MembersList key={1} editorIds={groupData.editorIds} viewerIds={groupData.viewerIds} setPermissionChange={setPermissionChange} setCheckboxAction={setCheckboxAction} updatedDataFlag={updatedDataFlag}/>,
                 <InvitedList key={2} groupId={groupId} setCheckboxAction={setCheckboxAction} updatedDataFlag={updatedDataFlag}/>
             ])
@@ -50,6 +54,7 @@ const EditGroup = ({groupId, setGroups}) => {
 
     }, [groupData])
 
+    // Get the group data and set the information to be displayed
     const getData = () => {
         GroupDataService.GetGroupById(groupId).then((res) => {
             let data = res.data.groupDoc
@@ -58,18 +63,20 @@ const EditGroup = ({groupId, setGroups}) => {
             setGroupName(data.name);
 
             setEditableFieldsDisplay([
-                <GroupNameInput key={0} groupName={data.name} setGroupName={setGroupName} />,
+                <TextInputWrapper key={0} label={"Group Name"} defaultValue={data.name} setStateValue={setGroupName} />,
                 <MembersList key={1} editorIds={data.editorIds} viewerIds={data.viewerIds} setPermissionChange={setPermissionChange} setCheckboxAction={setCheckboxAction} />,
                 <InvitedList key={2} groupId={groupId} setCheckboxAction={setCheckboxAction} />
             ])
         })
     }
 
+    // If the data was saved, get the updated data to display
     if (wasDataSaved) {
         setWasDataSaved(false);
         getData();
     }
 
+    // If a new member has been invited to join the group, get the updated data to display
     if (hasInvitedMember) {
         setHasInvitedMember(false);
         getData();

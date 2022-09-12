@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import handleCheckboxChange from "../../helpers/handleCheckboxChange";
 
 // Called from makeMembersList.js
+// Displays and maintains state for a remove group member checkbox
 const RemoveMemberCheckbox = ({userId, setCheckboxAction}) => {
     return (
         <Form.Check 

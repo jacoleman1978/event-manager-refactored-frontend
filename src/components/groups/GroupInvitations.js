@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
 import getFullUserName from "./helpers/getFullUserName";
 
+// Called by Groups.js
+// Display that the user has an invitation from groups in groupInvitations along with an 'Accept Invitation' button
 const GroupInvitations = ({groupInvitations}) => {
     let invitationList = groupInvitations.map((group) => {
         return (

@@ -2,6 +2,7 @@ import React from "react";
 import getFullUserName from "./helpers/getFullUserName";
 
 // Called from GroupMembership.js
+// Display the passed in header along with passed in users' full names
 const UsersList = ({userHeader, userDocs}) => {
     let users = userDocs.map((userDoc) => {
         return (

@@ -12,8 +12,11 @@ const UserSearch = ({group, setHasInvitedMember}) => {
     let [lastName, setLastName] = useState("");
     let [searchResults, setSearchResults] = useState([]);
 
+    // Memoize an array of current users associated with a group
     let users = useMemo(() => makeAllGroupMembersArray(group), [group]);
 
+    // When the "Search" button is clicked, retrieve a list of users fitting the criteria
+    // Filter the results to omit associated users
     const handleSearch = (e) => {
         e.preventDefault();
 

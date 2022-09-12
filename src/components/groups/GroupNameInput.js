@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-// Called from EditGroup.js
+// Called from EditGroup.js...Unused
 const GroupNameInput = ({groupName, setGroupName}) => {
     return (
         <Form.Group controlId="formGroupName" className="flex-left-center">

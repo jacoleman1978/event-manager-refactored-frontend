@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import makeMembersList from "./helpers/makeMembersList";
 
 // Called from EditGroup.js
+// Display the members and editors of the groups as a list
 const MembersList = ({editorIds, viewerIds, setPermissionChange, setCheckboxAction, updatedDataFlag}) => {
     let [groupEditorsList, setEditorsList] = useState([]);
     let [groupViewersList, setViewersList] = useState([]);

@@ -1,6 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
+// Called by /groups/EditGroup.js, /groups/NewGroupForm.js, /groups/UserSearch.js
 const TextInputWrapper = ({label, defaultValue, setStateValue}) => {
     // Displays and maintains state for an input field with the passed in label
     return (

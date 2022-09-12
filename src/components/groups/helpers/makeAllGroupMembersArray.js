@@ -1,3 +1,4 @@
+// Called by UserSearch.js
 /*
 -group is a group document retrieved from the database
 -Returns an array of userIds associated with the group

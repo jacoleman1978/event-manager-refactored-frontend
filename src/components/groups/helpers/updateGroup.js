@@ -1,5 +1,6 @@
 import GroupDataService from "../../../services/groupDataService";
 
+// Called from /groups/EditGroup.js
 // Updates the Group database document, if needed
 const updateGroup = (groupId, formGroupName, originalGroupName, changedPermissionList, usersToRemoveList) => {
     let data = {
@@ -10,10 +11,12 @@ const updateGroup = (groupId, formGroupName, originalGroupName, changedPermissio
         removedUserId: "",
     }
 
+    // If the Group name has changed, update it
     if (data.groupName !== originalGroupName) {
         GroupDataService.ChangeGroupName(data);
     }
 
+    // If the a user's permission has been changed, update it
     if (changedPermissionList.length > 0) {
         for (let userData of changedPermissionList) {
             data.userIdPrivChange = userData[0];
@@ -23,6 +26,7 @@ const updateGroup = (groupId, formGroupName, originalGroupName, changedPermissio
         }
     }
 
+    // If the "Remove" checkbox has been checked, remove the user from the Group
     if (usersToRemoveList.length > 0) {
         let filteredToRemoveList = new Set([...usersToRemoveList])
 

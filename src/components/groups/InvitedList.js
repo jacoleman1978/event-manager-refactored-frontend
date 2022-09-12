@@ -5,6 +5,7 @@ import makeCheckboxUsersList from "../../helpers/makeCheckboxUsersList";
 import getFullUserName from "./helpers/getFullUserName";
 
 // Called from EditGroup.js
+// Get and display a list of invited users for the group
 const InvitedList = ({groupId, setCheckboxAction, updatedDataFlag}) => {
     let [invitedUsers, setInvitedUsers] = useState([]);
 
@@ -29,6 +30,7 @@ const InvitedList = ({groupId, setCheckboxAction, updatedDataFlag}) => {
             } 
         )
     }, [updatedDataFlag])
+
     return (
         <Form.Group >
             <Form.Label className="flex-left-bold">People Invited:</Form.Label>

@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import handleCheckboxChange from "./handleCheckboxChange";
 
+// Called by /groups/InvitedList.js
 // Called by /events/UsersWithCommonEvents.js ... Unused
 /*
 -userDocs is a list of user objects

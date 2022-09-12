@@ -1,3 +1,4 @@
+// Called by /groups/RemoveMemberCheckbox.js
 // Called by /helpers/makeCheckboxUsersList.js ... Unused
 /*
 -onChange handler of checkboxes

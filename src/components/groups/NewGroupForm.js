@@ -4,6 +4,7 @@ import GroupDataService from "../../services/groupDataService";
 import TextInputWrapper from "../form/TextInputWrapper";
 
 // Called from Groups.js
+// Make a new group with the name inputted, while maintaining state for the setCreateFlag
 const NewGroupForm = ({setCreateFlag}) => {
     let [groupName, setGroupName] = useState("");
 

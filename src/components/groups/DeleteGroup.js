@@ -10,10 +10,12 @@ const DeleteGroup = ({groupId, setGroups}) => {
         setShouldWarn(false);
     }, [groupId])
 
+    // Triggers display of warning when the "Delete" button is clicked
     const onDeleteClick = () => {
         setShouldWarn(!shouldWarn);
     }
 
+    // After the Delete button click is confirmed by clicking "Confirm", delete the group
     const onConfirmDeletionClick = () => {
         GroupDataService.DeleteGroup(groupId).then(() => {
             GroupDataService.GetOwnedGroups().then((res) => {

@@ -19,6 +19,7 @@ const Groups = () => {
     let [editFlag, setEditFlag] = useState(false);
     let [createFlag, setCreateFlag] = useState(false);
     
+    // Get owned groups, group members, and group invitations and display that information
     useEffect(() => {
         if (currentUser !== null) {
             getOwnedGroupDisplay();
@@ -31,6 +32,7 @@ const Groups = () => {
         }
     }, [currentUser, editFlag])
 
+    // Check if any of the groups associated with the user are owned by the user
     useEffect(() => {
         if (groups.length > 0) {
             let ownedGroups = groups.map((group, i) => {
@@ -43,6 +45,7 @@ const Groups = () => {
         }
     }, [groups])
 
+    // Gets the groups owned by the user and displays different views depending on the editFlag from the switch display
     const getOwnedGroupDisplay = () => {
         GroupDataService.GetOwnedGroups().then((res) => {
             let ownedGroups = res.data.ownedGroups.map((group, i) => {
@@ -54,6 +57,7 @@ const Groups = () => {
         });
     }
 
+    // If a new group has been created, retrieve the updated group documents and update the display, while reseting the new group name input field
     if (createFlag) {
         setCreateFlag(false);
         getOwnedGroupDisplay();

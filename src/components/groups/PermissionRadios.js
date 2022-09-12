@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 // Called from makeMembersList.js
+// Create, set and maintain state on a permissionChange object, indicating whether the user's permission has been changed
 const PermissionRadios = ({type, userId, setPermissionChange}) => {
     const handleRadio = (e) => {
         let permissionChange = {

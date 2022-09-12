@@ -7,6 +7,7 @@ const SearchResults = ({searchResults, groupId, setHasInvitedMember}) => {
     let [filteredSearch, setFilteredSearch] = useState(searchResults);
     let [invitedUsers, setInvitedUsers] = useState([]);
 
+    // Filter the users returned by the search to omit any current members of the group
     useEffect(() => {
         let filteredSearchResults = filteredSearch.filter((result) => {
             return result._id !== invitedUserId
