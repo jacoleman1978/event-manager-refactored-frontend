@@ -11,6 +11,7 @@ import getActiveView from "./helpers/getActiveView";
 const NavMenu = ({ isTask, isEvent, viewType, settings }) => {
     const {currentUser, setCurrentUser} = useContext(CurrentUser);
 
+    // If the user has a current session, set CurrentUser context
     useEffect(() => {
         UserDataService.CheckSessionUser().then(res => setCurrentUser(res.data));
     }, [])

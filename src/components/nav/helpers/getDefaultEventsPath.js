@@ -1,3 +1,4 @@
+// Called by NavMenu.js
 /*
 -defaultView is a string from an enumerated list from SettingsSchema on the backend
 -defaultView has the following options: 'By List', 'By Day', 'By Week'

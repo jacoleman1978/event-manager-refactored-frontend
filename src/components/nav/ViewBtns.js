@@ -2,6 +2,7 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 
 // Called from NavMenu.js
+// Conditionally display NavLink buttons on the NavBar
 const ViewBtns = ({isTask, isEvent}) => {
     const btnDisplay = (isTask, isEvent) => {
         if (isTask) {

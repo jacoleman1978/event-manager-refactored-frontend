@@ -1,3 +1,4 @@
+// Called by NavMenu.js
 /* 
 -Sets display option for View and highlights active Nav button, if applicaple.
 -isTask and isEvent are boolean values set in App.js Route
@@ -22,9 +23,7 @@ const getActiveView = (isTask, isEvent, viewType) => {
     } else if (isEvent) {
         dropdownTitle = 'Events';
 
-        if (viewType === 'list') {
-            defaultActive = '/events/list/0';
-        } else if (viewType === 'day') {
+        if (viewType === 'day') {
             defaultActive = '/events/day/0';
         } else if (viewType === 'new') {
             defaultActive = '/events/new/0'
