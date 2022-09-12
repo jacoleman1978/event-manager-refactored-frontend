@@ -1,7 +1,7 @@
 import React from "react";
 import EventGroup from "./EventGroup";
 import OffsetButtonGroup from "./OffsetButtonGroup";
-import getSortedEventsByWeek from "../../helpers/getSortedEventsByWeek";
+import getSortedEventsByWeek from "./helpers/getSortedEventsByWeek";
 
 // Currently UNUSED: Called from Events.js
 const EventsByList = ({events, dateRange, offsetBy, viewType}) => {    

@@ -5,9 +5,9 @@ import UserSearch from "./UserSearch";
 import MembersList from "./MembersList";
 import InvitedList from "./InvitedList";
 import DeleteGroup from "./DeleteGroup";
-import TextInputWrapper from "../form/TextInputWrapper";
+import TextInputWrapper from "./TextInputWrapper";
 import updateGroup from "./helpers/updateGroup";
-import updateCheckedUsers from "../../helpers/updateCheckedUsers";
+import updateCheckedUsers from "./helpers/updateCheckedUsers";
 import updateMemberChange from "./helpers/updateMemberChange";
 
 // Called from OwnedGroup.js

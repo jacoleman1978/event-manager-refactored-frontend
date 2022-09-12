@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import handleCheckboxChange from "../../helpers/handleCheckboxChange";
+import handleCheckboxChange from "./helpers/handleCheckboxChange";
 
 // Called from makeMembersList.js
 // Displays and maintains state for a remove group member checkbox

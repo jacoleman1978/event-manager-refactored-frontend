@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { Card } from "react-bootstrap"
 import { CurrentUser } from '../../contexts/currentUser';
 import DisplayButtonGroup from "./DisplayButtonGroup";
-import CardTitleWithValue from "../cards/CardTitleWithValue";
-import CardTitleWithList from "../cards/CardTitleWIthList";
-import CardTitleWithValueNextLine from "../cards/CardTitleWithValueNextLine";
-import getDisplayDateFormated from "../../helpers/getDisplayDateFormated";
+import CardTitleWithValue from "./CardTitleWithValue";
+import CardTitleWithList from "./CardTitleWIthList";
+import CardTitleWithValueNextLine from "./CardTitleWithValueNextLine";
+import getDisplayDateFormated from "./helpers/getDisplayDateFormated";
 
-// Called from TaskRow.js
+// Called from /tasks/TaskRow.js, /events/EventRow.js, /events/FifteenMin.js
 const DetailedView = ({event, type, isWeek}) => {  
     const { currentUser } = useContext(CurrentUser);
 

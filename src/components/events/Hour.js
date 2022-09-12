@@ -1,7 +1,7 @@
 import React from "react";
 import FifteenMin from "./FifteenMin";
-import getCurrentEventsTemplateList from "../../helpers/getCurrentEventsTemplateList";
-import orderDayCurrentEvents from "../../helpers/orderDayCurrentEvents";
+import getCurrentEventsTemplateList from "./helpers/getCurrentEventsTemplateList";
+import orderDayCurrentEvents from "./helpers/orderDayCurrentEvents";
 
 // Called from Day.js
 const Hour = ({hour, events, maximumEventsPerHour}) => {

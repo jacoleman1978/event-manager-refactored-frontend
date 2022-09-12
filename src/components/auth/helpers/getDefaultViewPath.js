@@ -1,4 +1,4 @@
-import SettingsDataService from "../services/settingsDataService";
+import SettingsDataService from "../../../services/settingsDataService";
 
 // Called from /auth/LoginForm.js, /auth/SignupForm.js
 const getDefaultViewPath = async () => {

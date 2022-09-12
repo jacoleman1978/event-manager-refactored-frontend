@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Form, Button} from 'react-bootstrap';
 import EventDataService from "../../services/eventDataService";
 import Title from "../form/Title";
-import Priority from "../form/Priority";
+import Priority from "./Priority";
 import EndDate from "../form/EndDate";
 import Notes from "../form/Notes";
 import getDefaultDate from "../../helpers/getDefaultDate";

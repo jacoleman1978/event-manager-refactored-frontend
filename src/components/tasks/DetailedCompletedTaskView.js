@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import CardTitleWithValue from "../cards/CardTitleWithValue";
+import CardTitleWithValue from "../eventViews/CardTitleWithValue";
 
 // Called by /tasks/CompletedTaskRow.js
 const DetailedCompletedTaskView = ({task}) => {

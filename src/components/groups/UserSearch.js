@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { Form, Button } from "react-bootstrap";
 import UserDataService from "../../services/userDataService";
-import TextInputWrapper from "../form/TextInputWrapper";
+import TextInputWrapper from "./TextInputWrapper";
 import SearchResults from "./SearchResults";
 import makeAllGroupMembersArray from "./helpers/makeAllGroupMembersArray";
 

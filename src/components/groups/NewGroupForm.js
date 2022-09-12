@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Form, Button } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
-import TextInputWrapper from "../form/TextInputWrapper";
+import TextInputWrapper from "./TextInputWrapper";
 
 // Called from Groups.js
 // Make a new group with the name inputted, while maintaining state for the setCreateFlag

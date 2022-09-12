@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-// Called by events/EventForm.js, /tasks/TaskForm.js
+// Called by /events/EventForm.js, /tasks/TaskForm.js
 const Groups = ({ groupEditList, formGroups, setGroups, label}) => {
     // Displays and maintains selected groups
     const handleGroupCheck = (e) => {

@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
 import Title from "../form/Title";
-import Priority from "../form/Priority";
+import Priority from "./Priority";
 import AllDaySwitch from "../form/AllDaySwitch";
 import DateRange from "../form/DateRange";
 import TimeRange from "../form/TimeRange";

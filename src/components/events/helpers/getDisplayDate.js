@@ -1,4 +1,4 @@
-import zeroBeforeSingleDigitInt from "./zeroBeforeSingleDigitInt";
+import zeroBeforeSingleDigitInt from "../../../helpers/zeroBeforeSingleDigitInt";
 
 // Called by /helpers/getDateRange.js
 const getDisplayDate = (date) => {

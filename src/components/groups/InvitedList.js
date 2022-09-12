@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import GroupDataService from "../../services/groupDataService";
-import makeCheckboxUsersList from "../../helpers/makeCheckboxUsersList";
+import makeCheckboxUsersList from "./helpers/makeCheckboxUsersList";
 import getFullUserName from "./helpers/getFullUserName";
 
 // Called from EditGroup.js

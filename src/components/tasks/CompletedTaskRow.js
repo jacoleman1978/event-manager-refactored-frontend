@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SimpleView from "../eventViews/SimpleView";
-import DetailedCompletedTaskView from "../eventViews/DetailedCompletedTaskView";
+import DetailedCompletedTaskView from "./DetailedCompletedTaskView";
 
 // Called from CompletedTasks.js
 const CompletedTaskRow = ({task}) => {

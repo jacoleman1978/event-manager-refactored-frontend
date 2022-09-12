@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import OffsetButtonGroup from "./OffsetButtonGroup";
 import Day from "./Day";
 import getDateOffsetBy from "./helpers/getDateOffsetBy";
-import getDateRange from "../../helpers/getDateRange";
+import getDateRange from "./helpers/getDateRange";
 
 // Called from Events.js
 const EventsByDay = ({viewType}) => {

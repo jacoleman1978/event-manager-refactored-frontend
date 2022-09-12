@@ -1,4 +1,4 @@
-import getSortedEventsByWeek from "../../../helpers/getSortedEventsByWeek";
+import getSortedEventsByWeek from "./getSortedEventsByWeek";
 /*
 -Called by /events/EventsByWeek.js
 -events is and object with userIds as keys: {userId: {events: [], userName, fullName, userId}}

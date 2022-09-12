@@ -1,4 +1,4 @@
-import getDayDifference from "./getDayDifference";
+import getDayDifference from "../../../helpers/getDayDifference";
 
 // Called by /helpers/getSortedEventsByUser.js
 const isEventWithinDateRange = (dateRange, eventStart, eventEnd) => {

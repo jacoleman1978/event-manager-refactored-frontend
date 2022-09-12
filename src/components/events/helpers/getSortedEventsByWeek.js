@@ -1,4 +1,4 @@
-import getDayDifference from "./getDayDifference";
+import getDayDifference from "../../../helpers/getDayDifference";
 
 // Called from /events/helpers/filterGroupEventsByWeek.js, /events/helpers/filterUserEventsByWeek.js
 const getSortedEventsByWeek = (events, dateRange) => {

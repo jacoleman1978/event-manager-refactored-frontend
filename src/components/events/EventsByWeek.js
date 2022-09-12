@@ -4,7 +4,7 @@ import Week from "./Week";
 import WeekHeader from "./WeekHeader";
 import OffsetButtonGroup from "./OffsetButtonGroup";
 import EventDataService from "../../services/eventDataService";
-import getDateRange from "../../helpers/getDateRange";
+import getDateRange from "./helpers/getDateRange";
 import getDateOffsetBy from "./helpers/getDateOffsetBy";
 import filterGroupEventsByWeek from "./helpers/filterGroupEventsByWeek";
 import filterUserEventsByWeek from "./helpers/filterUserEventsByWeek";

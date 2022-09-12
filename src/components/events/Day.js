@@ -3,8 +3,8 @@ import { CurrentUser } from "../../contexts/currentUser";
 import EventDataService from "../../services/eventDataService";
 import Hour from "./Hour";
 import EventGroup from "./EventGroup";
-import getSortedEventsByUser from "../../helpers/getSortedEventsByUser";
-import getSortedEventsByHour from "../../helpers/getSortedEventsByHour";
+import getSortedEventsByUser from "./helpers/getSortedEventsByUser";
+import getSortedEventsByHour from "./helpers/getSortedEventsByHour";
 
 // Called from EventsByDay.js
 const Day = ({dateRange, viewType}) => {
