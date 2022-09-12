@@ -1,3 +1,4 @@
+// Called by /events/Day.js
 const getSortedEventsByHour = (timeRangeEvents) => {
     let eventsByHour = [];
 

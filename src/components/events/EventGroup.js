@@ -3,10 +3,10 @@ import EventRow from "./EventRow";
 
 // Called from Day.js
 const EventGroup = ({header, data, headerStyle, viewType}) => {
-    // eventssList will be filled in the conditional below
+    // eventsList will be filled in the conditional below
     let eventsList =[];
 
-    // If the data passed in has data in it, send each event to the the EventRow React Component. Otherwise pass in an object that will display 'No events found' under the priority.
+    // If data was passed in, send each event to the the EventRow React Component. Otherwise pass in an object that will display 'No events found' under the priority.
     if (data !== 'undefined') {
         eventsList = data.map((event) => {
             return (

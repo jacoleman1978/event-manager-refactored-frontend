@@ -1,5 +1,6 @@
 import getDayDifference from "./getDayDifference";
 
+// Called by /helpers/getSortedEventsByUser.js
 const isEventWithinDateRange = (dateRange, eventStart, eventEnd) => {
     let dateRangeStartDiff = getDayDifference(dateRange.startDate);
     let dateRangeEndDiff = getDayDifference(dateRange.endDate);

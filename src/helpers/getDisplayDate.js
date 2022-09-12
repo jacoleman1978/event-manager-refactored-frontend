@@ -1,5 +1,6 @@
 import zeroBeforeSingleDigitInt from "./zeroBeforeSingleDigitInt";
 
+// Called by /helpers/getDateRange.js
 const getDisplayDate = (date) => {
     let year = date.getFullYear().toString();
     let month = date.getMonth() + 1;

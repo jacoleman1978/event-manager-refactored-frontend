@@ -4,7 +4,7 @@ import { CurrentUser } from "../../contexts/currentUser";
 import makeCheckboxUsersList from "../../helpers/makeCheckboxUsersList";
 import formatUserList from "./helpers/formatUserList";
 
-// Called from EventsByWeek.js
+// Unused
 const UsersWithCommonEvents = ({events, setCheckboxAction, dateRange}) => {
     const { currentUser } = useContext(CurrentUser);
 

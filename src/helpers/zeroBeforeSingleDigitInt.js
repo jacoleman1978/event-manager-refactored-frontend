@@ -1,3 +1,4 @@
+// Called by /helpers/getDefaultDate.js, /helpers/getDefaultTime.js, /helpers/getDisplayDate.js
 // Converts an int to a string and returns the string as at least two characters
 const zeroBeforeSingleDigitInt = (intToConvert) => {
     if (intToConvert < 10) {

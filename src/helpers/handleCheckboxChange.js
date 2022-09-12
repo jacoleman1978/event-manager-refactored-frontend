@@ -1,3 +1,4 @@
+// Called by /helpers/makeCheckboxUsersList.js ... Unused
 /*
 -onChange handler of checkboxes
 -Adds the userId to addId if a user's remove box is checked.

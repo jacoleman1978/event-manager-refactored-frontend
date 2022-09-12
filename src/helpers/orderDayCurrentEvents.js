@@ -1,5 +1,6 @@
 import getFirstBlankPosition from "./getFirstBlankPosition";
 
+// Called by /events/Hour.js
 const orderDayCurrentEvents = (events, previousEvents, currentEvents) => {
     let previousLength = previousEvents.length;
 

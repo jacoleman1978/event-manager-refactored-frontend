@@ -1,9 +1,8 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const CardTitleWithValue = (props) => {
-    let {title, value} = props;
-
+// Use passed in title and value to return a the title and value on the same line
+const CardTitleWithValue = ({title, value}) => {
     return (
         <Card.Text className="flex-left-center-no-gap xxsmall-gap">
             <strong>{title}:</strong> {value}

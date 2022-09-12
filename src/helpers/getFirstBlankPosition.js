@@ -1,3 +1,4 @@
+// Called by /helpers/orderDayCurrentEvents.js
 const getFirstBlankPosition = (events) => {
     let firstBlankPosition = -1;
  

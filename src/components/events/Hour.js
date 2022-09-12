@@ -3,9 +3,9 @@ import FifteenMin from "./FifteenMin";
 import getCurrentEventsTemplateList from "../../helpers/getCurrentEventsTemplateList";
 import orderDayCurrentEvents from "../../helpers/orderDayCurrentEvents";
 
-const Hour = (props) => {
-    let {hour, events, maximumEventsPerHour} = props;
-
+// Called from Day.js
+const Hour = ({hour, events, maximumEventsPerHour}) => {
+    // An object template for each hour breaking each hour up into 15 minute increments
     let fifteenLabels = [
         {
             label: "zero",
@@ -31,6 +31,7 @@ const Hour = (props) => {
 
     let tempEvents = [];
 
+    // Checks the start and end time for timed events, displaying the event duing the time increment
     let fifteens = fifteenLabels.map((fifteen) => {
         let timeRangeEvents = [];
         let previousEvents = [...tempEvents];

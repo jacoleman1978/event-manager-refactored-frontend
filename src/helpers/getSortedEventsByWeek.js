@@ -1,5 +1,6 @@
 import getDayDifference from "./getDayDifference";
 
+// Called from /events/helpers/filterGroupEventsByWeek.js, /events/helpers/filterUserEventsByWeek.js
 const getSortedEventsByWeek = (events, dateRange) => {
 
     // Create arrays to hold events for up to a week total

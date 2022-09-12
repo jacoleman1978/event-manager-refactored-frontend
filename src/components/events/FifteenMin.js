@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import SimpleView from "../eventViews/SimpleView";
 import DetailedView from "../eventViews/DetailedView";
 
-const FifteenMin = (props) => {
-    let {hour, fifteenLabel, currentEvents, maximumEventsPerHour} = props;
-
+// Called from Hour.js
+const FifteenMin = ({hour, fifteenLabel, currentEvents, maximumEventsPerHour}) => {
     let [isSimpleView, setView] = useState(true);
 
     let time = fifteenLabel.time;
 
+    // Creates the flex grid display using the maximum events that will be displayed per hour for that day
     let dayEventsDisplay = {
         display: "grid",
         gridTemplateColumns: `repeat(${maximumEventsPerHour}, 1fr)`,
@@ -16,6 +16,7 @@ const FifteenMin = (props) => {
         width: "100%"
     }
 
+    // Clicking on an event title displays a detailed view for the event
     let eventDisplay = currentEvents.map((event) => {
         return (
             <div onClick={() => {setView(!isSimpleView)}} key={`${event._id}-view`} className="flex-left">

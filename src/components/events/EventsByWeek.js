@@ -36,6 +36,7 @@ const EventsByWeek = ({viewType, currentUser}) => {
             let groupEvents = {};
             groupEvents = res.data.events.groups;
 
+            // Displays only th events for the current week for groups to which the user belongs
             let groupEventsByWeek = filterGroupEventsByWeek(res.data.events.groups, dateRange);
 
             for (let group in groupEventsByWeek) {

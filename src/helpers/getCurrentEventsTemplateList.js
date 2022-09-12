@@ -1,3 +1,4 @@
+// Called by events/Hour.js
 const getCurrentEventsTemplateList = (maximumEventsPerHour) => {
     let currentEvents = [];
 

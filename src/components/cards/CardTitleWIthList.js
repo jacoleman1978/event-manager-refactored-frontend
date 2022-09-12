@@ -1,9 +1,8 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const CardTitleWithList = (props) => {
-    let {title, list} = props;
-
+// Use passed in title and list to create a Card list
+const CardTitleWithList = ({title, list}) => {
     return (
         <>
             <Card.Text className="flex-left-center-no-gap">

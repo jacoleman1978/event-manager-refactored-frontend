@@ -16,6 +16,7 @@ const Day = ({dateRange, viewType}) => {
     let [timeRangeEvents, setTimeRangeEvents] = useState([]);
     let [hoursDisplay, setHoursDisplay] = useState([]);
 
+    // If the date has changed, reload data
     if (date.startDate !== dateRange.startDate) {
         setDate(dateRange);
         setReloadToggle(!reloadToggle)

@@ -1,5 +1,6 @@
 import getSortedEventsByWeek from "../../../helpers/getSortedEventsByWeek";
 /*
+-Called by /events/EventsByWeek.js
 -events is and object with userIds as keys: {userId: {events: [], userName, fullName, userId}}
 -date range is and object: {startDate: 'YYYY-MM-DD', endDate: 'YYYY-MM-DD'}
 -Returns an object similar to events, except the events property has been split into 7 arrays representing days in the dateRange

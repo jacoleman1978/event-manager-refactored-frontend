@@ -4,8 +4,11 @@ import { Button } from "react-bootstrap";
 
 // Called from OffsetButtonGroup.js
 const NextBtn = ({viewType}) => {
+    let navigate = useNavigate();
+
     let offsetBy = 0;
 
+    // Gets the url param depending on viewType
     if (viewType === 'week') {
         let { week } = useParams();
         offsetBy = week;
@@ -14,8 +17,7 @@ const NextBtn = ({viewType}) => {
         offsetBy = day;
     } 
 
-    let navigate = useNavigate();
-    
+    // When the button is clicked, navigate to the next week or day, depending on viewType
     const handleNextBtnClick = () => {
         navigate(`/events/${viewType}/${parseInt(offsetBy) + 1}`)
     }

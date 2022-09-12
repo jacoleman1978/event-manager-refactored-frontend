@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import handleCheckboxChange from "./handleCheckboxChange";
 
+// Called by /events/UsersWithCommonEvents.js ... Unused
 /*
 -userDocs is a list of user objects
 -setCheckboxAction sets state with an updated list of userIds that are checked

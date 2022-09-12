@@ -1,5 +1,6 @@
 import getDisplayDate from "./getDisplayDate";
 
+// Called by /events/EventsByDay.js, /events/EventsByWeek.js
 const getDateRange = (viewType, offsetBy) => {
     let date = new Date();
     let day = date.getDate();

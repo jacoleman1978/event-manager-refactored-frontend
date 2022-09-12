@@ -1,5 +1,6 @@
 import isEventWithinDateRange from "./isEventWithinDateRange";
 
+// Called by /events/Day.js
 const getSortedEventsByUser = (dateRange, events, currentUser) => {
     if (events.length === 0) {
         return {}

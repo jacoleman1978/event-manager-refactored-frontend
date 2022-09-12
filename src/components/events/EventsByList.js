@@ -3,7 +3,7 @@ import EventGroup from "./EventGroup";
 import OffsetButtonGroup from "./OffsetButtonGroup";
 import getSortedEventsByWeek from "../../helpers/getSortedEventsByWeek";
 
-// Called from Events.js
+// Currently UNUSED: Called from Events.js
 const EventsByList = ({events, dateRange, offsetBy, viewType}) => {    
     let sortedEvents = getSortedEventsByWeek(events, dateRange);
 

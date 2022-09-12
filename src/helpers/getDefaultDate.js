@@ -1,5 +1,6 @@
 import zeroBeforeSingleDigitInt from "./zeroBeforeSingleDigitInt";
 
+// Called from /helpers/getDayDifference.js, /events/EventForm.js
 // Used to convert date defaults in settings to format usable by date input fields.
 // Input is "Today", "Tomorrow", "Next Week".
 // Date will be returned as a string 'YYYY-MM-DD'.

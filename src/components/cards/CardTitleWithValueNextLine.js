@@ -1,9 +1,8 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const CardTitleWithValueNextLine = (props) => {
-    let {title, value} = props;
-
+// Use the passed in title and value to return the title with the value indented on the next line
+const CardTitleWithValueNextLine = ({title, value}) => {
     return (
         <div className="flex-col-center-left-no-gap">
             <Card.Text><strong>{title}:</strong></Card.Text>

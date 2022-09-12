@@ -16,6 +16,7 @@ const Events = ({viewType, settings}) => {
         } 
     }, [currentUser, viewType])
 
+    // Selets the display to use depending on the viewType passed in
     const selectView = (currentUser) => {
         if (viewType === 'week') {
             return <EventsByWeek viewType={viewType} currentUser={currentUser} />

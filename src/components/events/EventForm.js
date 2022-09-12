@@ -3,15 +3,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import EventDataService from "../../services/eventDataService";
 import GroupDataService from "../../services/groupDataService";
-import getDefaultDate from "../../helpers/getDefaultDate";
-import getDefaultTime from "../../helpers/getDefaultTime";
 import Title from "../form/Title";
 import AllDaySwitch from "../form/AllDaySwitch";
 import DateRange from "../form/DateRange";
 import TimeRange from "../form/TimeRange";
 import Groups from "../form/Groups";
 import Notes from "../form/Notes";
+import getDefaultDate from "../../helpers/getDefaultDate";
+import getDefaultTime from "../../helpers/getDefaultTime";
 
+// Used to edit or create a new event
 const EventForm = ({settings, isEdit}) => {
     const { eventId } = useParams();
 
@@ -54,32 +55,38 @@ const EventForm = ({settings, isEdit}) => {
         }
 
         if (isEdit) {
+            // Update the event document
             EventDataService.UpdateEvent(data, eventId);
 
+            // If any groups were added to the event, handle all dependencies
             for (let groupId of formGroups) {
                 if (originalGroupIds.indexOf(groupId) === -1) {
                     EventDataService.AddGroupToEvent({groupIdToAdd: groupId}, eventId);
                 }
             }
 
+            // If any groups were removed from the event, handle all dependencies
             for (let groupId of originalGroupIds) {
                 if (formGroups.indexOf(groupId) === -1) {
                     EventDataService.RemoveGroupFromEvent({groupIdToRemove: groupId}, eventId);
                 }
             }
-            
-            navigate(-1);
+    
         } else {
+            // Create the new event
             EventDataService.AddEvent(data);
-            
-            navigate(-1);
         }
+
+        // Return to the page prior to creating an event or editing an event
+        navigate(-1);
     }
 
     useEffect(() => {
+        // Set the list of all the groups the current user can edit
         GroupDataService.GetGroupsCanEdit().then(res => {
             setGroupEditList(res.data.groupsCanEdit)
 
+            // If the user is editing this event, fill in all the fields with current values
             if (isEdit) {
                 EventDataService.GetEventById(eventId).then(res => {
                     let event = res.data.eventDoc
@@ -94,6 +101,7 @@ const EventForm = ({settings, isEdit}) => {
                     setOriginalGroupIds(event.groupIds);
                 })
             } else {
+                // If the user is creating a new event, use the user settings to display default values
                 setAllDay(settings.allDay.isIt);
                 setStartDate(getDefaultDate(settings.allDay.startDate));
                 setEndDate(getDefaultDate(settings.allDay.endDate));

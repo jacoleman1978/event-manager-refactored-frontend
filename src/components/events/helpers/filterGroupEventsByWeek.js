@@ -1,8 +1,9 @@
 import getSortedEventsByWeek from "../../../helpers/getSortedEventsByWeek";
 /*
--events is and object with userIds as keys: {userId: {events: [], userName, fullName, userId}}
+-Called by /events/EventsByWeek.js
+-groupEvents is and object with userIds as keys: {userId: {events: [], userName, fullName, userId}}
 -date range is and object: {startDate: 'YYYY-MM-DD', endDate: 'YYYY-MM-DD'}
--Returns an object similar to events, except the events property has been split into 7 arrays representing days in the dateRange
+-Returns an object similar to events, except for each group the events property has been split into 7 arrays representing days in the dateRange
 */
 const filterGroupEventsByWeek = (groupEvents, dateRange) => {
     let sortedEvents = {};
