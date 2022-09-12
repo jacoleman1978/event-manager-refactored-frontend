@@ -1,9 +1,9 @@
 import React from "react";
 import {Form} from "react-bootstrap";
 
-const Title = (props) => {
-    let {formTitle, setTitle, label} = props;
-
+// Called by events/EventForm.js
+const Title = ({formTitle, setTitle, label}) => {
+    // Displays and maintains state for an event/task title
     return (
         <div className="flex-left-center-no-gap outline-inner">
             <Form.Label className="flex-left-bold">{label}</Form.Label>

@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 const TextInputWrapper = ({label, defaultValue, setStateValue}) => {
+    // Displays and maintains state for an input field with the passed in label
     return (
         <div className="flex-left-center-no-gap">
             <Form.Label className="flex-left-bold">{label}:</Form.Label>

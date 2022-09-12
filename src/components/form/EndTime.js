@@ -1,9 +1,9 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const EndTime = (props) => {
-    let {formEndTime, setEndTime, label} = props;
-
+// Called by /form/TimeRange.js
+const EndTime = (formEndTime, setEndTime, label) => {
+    // Displays and maintains state for the end time
     return (
         <div className="flex-left-center-no-gap">
             <Form.Label className="flex-left-bold">{label}</Form.Label>

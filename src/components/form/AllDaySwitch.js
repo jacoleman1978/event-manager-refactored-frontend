@@ -1,8 +1,9 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
+// Called by /events/EventForm.js
 const AllDaySwitch = ({formAllDay, setAllDay}) => {
-
+    // 'All Day' state switch
     return (
         <div className="flex-left-center-wrap">
             <Form.Check 

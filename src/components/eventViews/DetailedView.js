@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Card } from "react-bootstrap"
-import getDisplayDateFormated from "../../helpers/getDisplayDateFormated";
-import DisplayButtonGroup from "./DisplayButtonGroup";
 import { CurrentUser } from '../../contexts/currentUser';
+import DisplayButtonGroup from "./DisplayButtonGroup";
 import CardTitleWithValue from "../cards/CardTitleWithValue";
 import CardTitleWithList from "../cards/CardTitleWIthList";
 import CardTitleWithValueNextLine from "../cards/CardTitleWithValueNextLine";
+import getDisplayDateFormated from "../../helpers/getDisplayDateFormated";
 
 // Called from TaskRow.js
 const DetailedView = ({event, type, isWeek}) => {  

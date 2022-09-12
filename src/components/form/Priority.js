@@ -1,9 +1,9 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const Priority = (props) => {
-    let {formPriority, setPriority, label} = props;
-
+// Called by /tasks/NewSimpleTask.js, /tasks/TaskForm.js
+const Priority = ({formPriority, setPriority, label}) => {
+    // Displays a dropdown list of priorities and maintains state
     return (
         <div className="flex-left-center-no-gap outline-inner">
             <Form.Label className="flex-left-bold">{label}</Form.Label>

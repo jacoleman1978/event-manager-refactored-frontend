@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import EventDataService from "../../services/eventDataService";
 
 // Called from DetailedView.js
+// Conditionally displays complete, edit, and delete buttons
 const DisplayButtonGroup = ({event, type}) => {
     const navigate = useNavigate();
 

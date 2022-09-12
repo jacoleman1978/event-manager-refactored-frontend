@@ -1,9 +1,9 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const StartDate = (props) => {
-    let {formStartDate, setStartDate, label} = props;
-
+// Called by /form/TimeRange.js
+const StartDate = ({formStartDate, setStartDate, label}) => {
+    // Displays and maintains start date state
     return (
         <div className="flex-left-center-no-gap">
             <Form.Label className="flex-left-bold">{label}</Form.Label>

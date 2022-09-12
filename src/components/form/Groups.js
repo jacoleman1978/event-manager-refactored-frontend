@@ -1,9 +1,9 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const Groups = (props) => {
-    let { groupEditList, formGroups, setGroups, label} = props;
-
+// Called by events/EventForm.js
+const Groups = ({ groupEditList, formGroups, setGroups, label}) => {
+    // Displays and maintains selected groups
     const handleGroupCheck = (e) => {
         if (e.target.checked === true) {
             setGroups(formGroups => [...formGroups, e.target.id]);
@@ -14,6 +14,7 @@ const Groups = (props) => {
         }
     }
 
+    // Checks the appropriate checkboxes as a default display
     let groupList = groupEditList.map((group) => {
         let isChecked = false;
 

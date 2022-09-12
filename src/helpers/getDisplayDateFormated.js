@@ -1,3 +1,4 @@
+// Called from /eventViews/DetailedView.js
 const getDisplayDateFormated = (date) => {
     let dateSplit = date.split("-");
 

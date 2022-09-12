@@ -6,9 +6,11 @@ import CardTitleWithValue from "../cards/CardTitleWithValue";
 const DetailedCompletedTaskView = ({task}) => {
     const navigate = useNavigate();
 
+    // Formats current date as 'MM/DD/YYYY'
     let date = new Date(task.task.dateCompleted);
     let formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 
+    // When button is clicked, go to the edit view of the task
     const restoreTask = () => {
         navigate(`/tasks/edit/${task._id}/restore`);
     }

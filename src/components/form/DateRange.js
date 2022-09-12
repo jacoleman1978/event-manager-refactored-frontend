@@ -2,7 +2,9 @@ import React from "react";
 import StartDate from "./StartDate";
 import EndDate from "./EndDate";
 
+// Called by /events/EventForm.js
 const DateRange = ({formStartDate, setStartDate, formEndDate, setEndDate, formAllDay}) => {
+    // Displays and maintains state for the start and end dates
     return (
         <div className="flex-left-center-wrap xxsmall-gap">
             <div className="flex-left-center-no-gap outline-inner">

@@ -2,9 +2,9 @@ import React from "react";
 import StartTime from "./StartTime";
 import EndTime from "./EndTime";
 
-const TimeRange = (props) => {
-    let { formStartTime, setStartTime, formEndTime, setEndTime} = props;
-
+// Called by /events/EventForm.js
+const TimeRange = ({formStartTime, setStartTime, formEndTime, setEndTime}) => {
+    // Displays and maintains state for start time and end time
     return (
         <div className="flex-left-center-wrap xxsmall-gap">
             <div className="flex-left-center-no-gap outline-inner">

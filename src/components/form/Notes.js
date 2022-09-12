@@ -1,9 +1,9 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const Notes = (props) => {
-    let {formNotes, setNotes} = props;
-
+// Called by /events/EventForm.js
+const Notes = ({formNotes, setNotes}) => {
+    // Displays and maintains state for notes
     return (
         <Form.Group controlId="formNotes" className="flex-left-center-wrap small-gap">
             <Form.Label className="flex-left-bold">Notes: </Form.Label>
