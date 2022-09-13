@@ -10,17 +10,15 @@ const TasksByPriority = ({settings, tasks}) => {
 
     useEffect(() => {
         // If there are tasks, sort them and set TaskGroup component for each priority
-        if (tasks.length > 0) {
-            let sortedTasksDisplay = [];
-            
-            let taskPriorities = sortTasksByPriority(tasks);
+        let sortedTasksDisplay = [];
+        
+        let taskPriorities = sortTasksByPriority(tasks);
 
-            for (let taskPriorityGroup in taskPriorities) {
-                sortedTasksDisplay = [...sortedTasksDisplay, <TaskGroup key={taskPriorityGroup} tasks={taskPriorities[taskPriorityGroup]} />]
-            }
-    
-            setDisplayTasks(sortedTasksDisplay);
-        } 
+        for (let taskPriorityGroup in taskPriorities) {
+            sortedTasksDisplay = [...sortedTasksDisplay, <TaskGroup key={taskPriorityGroup} tasks={taskPriorities[taskPriorityGroup]} />]
+        }
+
+        setDisplayTasks(sortedTasksDisplay);
     }, [tasks])
     
     return (

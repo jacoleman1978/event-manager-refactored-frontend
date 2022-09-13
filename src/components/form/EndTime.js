@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 // Called by /form/TimeRange.js
-const EndTime = (formEndTime, setEndTime, label) => {
+const EndTime = ({formEndTime, setEndTime, label}) => {
     // Displays and maintains state for the end time
     return (
         <div className="flex-left-center-no-gap">

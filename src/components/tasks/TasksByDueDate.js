@@ -10,17 +10,15 @@ const TasksByDueDate = ({settings, tasks}) => {
 
     useEffect(() => {
         // If there are tasks, sort them and set TaskGroup component for each due date
-        if (tasks.length > 0) {
-            let sortedTasksDisplay = [];
-            
-            let taskDueDates = sortTasksByDueDate(tasks);
+        let sortedTasksDisplay = [];
+        
+        let taskDueDates = sortTasksByDueDate(tasks);
 
-            for (let taskDueDateGroup in taskDueDates) {
-                sortedTasksDisplay = [...sortedTasksDisplay, <TaskGroup key={taskDueDateGroup} tasks={taskDueDates[taskDueDateGroup]} />]
-            }
-    
-            setDisplayTasks(sortedTasksDisplay);
-        } 
+        for (let taskDueDateGroup in taskDueDates) {
+            sortedTasksDisplay = [...sortedTasksDisplay, <TaskGroup key={taskDueDateGroup} tasks={taskDueDates[taskDueDateGroup]} />]
+        }
+
+        setDisplayTasks(sortedTasksDisplay);
     }, [tasks])
 
     return (

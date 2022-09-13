@@ -30,7 +30,11 @@ const Day = ({dateRange, viewType}) => {
             // Takes the user's events and all the group members of that user and returns an object with userId keys
             let eventsSortedByUser = getSortedEventsByUser(dateRange, events, currentUser);
 
-            let eventsForDay = eventsSortedByUser[currentUser.userId].events
+            let eventsForDay = [];
+
+            if (events.length > 0) {
+                eventsForDay = eventsSortedByUser[currentUser.userId].events;
+            }
 
             // If there are events, sort them into allDay events and events with a time range
             let tempAllDay = [];

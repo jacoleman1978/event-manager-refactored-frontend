@@ -11,6 +11,7 @@ import Groups from "../form/Groups";
 import Notes from "../form/Notes";
 import getDefaultDate from "../../helpers/getDefaultDate";
 import getDefaultTime from "../../helpers/getDefaultTime";
+import isDateTimeValid from "./helpers/isDateTimeValid";
 
 // Used to edit or create a new event
 const EventForm = ({settings, isEdit}) => {
@@ -29,56 +30,64 @@ const EventForm = ({settings, isEdit}) => {
     let [formNotes, setNotes] = useState("");
     let [originalGroupIds, setOriginalGroupIds] = useState([]);
     let [groupEditList, setGroupEditList] = useState([]);
+    let [isDateTimeWarning, setIsDateTimeWarning] = useState(false);
 
     // Uses the DataService to port the data to database when form submitted
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let data = {
-            title: formTitle,
-            task: {
-                isIt: false,
-            },
-            allDay: {
-                isIt: formAllDay,
-                startDate: formStartDate,
-                endDate: formEndDate,
-                startTime: formStartTime,
-                endTime: formEndTime
-            },
-            recurring: {
-                isIt: false
-            },
-            groupIds: formGroups,
-            notes: formNotes,
-            lastUpdated: new Date()
-        }
+        if (isDateTimeValid(formStartDate, formEndDate, formStartTime, formEndTime)) {
+            setIsDateTimeWarning(false);
 
-        if (isEdit) {
-            // Update the event document
-            EventDataService.UpdateEvent(data, eventId);
-
-            // If any groups were added to the event, handle all dependencies
-            for (let groupId of formGroups) {
-                if (originalGroupIds.indexOf(groupId) === -1) {
-                    EventDataService.AddGroupToEvent({groupIdToAdd: groupId}, eventId);
-                }
-            }
-
-            // If any groups were removed from the event, handle all dependencies
-            for (let groupId of originalGroupIds) {
-                if (formGroups.indexOf(groupId) === -1) {
-                    EventDataService.RemoveGroupFromEvent({groupIdToRemove: groupId}, eventId);
-                }
+            let data = {
+                title: formTitle,
+                task: {
+                    isIt: false,
+                },
+                allDay: {
+                    isIt: formAllDay,
+                    startDate: formStartDate,
+                    endDate: formEndDate,
+                    startTime: formStartTime,
+                    endTime: formEndTime
+                },
+                recurring: {
+                    isIt: false
+                },
+                groupIds: formGroups,
+                notes: formNotes,
+                lastUpdated: new Date()
             }
     
+            if (isEdit) {
+                // Update the event document
+                EventDataService.UpdateEvent(data, eventId);
+    
+                // If any groups were added to the event, handle all dependencies
+                for (let groupId of formGroups) {
+                    if (originalGroupIds.indexOf(groupId) === -1) {
+                        EventDataService.AddGroupToEvent({groupIdToAdd: groupId}, eventId);
+                    }
+                }
+    
+                // If any groups were removed from the event, handle all dependencies
+                for (let groupId of originalGroupIds) {
+                    if (formGroups.indexOf(groupId) === -1) {
+                        EventDataService.RemoveGroupFromEvent({groupIdToRemove: groupId}, eventId);
+                    }
+                }
+        
+            } else {
+                // Create the new event
+                EventDataService.AddEvent(data);
+            }
+    
+            // Return to the page prior to creating an event or editing an event
+            navigate(-1);
         } else {
-            // Create the new event
-            EventDataService.AddEvent(data);
+            setIsDateTimeWarning(true);
         }
-
-        // Return to the page prior to creating an event or editing an event
-        navigate(-1);
+        
     }
 
     useEffect(() => {
@@ -126,6 +135,8 @@ const EventForm = ({settings, isEdit}) => {
                     <DateRange formStartDate={formStartDate} setStartDate={setStartDate} formEndDate={formEndDate} setEndDate={setEndDate} formAllDay={formAllDay} />
 
                     {formAllDay === false ?  <TimeRange formStartTime={formStartTime} setStartTime={setStartTime} formEndTime={formEndTime} setEndTime={setEndTime} /> : ""}
+
+                    {isDateTimeWarning ? <p>The end date and time must be after the start date and time!</p> : ""}
                 </Form.Group>
 
                 <div className="week-wrapper">
