@@ -3,12 +3,12 @@ import axios from "axios";
 class SettingsDataService {
     static GetSettings() {
         axios.defaults.withCredentials = true;
-        return axios.get(`http://localhost:3100/settings/`)
+        return axios.get(`https://event-manager-colmartason.herokuapp.com/settings/`)
     }
 
     static UpdateSettings(data) {
         axios.defaults.withCredentials = true;
-        return axios.put(`http://localhost:3100/settings/`, data)
+        return axios.put(`https://event-manager-colmartason.herokuapp.com/settings/`, data)
     }
 }
 
