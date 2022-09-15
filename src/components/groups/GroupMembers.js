@@ -3,7 +3,7 @@ import UsersList from "./UsersList";
 
 // Called by Groups.js
 // Displays a simple version of the title and members of a group, including invitees
-const GroupMembership = ({group}) => {
+const GroupMembers = ({group}) => {
     return (
         <div className="group-container-no-set-width">
             <p className="title">{group.name}</p>
@@ -17,4 +17,4 @@ const GroupMembership = ({group}) => {
     )
 }
 
-export default GroupMembership;
+export default GroupMembers;

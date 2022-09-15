@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { CurrentUser } from '../../contexts/currentUser';
 import GroupDataService from "../../services/groupDataService";
 import OwnedGroup from "./OwnedGroup";
-import GroupMembership from "./GroupMembership";
+import GroupMembers from "./GroupMembers";
 import GroupInvitations from "./GroupInvitations";
 import NewGroupForm from "./NewGroupForm";
 
@@ -67,7 +67,7 @@ const Groups = () => {
     // Generate a display list of groups that the user is a member of, but does not own
     let membershipList = groupMemberships.map((group, i) => {
         return (
-            <GroupMembership group={group} key={`member-${i}`}/>
+            <GroupMembers group={group} key={`member-${i}`}/>
         )
     });
 
