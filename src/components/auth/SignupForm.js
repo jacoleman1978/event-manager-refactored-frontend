@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import UserDataService from '../../services/userDataService';
-import getDefaultViewPath from './helpers/getDefaultViewPath';
 
 // Called from App.js
 const SignupForm = () => {
@@ -43,9 +42,8 @@ const SignupForm = () => {
 
                     // UserName is unique, so create user account and redirect to ...
                     UserDataService.Signup(data);
-                    let navPath = await getDefaultViewPath();
             
-                    navigate(navPath);
+                    navigate('/settings');
                 }
             });
         } else {
