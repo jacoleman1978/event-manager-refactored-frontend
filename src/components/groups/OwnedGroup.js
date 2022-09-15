@@ -1,5 +1,5 @@
 import React from "react";
-import GroupMembership from "./GroupMembership";
+import GroupMembers from "./GroupMembers";
 import EditGroup from "./EditGroup";
 
 // Called from Groups.js
@@ -12,7 +12,7 @@ const OwnedGroup = ({group, editFlag, setGroups}) => {
                     groupId={group._id} 
                     setGroups={setGroups}
                 /> : 
-                <GroupMembership 
+                <GroupMembers 
                     group={group} 
                 />
             }
