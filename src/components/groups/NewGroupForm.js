@@ -17,7 +17,7 @@ const NewGroupForm = ({setCreateFlag}) => {
     return (
         <div>
             <Form className="group-container-no-set-width">
-                <Form.Group className="flex-left-center wrap-items">
+                <Form.Group className="flex-center-center-wrap">
                     <TextInputWrapper label={"Name"} defaultValue={""} setStateValue={setGroupName} />
                     <Button 
                         size="sm"
