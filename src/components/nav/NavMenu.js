@@ -26,8 +26,7 @@ const NavMenu = ({ isTask, isEvent, viewType, settings }) => {
     return (
         <Navbar expand='lg'>
             <Navbar.Brand href='/'>Event Manager</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navebar-nav" />
-            <Nav fill variant="pills" className="me-auto" defaultActiveKey={defaultActive}>
+            <Nav variant="tabs" className="flex-center-center-wrap" defaultActiveKey={defaultActive}>
                 <Navbar.Text>View: </Navbar.Text>
                 <NavDropdown title={dropdownTitle} id="basic-nav-dropdown">
                     <NavDropdown.Item href={defaultEventsPath}>Events</NavDropdown.Item>
