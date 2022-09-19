@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import UserDataService from '../../services/userDataService';
@@ -11,7 +11,10 @@ const LoginForm = () => {
 
     // Store current user session after successful login
     const { setCurrentUser } = useContext(CurrentUser);
-    UserDataService.CheckSessionUser().then(res => setCurrentUser(res.data));
+
+    useEffect(() => {
+        UserDataService.CheckSessionUser().then(res => setCurrentUser(res.data));
+    }, [])
 
     // Use state to keep track of info entered into the form
     let [formUserName, setUserName] = useState("");
