@@ -494,7 +494,6 @@ strong {
 .checkbox-list {
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .hour-grid {
@@ -558,4 +557,9 @@ strong {
   display: flex;
   justify-content: space-around;
   margin: 1rem;
+}
+
+.wrap-items {
+  display: flex;
+  flex-wrap: wrap;
 }
