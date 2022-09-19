@@ -27,26 +27,21 @@ const NavMenu = ({ isTask, isEvent, viewType, settings }) => {
         <Navbar expand='lg'>
             <Navbar.Brand href='/'>Event Manager</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navebar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav fill variant="pills" className="me-auto" defaultActiveKey={defaultActive}>
-                    <Navbar.Text>View: </Navbar.Text>
-                    <NavDropdown title={dropdownTitle} id="basic-nav-dropdown">
-                        <NavDropdown.Item href={defaultEventsPath}>Events</NavDropdown.Item>
-                        <NavDropdown.Item href={defaultTasksPath}>Tasks</NavDropdown.Item>
-                        <NavDropdown.Item href="/groups">Groups</NavDropdown.Item>
-                        <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
-                    </NavDropdown>
-                    <ViewBtns 
-                        isTask={isTask} 
-                        isEvent={isEvent} 
-                    />
-                </Nav>
-                
-            </Navbar.Collapse>
+            <Nav fill variant="pills" className="me-auto" defaultActiveKey={defaultActive}>
+                <Navbar.Text>View: </Navbar.Text>
+                <NavDropdown title={dropdownTitle} id="basic-nav-dropdown">
+                    <NavDropdown.Item href={defaultEventsPath}>Events</NavDropdown.Item>
+                    <NavDropdown.Item href={defaultTasksPath}>Tasks</NavDropdown.Item>
+                    <NavDropdown.Item href="/groups">Groups</NavDropdown.Item>
+                    <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
+                </NavDropdown>
+                <ViewBtns 
+                    isTask={isTask} 
+                    isEvent={isEvent} 
+                />
+            </Nav>
 
             <div className="flex-centered">
-                {currentUser !== null ? <>{currentUser.fullName}</> : ""}
-
                 {currentUser !== null ? 
                     <Button 
                         className="logout-btn"
