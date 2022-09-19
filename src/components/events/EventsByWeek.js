@@ -70,7 +70,7 @@ const EventsByWeek = ({viewType, currentUser}) => {
 
     return (
         <>
-            <div className="week-wrapper">
+            <div className="week-wrapper horizontal-scroll">
                 <WeekHeader offsetBy={offsetBy} />
                 {weeklyDisplay}
             </div>

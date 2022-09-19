@@ -567,3 +567,10 @@ strong {
   justify-content: space-around;
   margin: 1rem;
 }
+
+.horizontal-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
