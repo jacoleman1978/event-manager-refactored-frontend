@@ -26,7 +26,7 @@ const getActiveView = (isTask, isEvent, viewType) => {
         if (viewType === 'day') {
             defaultActive = '/events/day/0';
         } else if (viewType === 'new') {
-            defaultActive = '/events/new/0'
+            defaultActive = '/events/new'
         } else if (viewType === 'week') {
             defaultActive = '/events/week/0'
         }
