@@ -569,6 +569,7 @@ strong {
 }
 
 .horizontal-scroll {
+  min-width: 630px;
   overflow-x: auto;
   overflow-y: hidden;
 }
