@@ -573,3 +573,8 @@ strong {
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+.wrap-contents {
+  display: flex;
+  flex-wrap: wrap;
+}

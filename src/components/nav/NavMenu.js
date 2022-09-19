@@ -24,7 +24,7 @@ const NavMenu = ({ isTask, isEvent, viewType, settings }) => {
     let defaultEventsPath = getDefaultEventsPath(settings.views.events);
     
     return (
-        <Navbar>
+        <Navbar className="flex-between-center wrap-contents">
             <Navbar.Brand href='/'>Event Manager</Navbar.Brand>
             <Nav variant="tabs" className="flex-center-center-wrap" defaultActiveKey={defaultActive}>
                 <Navbar.Text>View: </Navbar.Text>
@@ -40,7 +40,7 @@ const NavMenu = ({ isTask, isEvent, viewType, settings }) => {
                 />
             </Nav>
 
-            <div className="flex-centered align-self-end">
+            <div className="flex-centered">
                 {currentUser !== null ? 
                     <Button 
                         className="logout-btn"
