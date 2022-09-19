@@ -9,7 +9,6 @@ const PasswordInput = ({label, setPassword}) => {
             <Form.Label className="flex-left-bold" >{label} Password:</Form.Label>
             <Form.Control
                 required
-                className="input-width"
                 type="password"
                 aria-describedby={`Enter ${label.toLowerCase()} password`}
                 placeholder={`Enter ${label.toLowerCase()} password`}

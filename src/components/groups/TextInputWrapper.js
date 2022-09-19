@@ -11,7 +11,6 @@ const TextInputWrapper = ({label, defaultValue, setStateValue}) => {
                 type="text"
                 defaultValue={defaultValue}
                 onChange={(e) => setStateValue(e.target.value)}
-                className="input-width"
             />
         </div>
     )

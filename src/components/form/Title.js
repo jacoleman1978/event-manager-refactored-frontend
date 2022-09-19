@@ -8,7 +8,6 @@ const Title = ({formTitle, setTitle, label}) => {
         <div className="flex-left-center-no-gap outline-inner">
             <Form.Label className="flex-left-bold">{label}</Form.Label>
             <Form.Control
-                className="input-width"
                 required
                 type="text"
                 defaultValue={formTitle}
